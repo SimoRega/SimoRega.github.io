@@ -1,769 +1,729 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="it">
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Simone Rega</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: MyResume
-  * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
-  * Updated: Jun 29 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preventivo di Viaggio - Nord America 2026</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
 
-<body class="index-page">
-
-  <header id="header" class="header d-flex flex-column justify-content-center">
-
-    <i class="header-toggle d-xl-none bi bi-list"></i>
-
-    <nav id="navmenu" class="navmenu">
-      <ul>
-        <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i><span>Home</span></a></li>
-        <li><a href="#about"><i class="bi bi-person navicon"></i><span>About</span></a></li>
-        <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i><span>Resume</span></a></li>
-        <li><a href="#portfolio"><i class="bi bi-images navicon"></i><span>Portfolio</span></a></li>
-        <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i><span>Services</span></a></li>
-        <li><a href="#contact"><i class="bi bi-envelope navicon"></i><span>Contact</span></a></li>
-      </ul>
-    </nav>
-
-  </header>
-
-  <main class="main">
-
-    <!-- Hero Section -->
-    <section id="hero" class="hero section light-background">
-
-      <img src="assets/img/bg.jpeg" alt="">
-
-      <div class="container" data-aos="zoom-out">
-        <div class="row justify-content-center">
-          <div class="col-lg-9">
-            <h2>Simone Rega</h2>
-            <p>I'm a <span class="typed" data-typed-items="Traveler, Developer, Drone Pilot, WoodWorker">Software Engineer</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
-            <div class="social-links">
-              <a href="#"><i class="bi bi-twitter-x"></i></a>
-              <a href="#"><i class="bi bi-facebook"></i></a>
-              <a href="https://www.instagram.com/simone_rega/"><i class="bi bi-instagram"></i></a>
-              <a href="https://www.linkedin.com/in/simone-rega-9a5a31264/"><i class="bi bi-linkedin"></i></a>
+    <!-- Header / Hero -->
+    <header class="bg-slate-900 text-white py-12 px-6 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div>
+                    <span class="text-sky-400 font-semibold tracking-wider uppercase text-xs">Consulenza di Viaggio Personalizzata</span>
+                    <h1 class="text-3xl md:text-5xl font-bold mt-2">La Vostra Prima Volta in America</h1>
+                    <p class="text-slate-400 mt-2 text-lg max-w-2xl">Un'avventura indimenticabile bilanciata tra lo spirito autentico d'oltreoceano e l'ottimizzazione del budget. Analisi delle proposte per Boston, New York e Toronto.</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 backdrop-blur-sm">
+                    <p class="text-xs text-slate-400 uppercase tracking-wider">Preparato per</p>
+                    <p class="font-semibold text-white text-lg">Coppia di Viaggiatori da Rimini</p>
+                    <div class="flex items-center gap-2 mt-2 text-sm text-sky-400">
+                        <i data-lucide="calendar" class="w-4 h-4"></i>
+                        <span>29 Ago - 5 Set (8 Giorni / 7 Notti)</span>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-sky-900/30 via-slate-900 to-slate-900 pointer-events-none"></div>
+    </header>
 
-    </section><!-- /Hero Section -->
+    <!-- Main Content Grid -->
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-12">
 
-    <!-- About Section -->
-    <section id="about" class="about section">
+        <!-- Navigazione rapida sezioni -->
+        <section class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <button onclick="scrollToSection('confronto-voli')" class="flex items-center justify-center gap-2 p-3 bg-white hover:bg-slate-100 rounded-lg shadow-sm border border-slate-200 transition text-sm font-medium">
+                <i data-lucide="plane" class="w-4 h-4 text-sky-600"></i> Voli e Destinazioni
+            </button>
+            <button onclick="scrollToSection('collegamenti-rimini')" class="flex items-center justify-center gap-2 p-3 bg-white hover:bg-slate-100 rounded-lg shadow-sm border border-slate-200 transition text-sm font-medium">
+                <i data-lucide="train" class="w-4 h-4 text-sky-600"></i> Navette da Rimini
+            </button>
+            <button onclick="scrollToSection('itinerari')" class="flex items-center justify-center gap-2 p-3 bg-white hover:bg-slate-100 rounded-lg shadow-sm border border-slate-200 transition text-sm font-medium">
+                <i data-lucide="map" class="w-4 h-4 text-sky-600"></i> Itinerari e Attività
+            </button>
+            <button onclick="scrollToSection('burocrazia')" class="flex items-center justify-center gap-2 p-3 bg-white hover:bg-slate-100 rounded-lg shadow-sm border border-slate-200 transition text-sm font-medium">
+                <i data-lucide="shield-check" class="w-4 h-4 text-sky-600"></i> Visti e Consigli
+            </button>
+        </section>
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>About</h2>
-        <p>An Italian develop born in 2000. Loves Technology and Nature. He hopes one day to live in a cozy cabin in the woods with a lovely family.</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4 justify-content-center">
-          <div class="col-lg-4">
-            <img src="assets/img/propic.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-8 content">
-            <h2>Software Engineer &amp; BackEnd Developer.</h2>
-            <p class="fst-italic py-3">
-              Long story short, Ever since I was a child, I have always dealt with technology and electronic devices. I have witnessed with my own eyes the technological progress of electronics and computer science, from the first computers and VHS tapes to the first laptops and CDs, up to the first smartphones, and finally to the present day. For as long as I can remember, I have always planned to base my studies and career on computer science.
-            </p>
-            <div class="row">
-              <div class="col-lg-6">
-                <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>1 April 2000</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>https://simorega.github.io/</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Rimini, Emilia-Romagna (Italy)</span></li>
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>24</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>Bachelor Degree</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>simone.rega@gmail.com</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Available</span></li>
-                </ul>
-              </div>
+        <!-- SEZIONE 1: CONFRONTO VOLI E DESTINAZIONI -->
+        <section id="confronto-voli" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+            <div class="border-b border-slate-100 pb-4 mb-6">
+                <h2 class="text-2xl font-bold text-slate-950 flex items-center gap-2">
+                    <i data-lucide="compass" class="text-sky-600"></i>
+                    Analisi e Confronto delle Destinazioni
+                </h2>
+                <p class="text-slate-500 text-sm mt-1">Dati estratti dalle migliori combinazioni di volo dirette da Roma Fiumicino (FCO) con partenza il 29 agosto e rientro il 5 settembre.</p>
             </div>
-            <p class="py-3">
-              I am a very active person; I have always played sports since I was a child. At the moment, I play beach volleyball recreationally and go to the gym regularly. My hobbies include hiking in nature, flying drones, traveling in a tent or camper, and woodworking.
-            </p>
-          </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Opzione 1: Boston -->
+                <div class="border border-slate-200 hover:border-sky-400 rounded-xl p-5 transition flex flex-col justify-between bg-slate-50/50">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-full font-medium">Consigliato Prima Volta</span>
+                            <span class="text-slate-400 text-xs flex items-center gap-1"><i data-lucide="leaf" class="w-3.5 h-3.5"></i> -19% CO₂</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mt-3">Boston, Massachusetts</h3>
+                        <p class="text-slate-500 text-xs mt-1">La culla della storia americana. Perfetta per spostarsi interamente a piedi o con l'efficiente metropolitana, riducendo a zero i costi di noleggio auto.</p>
+                        
+                        <div class="mt-6 space-y-3 border-t border-b border-slate-100 py-4">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-500">Compagnia:</span>
+                                <span class="font-semibold text-slate-700">ITA Airways (Diretto)</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-500">Andata (29 ago):</span>
+                                <span class="font-medium">10:25 FCO &rarr; 13:40 BOS</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-500">Ritorno (5 set):</span>
+                                <span class="font-medium">17:05 BOS &rarr; 07:05<span class="text-xs text-sky-600 font-bold">+1</span> FCO</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-500">Durata media volo:</span>
+                                <span class="font-medium text-slate-700">8h 38m</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <div class="flex items-baseline justify-between">
+                            <span class="text-slate-500 text-sm">Tariffa Volo:</span>
+                            <span class="text-2xl font-bold text-slate-900">€ 552 <span class="text-xs font-normal text-slate-500">/persona</span></span>
+                        </div>
+                        <button onclick="selezionaDestinazione('Boston', 552)" class="w-full mt-4 bg-slate-900 hover:bg-slate-800 text-white py-2 rounded-lg text-sm font-medium transition flex items-center justify-center gap-2">
+                            Seleziona per Preventivo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Opzione 2: New York -->
+                <div class="border border-slate-200 hover:border-sky-400 rounded-xl p-5 transition flex flex-col justify-between bg-slate-50/50">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-amber-100 text-amber-800 text-xs px-2.5 py-1 rounded-full font-medium">Grande Classico</span>
+                            <span class="text-slate-400 text-xs flex items-center gap-1"><i data-lucide="leaf" class="w-3.5 h-3.5"></i> -12% CO₂</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mt-3">New York, NY</h3>
+                        <p class="text-slate-500 text-xs mt-1">L'icona mondiale. Energia impareggiabile, ma i costi per l'alloggio a Manhattan durante la fine dell'estate sono sensibilmente più alti delle altre mete.</p>
+                        
+                        <div class="mt-6 space-y-3 border-t border-b border-slate-100 py-4">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-500">Compagnia:</span>
+                                <span class="font-semibold text-slate-700">ITA Airways (Diretto)</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-500">Andata (29 ago):</span>
+                                <span class="font-medium">10:30 FCO &rarr; 13:55 JFK</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-500">Ritorno (5 set):</span>
+                                <span class="font-medium">21:10 JFK &rarr; 11:50<span class="text-xs text-sky-600 font-bold">+1</span> FCO</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-500">Durata media volo:</span>
+                                <span class="font-medium text-slate-700">9h 03m</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <div class="flex items-baseline justify-between">
+                            <span class="text-slate-500 text-sm">Tariffa Volo:</span>
+                            <span class="text-2xl font-bold text-slate-900">€ 580 <span class="text-xs font-normal text-slate-500">/persona</span></span>
+                        </div>
+                        <button onclick="selezionaDestinazione('New York', 580)" class="w-full mt-4 bg-slate-900 hover:bg-slate-800 text-white py-2 rounded-lg text-sm font-medium transition flex items-center justify-center gap-2">
+                            Seleziona per Preventivo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Opzione 3: Toronto -->
+                <div class="border border-slate-200 hover:border-sky-400 rounded-xl p-5 transition flex flex-col justify-between bg-slate-50/50">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2.5 py-1 rounded-full font-medium">Natura e Metropoli</span>
+                            <span class="text-slate-400 text-xs flex items-center gap-1"><i data-lucide="leaf" class="w-3.5 h-3.5"></i> -12% CO₂</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mt-3">Toronto, Canada</h3>
+                        <p class="text-slate-500 text-xs mt-1">Metropoli canadese pulita, sicura e multiculturale. Ottimo punto di partenza per una gita in giornata alle Cascate del Niagara senza spendere cifre esorbitanti.</p>
+                        
+                        <div class="mt-6 space-y-3 border-t border-b border-slate-100 py-4">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-500">Compagnia:</span>
+                                <span class="font-semibold text-slate-700">Air Canada (Diretto)</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-500">Andata (29 ago):</span>
+                                <span class="font-medium">12:25 FCO &rarr; 16:00 YYZ</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-500">Ritorno (5 set):</span>
+                                <span class="font-medium">20:00 YYZ &rarr; 10:20<span class="text-xs text-sky-600 font-bold">+1</span> FCO</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-500">Durata media volo:</span>
+                                <span class="font-medium text-slate-700">8h 58m</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <div class="flex items-baseline justify-between">
+                            <span class="text-slate-500 text-sm">Tariffa Volo:</span>
+                            <span class="text-2xl font-bold text-slate-900">€ 659 <span class="text-xs font-normal text-slate-500">/persona</span></span>
+                        </div>
+                        <button onclick="selezionaDestinazione('Toronto', 659)" class="w-full mt-4 bg-slate-900 hover:bg-slate-800 text-white py-2 rounded-lg text-sm font-medium transition flex items-center justify-center gap-2">
+                            Seleziona per Preventivo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE 2: COLLEGAMENTI DA RIMINI -->
+        <section id="collegamenti-rimini" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+            <div class="border-b border-slate-100 pb-4 mb-6">
+                <h2 class="text-2xl font-bold text-slate-950 flex items-center gap-2">
+                    <i data-lucide="milestone" class="text-sky-600"></i>
+                    Collegamenti da Rimini a Roma Fiumicino (FCO)
+                </h2>
+                <p class="text-slate-500 text-sm mt-1">Le migliori opzioni studiate per un viaggio comodo ed economico per raggiungere l'aeroporto di partenza in tempo per i voli transatlantici.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Treno Alta Velocità + Leonardo Express -->
+                <div class="bg-slate-50 rounded-xl p-5 border border-slate-100">
+                    <div class="flex items-center gap-2 text-slate-900 font-semibold mb-3">
+                        <i data-lucide="train" class="text-sky-600 w-5 h-5"></i>
+                        <span>Opzione Treno (Consigliata)</span>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Prendere un treno Frecciarossa o Intercity da <strong>Rimini Centrale</strong> a <strong>Roma Termini</strong>, per poi salire sul treno navetta <strong>Leonardo Express</strong> che parte ogni 15 minuti direttamente per l'aeroporto FCO.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-slate-200/60 space-y-2 text-xs text-slate-500">
+                        <div class="flex justify-between"><span>Tempo medio di viaggio:</span> <span class="font-semibold text-slate-700">~4h 30m</span></div>
+                        <div class="flex justify-between"><span>Costo indicativo a persona:</span> <span class="font-semibold text-emerald-600">€ 45 - € 85 (A/R)</span></div>
+                        <div class="flex justify-between"><span>Flessibilità oraria:</span> <span class="font-semibold text-slate-700">Molto alta</span></div>
+                    </div>
+                </div>
+
+                <!-- Autobus Diretto / Low Cost -->
+                <div class="bg-slate-50 rounded-xl p-5 border border-slate-100">
+                    <div class="flex items-center gap-2 text-slate-900 font-semibold mb-3">
+                        <i data-lucide="bus" class="text-sky-600 w-5 h-5"></i>
+                        <span>Opzione Autobus (Economica)</span>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Autobus a lunga percorrenza (es. FlixBus o operatori regionali) da <strong>Rimini (Via Fada / Stazione)</strong> fino a <strong>Roma Tiburtina</strong>, e successivo treno regionale FL1 verso l'aeroporto di Fiumicino.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-slate-200/60 space-y-2 text-xs text-slate-500">
+                        <div class="flex justify-between"><span>Tempo medio di viaggio:</span> <span class="font-semibold text-slate-700">~6h 30m</span></div>
+                        <div class="flex justify-between"><span>Costo indicativo a persona:</span> <span class="font-semibold text-emerald-600">€ 30 - € 50 (A/R)</span></div>
+                        <div class="flex justify-between"><span>Flessibilità oraria:</span> <span class="font-semibold text-slate-700">Limitata</span></div>
+                    </div>
+                </div>
+
+                <!-- Auto propria + Parcheggio Lunga Sosta -->
+                <div class="bg-slate-50 rounded-xl p-5 border border-slate-100">
+                    <div class="flex items-center gap-2 text-slate-900 font-semibold mb-3">
+                        <i data-lucide="car" class="text-sky-600 w-5 h-5"></i>
+                        <span>Auto Propria + Parcheggio</span>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Viaggio in automobile via E45 (circa 380 km) da Rimini direttamente ai parcheggi ufficiali "Lunga Sosta" di Roma Fiumicino con servizio navetta gratuito per i terminal.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-slate-200/60 space-y-2 text-xs text-slate-500">
+                        <div class="flex justify-between"><span>Tempo medio di viaggio:</span> <span class="font-semibold text-slate-700">~4h 15m</span></div>
+                        <div class="flex justify-between"><span>Costo carburante + pedaggi:</span> <span class="font-semibold text-slate-700">~€ 90 (A/R)</span></div>
+                        <div class="flex justify-between"><span>Costo Parcheggio (8 gg):</span> <span class="font-semibold text-emerald-600">~€ 55 - € 70</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4 bg-sky-50 border border-sky-100 rounded-xl p-4 text-xs text-sky-800 flex items-start gap-3">
+                <i data-lucide="info" class="w-5 h-5 shrink-0 mt-0.5"></i>
+                <div>
+                    <span class="font-semibold">Nota di viaggio per la partenza:</span> I voli per gli Stati Uniti/Canada richiedono controlli di sicurezza speciali. Essendo il volo ITA per Boston/New York programmato alle 10:25/10:30, dovrete essere in aeroporto a Fiumicino **entro le ore 07:30**. Per questo motivo, l'opzione treno al mattino stesso potrebbe essere troppo rischiosa. Consigliamo di viaggiare in treno il pomeriggio del 28 agosto e pernottare in una struttura economica nei pressi di Fiumicino Paese o di optare per un viaggio notturno.
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE 3: ITINERARI COMPLETI (Interattivi) -->
+        <section id="itinerari" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+            <div class="border-b border-slate-100 pb-4 mb-6">
+                <h2 class="text-2xl font-bold text-slate-950 flex items-center gap-2">
+                    <i data-lucide="map-pin" class="text-sky-600"></i>
+                    Itinerari di Viaggio Proposti (Giorno per Giorno)
+                </h2>
+                <p class="text-slate-500 text-sm mt-1">Selezionate la destinazione desiderata per visualizzare l'itinerario ottimizzato con un perfetto bilanciamento tra attrazioni iconiche e segreti a basso costo.</p>
+            </div>
+
+            <!-- Tab Selettori -->
+            <div class="flex border-b border-slate-200 mb-6">
+                <button onclick="switchItinerario('boston')" id="tab-boston" class="py-3 px-6 font-semibold border-b-2 border-sky-600 text-sky-600 text-sm transition focus:outline-none">
+                    Itinerario Boston
+                </button>
+                <button onclick="switchItinerario('newyork')" id="tab-newyork" class="py-3 px-6 font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 text-sm transition focus:outline-none">
+                    Itinerario New York
+                </button>
+                <button onclick="switchItinerario('toronto')" id="tab-toronto" class="py-3 px-6 font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 text-sm transition focus:outline-none">
+                    Itinerario Toronto
+                </button>
+            </div>
+
+            <!-- Contenuto Itinerario BOSTON -->
+            <div id="itinerario-boston" class="space-y-6">
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col md:flex-row justify-between md:items-center gap-4">
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-base">Perché Boston è la scelta intelligente:</h4>
+                        <p class="text-slate-600 text-xs mt-1">Città fortemente universitaria (Harvard, MIT), ricca di parchi pubblici e atmosfera europea. Si gira benissimo a piedi, risparmiando sui mezzi di trasporto pubblici.</p>
+                    </div>
+                    <div class="shrink-0 bg-emerald-100 text-emerald-800 px-3 py-1.5 rounded-lg text-xs font-semibold">
+                        Stima Spesa Attività: ~ $90-120 a persona
+                    </div>
+                </div>
+
+                <div class="relative border-l border-slate-200 ml-4 pl-6 space-y-8">
+                    <!-- Giorno 1 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 1: Arrivo a Boston e Primo Contatto con il New England</h5>
+                        <p class="text-slate-600 text-sm mt-1">Atterraggio a Logan (BOS) alle 13:40. Trasferimento in centro rapido ed economico tramite la <strong>Blue Line</strong> della MBTA. Check-in in hotel/appartamento. Prima passeggiata rilassante lungo la passeggiata del porto (Boston Harborwalk) per superare il jet lag e cena informale a base di <em>Clam Chowder</em> (zuppa di vongole locale) al Quincy Market.</p>
+                    </div>
+                    <!-- Giorno 2 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 2: Il Freedom Trail e la Storia Americana (Gratuito!)</h5>
+                        <p class="text-slate-600 text-sm mt-1">Seguite la famosa "linea rossa" mattonata dipinta sui marciapiedi della città che vi guiderà attraverso 16 storici siti della rivoluzione americana. Partenza dal Boston Common (il parco pubblico più antico degli USA) e arrivo fino a Charlestown per ammirare la USS Constitution. <strong class="text-emerald-700">Costo: €0</strong>. Pranzo al sacco lungo il percorso.</p>
+                    </div>
+                    <!-- Giorno 3 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 3: Beacon Hill e la Vita Universitaria di Harvard</h5>
+                        <p class="text-slate-600 text-sm mt-1">In mattinata passeggiata tra le strade acciottolate e i lampioni a gas di <strong>Beacon Hill</strong> (la zona più fotogenica della città, in particolare Acorn Street). Nel pomeriggio, prendete la Red Line della metropolitana fino a Cambridge per visitare lo storico campus di <strong>Harvard</strong>. È possibile fare un tour guidato gratuito gestito dagli studenti o semplicemente passeggiare per l'Harvard Yard.</p>
+                    </div>
+                    <!-- Giorno 4 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 4: Boston Public Library e Back Bay</h5>
+                        <p class="text-slate-600 text-sm mt-1">Esplorazione del quartiere di Back Bay con i suoi splendidi edifici in mattoni rossi in stile vittoriano. Visita alla maestosa <strong>Boston Public Library</strong> (l'ingresso alla magnifica Bates Hall è completamente gratuito e spettacolare). Nel tardo pomeriggio, passeggiata rilassante lungo la Charles River Esplanade per vedere il tramonto sull'acqua.</p>
+                    </div>
+                    <!-- Giorno 5 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 5: Museo d'Arte Moderna (MFA) o Isabella Stewart Gardner Museum</h5>
+                        <p class="text-slate-600 text-sm mt-1">Visita ad uno dei musei di fama mondiale di Boston. Suggeriamo l'<strong>Isabella Stewart Gardner Museum</strong>, allestito all'interno di un palazzo in stile veneziano con un cortile interno mozzafiato (famoso anche per il più grande furto d'arte irrisolto della storia). Biglietto d'ingresso economico (~$20). Sera nel vivace quartiere italiano di North End per un'ottima pizza o cannolo da Mike's Pastry.</p>
+                    </div>
+                    <!-- Giorno 6 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 6: Gita in traghetto a Salem (La città delle streghe)</h5>
+                        <p class="text-slate-600 text-sm mt-1">Prendete il traghetto veloce da Long Wharf per una gita in giornata nella storica cittadina costiera di Salem. Perfetta per gli amanti del mistero e del folklore marino, è visitabile interamente a piedi. Il traghetto offre anche una splendida vista sullo skyline di Boston dall'oceano.</p>
+                    </div>
+                    <!-- Giorno 7 & 8 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 7 & 8: Shopping, relax e rientro in Italia</h5>
+                        <p class="text-slate-600 text-sm mt-1">Ultimi acquisti senza tasse sull'abbigliamento sotto i $175 (un grande vantaggio del Massachusetts!). Passeggiata al Boston Public Garden per un giro sulle celebri barche a forma di cigno. Nel pomeriggio del 5 settembre, trasferimento in metropolitana all'aeroporto per il volo diretto di rientro in Italia delle 17:05.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contenuto Itinerario NEW YORK -->
+            <div id="itinerario-newyork" class="space-y-6 hidden">
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col md:flex-row justify-between md:items-center gap-4">
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-base">La Grande Mela in modalità Budget-Conscious:</h4>
+                        <p class="text-slate-600 text-xs mt-1">New York può essere molto cara, ma con i giusti trucchi (traghetti gratuiti, parchi sopraelevati e cibo di strada multietnico) è possibile vivere il sogno americano senza spendere troppo.</p>
+                    </div>
+                    <div class="shrink-0 bg-amber-100 text-amber-800 px-3 py-1.5 rounded-lg text-xs font-semibold">
+                        Stima Spesa Attività: ~ $140-180 a persona
+                    </div>
+                </div>
+
+                <div class="relative border-l border-slate-200 ml-4 pl-6 space-y-8">
+                    <!-- Giorno 1 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 1: Benvenuti a New York e Times Square</h5>
+                        <p class="text-slate-600 text-sm mt-1">Arrivo al JFK alle 13:55. Trasferimento economico a Manhattan utilizzando l'Airtrain combinato con la metropolitana (linea E). Check-in in hotel (consigliamo zone come Long Island City per risparmiare sull'alloggio). Prima uscita serale sotto le luci accecanti di <strong>Times Square</strong> per un impatto indimenticabile.</p>
+                    </div>
+                    <!-- Giorno 2 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 2: Statua della Libertà (Gratis!) e Lower Manhattan</h5>
+                        <p class="text-slate-600 text-sm mt-1">Evitate i costosi battelli turistici e prendete lo <strong>Staten Island Ferry</strong>: è totalmente gratuito e passa vicinissimo alla Statua della Libertà regalando foto stupende dello skyline. All'approdo, esplorate Wall Street, la Trinity Church e il toccante memoriale dell'11 Settembre (Ground Zero).</p>
+                    </div>
+                    <!-- Giorno 3 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 3: Central Park e i Grandi Musei</h5>
+                        <p class="text-slate-600 text-sm mt-1">Intera giornata dedicata al polmone verde di New York, <strong>Central Park</strong>. Potete noleggiare delle bici economiche o camminare fino a Bethesda Fountain e Strawberry Fields. Nel pomeriggio, visitate l'esterno del Guggenheim e del MET (l'ingresso a questi musei ha tariffe fisse ma è possibile fare passeggiate stupende anche solo nei dintorni della Fifth Avenue).</p>
+                    </div>
+                    <!-- Giorno 4 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 4: High Line, Chelsea Market e Hudson Yards</h5>
+                        <p class="text-slate-600 text-sm mt-1">Camminate lungo la <strong>High Line</strong>, uno splendido parco lineare costruito su una ferrovia sopraelevata in disuso (completamente gratuito). Concludete la passeggiata al Chelsea Market per un pranzo veloce a base di tacos o lobster roll, ed esplorate l'avveniristico quartiere di Hudson Yards con la struttura "The Vessel".</p>
+                    </div>
+                    <!-- Giorno 5 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 5: Brooklyn, DUMBO e il Ponte al Tramonto</h5>
+                        <p class="text-slate-600 text-sm mt-1">Attraversate l'East River per esplorare il quartiere hipster di Williamsburg o la zona panoramica di DUMBO. Scattate la classica foto ricordo tra i vecchi magazzini di mattoni rossi con il ponte sullo sfondo. Rientrate a piedi a Manhattan attraversando il <strong>Ponte di Brooklyn</strong> al tramonto: un'esperienza magica ed emozionante a costo zero.</p>
+                    </div>
+                    <!-- Giorno 6 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 6: Un Osservatorio Panoramico e Grand Central</h5>
+                        <p class="text-slate-600 text-sm mt-1">Scegliete un osservatorio per una vista dall'alto della città. Per un buon compromesso budget/esperienza, consigliamo il <strong>Top of the Rock</strong> (Rockefeller Center) per una vista pazzesca anche su Central Park ed Empire State Building. Successivamente, visitate la magnifica stazione ferroviaria Grand Central Terminal.</p>
+                    </div>
+                    <!-- Giorno 7 & 8 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 7 & 8: Ultimo giorno a Manhattan e Rientro</h5>
+                        <p class="text-slate-600 text-sm mt-1">Mattinata dedicata allo shopping di souvenir vicino a Herald Square o esplorando Greenwich Village. Nel pomeriggio del 5 settembre, rientro in aeroporto JFK per il volo delle ore 21:10 diretto a Roma.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contenuto Itinerario TORONTO -->
+            <div id="itinerario-toronto" class="space-y-6 hidden">
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col md:flex-row justify-between md:items-center gap-4">
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-base">La Grande e Accogliente Metropoli Canadese:</h4>
+                        <p class="text-slate-600 text-xs mt-1">Toronto unisce moderni grattacieli a quartieri storici unici, con la possibilità di una memorabile escursione alle maestose Cascate del Niagara a prezzi contenuti.</p>
+                    </div>
+                    <div class="shrink-0 bg-blue-100 text-blue-800 px-3 py-1.5 rounded-lg text-xs font-semibold">
+                        Stima Spesa Attività: ~ $110-140 a persona
+                    </div>
+                </div>
+
+                <div class="relative border-l border-slate-200 ml-4 pl-6 space-y-8">
+                    <!-- Giorno 1 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 1: Arrivo a Toronto e Primo Sguardo alla Città</h5>
+                        <p class="text-slate-600 text-sm mt-1">Atterraggio all'Aeroporto Pearson (YYZ) alle 16:00. Trasferimento rapido in centro con il treno <strong>UP Express</strong> che vi porta a Union Station in 25 minuti. Sistemazione in hotel/alloggio. Prima passeggiata serale in Yonge-Dundas Square (la Times Square canadese) per ammirare i cartelloni luminosi.</p>
+                    </div>
+                    <!-- Giorno 2 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 2: CN Tower e lo Storico Distillery District</h5>
+                        <p class="text-slate-600 text-sm mt-1">In mattinata ammirate da sotto la maestosa <strong>CN Tower</strong> (salita facoltativa se il budget lo consente, altrimenti la vista migliore e gratuita si ha dai parchi limitrofi). Nel pomeriggio, camminate fino al <strong>Distillery District</strong>, una splendida area pedonale ricca di caffè, gallerie d'arte e negozi di design ricavati in antiche distillerie di epoca vittoriana.</p>
+                    </div>
+                    <!-- Giorno 3 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 3: Le isole di Toronto (La vista migliore sullo Skyline)</h5>
+                        <p class="text-slate-600 text-sm mt-1">Prendete il traghetto pubblico economico (~$9 CAD andata e ritorno) per le <strong>Toronto Islands</strong>. Queste isole sul Lago Ontario sono interamente pedonali e offrono spiagge, prati per fare picnic e soprattutto la vista da cartolina più bella e famosa dell'intero skyline di Toronto.</p>
+                    </div>
+                    <!-- Giorno 4 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 4: Escursione in Giornata alle Cascate del Niagara</h5>
+                        <p class="text-slate-600 text-sm mt-1">Prendete l'autobus economico (es. Flixbus o Megabus) da Toronto Union Station a Niagara Falls (circa 2 ore di viaggio per circa $20-30 CAD a/r). Potete ammirare le spettacolari e spumeggianti cascate gratuitamente camminando lungo il fiume. Per un'esperienza extra indimenticabile, il giro in battello "Maid of the Mist" / "Voyage to the Falls" costa circa $35 CAD.</p>
+                    </div>
+                    <!-- Giorno 5 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 5: Kensington Market e Chinatown</h5>
+                        <p class="text-slate-600 text-sm mt-1">Visitate il coloratissimo e alternativo quartiere di <strong>Kensington Market</strong>, ricco di negozi vintage, murales e caffè biologici. È il posto perfetto per pranzare spendendo pochissimo provando specialità di street food da tutto il mondo. Accanto sorge una delle Chinatown più grandi del Nord America.</p>
+                    </div>
+                    <!-- Giorno 6 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 6: Royal Ontario Museum (ROM) e Casa Loma</h5>
+                        <p class="text-slate-600 text-sm mt-1">Esplorate l'architettura avveniristica del Royal Ontario Museum (anche solo dall'esterno, se non volete pagare il biglietto). Successivamente, fate una camminata panoramica verso <strong>Casa Loma</strong>, un bizzarro castello in stile neogotico situato su una collina che domina la città, circondato da splendidi giardini.</p>
+                    </div>
+                    <!-- Giorno 7 & 8 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h5 class="font-bold text-slate-900 text-sm">Giorno 7 & 8: Shopping al St. Lawrence Market e Partenza</h5>
+                        <p class="text-slate-600 text-sm mt-1">In mattinata visitate lo storico <strong>St. Lawrence Market</strong> per assaggiare il famoso panino con "peameal bacon" (specialità locale). Fate gli ultimi acquisti all'enorme centro commerciale Eaton Centre. Nel pomeriggio del 5 settembre, rientro in aeroporto Pearson per il volo delle ore 20:00 diretto a Roma.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE 4: GUIDA BUROCRATICA E CONSIGLI PRATICI -->
+        <section id="burocrazia" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+            <div class="border-b border-slate-100 pb-4 mb-6">
+                <h2 class="text-2xl font-bold text-slate-950 flex items-center gap-2">
+                    <i data-lucide="shield-alert" class="text-sky-600"></i>
+                    Informazioni Burocratiche e Consigli per il Primo Viaggio
+                </h2>
+                <p class="text-slate-500 text-sm mt-1">Tutto quello che occorre sapere prima della partenza per evitare spiacevoli sorprese alle dogane e vivere il soggiorno in totale serenità.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Documenti d'Ingresso -->
+                <div class="space-y-4">
+                    <h3 class="font-semibold text-slate-900 text-lg flex items-center gap-2">
+                        <i data-lucide="file-text" class="text-sky-600 w-5 h-5"></i> Documenti Necessari
+                    </h3>
+                    
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-3 text-sm">
+                        <div>
+                            <span class="font-semibold text-slate-800 block">1. Passaporto Elettronico:</span>
+                            <p class="text-slate-600 text-xs">Deve essere in corso di validità. Si consiglia una validità residua di almeno 6 mesi dalla data di rientro.</p>
+                        </div>
+                        <div>
+                            <span class="font-semibold text-slate-800 block">2. Autorizzazione ESTA (Stati Uniti - Boston/NY):</span>
+                            <p class="text-slate-600 text-xs">Domanda da fare esclusivamente online sul sito ufficiale governativo degli Stati Uniti prima della partenza. Costo: **$21 USD**. Attenzione ai siti truffa intermediari.</p>
+                        </div>
+                        <div>
+                            <span class="font-semibold text-slate-800 block">3. Autorizzazione eTA (Canada - Toronto):</span>
+                            <p class="text-slate-600 text-xs">Se volate a Toronto, vi servirà l'eTA canadese, richiedibile online sul sito ufficiale del governo del Canada al costo di soli **$7 CAD**.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagamenti e Valuta -->
+                <div class="space-y-4">
+                    <h3 class="font-semibold text-slate-900 text-lg flex items-center gap-2">
+                        <i data-lucide="credit-card" class="text-sky-600 w-5 h-5"></i> Carte, Contanti e Pagamenti
+                    </h3>
+                    
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-3 text-sm">
+                        <div>
+                            <span class="font-semibold text-slate-800 block">Carte di Credito vs Debito:</span>
+                            <p class="text-slate-600 text-xs">In America il contante è quasi scomparso. È indispensabile che almeno uno di voi abbia una <strong>vera Carta di Credito</strong> (con i numeri in rilievo) per poter depositare cauzioni in hotel o per emergenze. Le prepagate ricaricabili (es. Postepay) sono utili per le spese quotidiane ma spesso rifiutate per garanzie hotel.</p>
+                        </div>
+                        <div>
+                            <span class="font-semibold text-slate-800 block">Mance (Tips) negli USA:</span>
+                            <p class="text-slate-600 text-xs">A Boston e New York la mancia nei ristoranti con servizio al tavolo è <strong>obbligatoria</strong> dal punto di vista culturale (rappresenta lo stipendio dei camerieri). La percentuale standard varia dal <strong>15% al 20%</strong> da calcolare sul totale al netto delle tasse.</p>
+                        </div>
+                        <div>
+                            <span class="font-semibold text-slate-800 block">Assicurazione Sanitaria (FONDAMENTALE):</span>
+                            <p class="text-slate-600 text-xs">Negli USA e in Canada la sanità è interamente privata e ha costi astronomici. Non partite mai senza aver stipulato una polizza assicurativa medica con massimale illimitato (costo di circa €40-50 a persona per una settimana).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE 5: CALCOLATORE DI BUDGET INTERATTIVO -->
+        <section id="budget-calculator" class="bg-slate-900 text-white rounded-2xl p-6 md:p-8 shadow-md relative overflow-hidden">
+            <div class="relative z-10">
+                <div class="border-b border-slate-800 pb-4 mb-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        <i data-lucide="calculator" class="text-sky-400"></i>
+                        Simulatore di Budget Personalizzato (per 2 Persone)
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-1">Regolate le variabili per stimare con precisione la spesa reale complessiva del vostro viaggio di coppia.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Configurazione -->
+                    <div class="space-y-6">
+                        <!-- Destinazione -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Destinazione Scelta:</label>
+                            <select id="calc-dest" onchange="updateCalculatedBudget()" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-sky-400">
+                                <option value="Boston" data-price="552">Boston (Volo: €552 a testa)</option>
+                                <option value="New York" data-price="580" selected>New York (Volo: €580 a testa)</option>
+                                <option value="Toronto" data-price="659">Toronto (Volo: €659 a testa)</option>
+                            </select>
+                        </div>
+
+                        <!-- Alloggio -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1 flex justify-between">
+                                <span>Tipologia Alloggio (7 Notti):</span>
+                                <span id="label-alloggio" class="text-sky-400 font-semibold">€ 150 / notte</span>
+                            </label>
+                            <input type="range" id="slider-alloggio" min="80" max="350" step="10" value="150" oninput="updateCalculatedBudget()" class="w-full accent-sky-400">
+                            <span class="text-xs text-slate-400">Da soluzioni low cost fuori centro (es. Queens/LIC per NY) a hotel di fascia media in centro.</span>
+                        </div>
+
+                        <!-- Spese Cibo / Giorno -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1 flex justify-between">
+                                <span>Cibo & Spese Giornaliere (a persona):</span>
+                                <span id="label-cibo" class="text-sky-400 font-semibold">€ 60 / giorno</span>
+                            </label>
+                            <input type="range" id="slider-cibo" min="40" max="150" step="5" value="60" oninput="updateCalculatedBudget()" class="w-full accent-sky-400">
+                            <span class="text-xs text-slate-400">Combina colazione e spuntini da asporto con cene occasionali al ristorante.</span>
+                        </div>
+
+                        <!-- Collegamento Rimini -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Trasferimento da Rimini (Totale per 2 persone):</label>
+                            <select id="calc-rimini" onchange="updateCalculatedBudget()" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-sky-400">
+                                <option value="120">Treno A/R + Leonardo Express (~€120 tot)</option>
+                                <option value="80">Autobus Low Cost (~€80 tot)</option>
+                                <option value="160">Auto propria + Parcheggio Lunga Sosta (~€160 tot)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Risultato -->
+                    <div class="bg-slate-800/80 rounded-xl p-6 border border-slate-700 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-slate-400 uppercase tracking-wider text-xs font-semibold">Riepilogo Preventivo di Coppia</h3>
+                            
+                            <div class="mt-6 space-y-4">
+                                <div class="flex justify-between text-sm border-b border-slate-700/50 pb-2">
+                                    <span class="text-slate-400">Voli Diretti (2 persone):</span>
+                                    <span id="res-voli" class="font-semibold text-white">€ 1.160</span>
+                                </div>
+                                <div class="flex justify-between text-sm border-b border-slate-700/50 pb-2">
+                                    <span class="text-slate-400">Alloggio (7 notti totale):</span>
+                                    <span id="res-alloggio" class="font-semibold text-white">€ 1.050</span>
+                                </div>
+                                <div class="flex justify-between text-sm border-b border-slate-700/50 pb-2">
+                                    <span class="text-slate-400">Vitto e Spese (2 persone, 8 giorni):</span>
+                                    <span id="res-cibo" class="font-semibold text-white">€ 960</span>
+                                </div>
+                                <div class="flex justify-between text-sm border-b border-slate-700/50 pb-2">
+                                    <span class="text-slate-400">Rimini &harr; Fiumicino (Navetta):</span>
+                                    <span id="res-rimini" class="font-semibold text-white">€ 120</span>
+                                </div>
+                                <div class="flex justify-between text-sm border-b border-slate-700/50 pb-2">
+                                    <span class="text-slate-400">Assicurazione Medica & Visti (Stima 2p):</span>
+                                    <span class="font-semibold text-white">€ 140</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 pt-6 border-t border-slate-700">
+                            <div class="flex justify-between items-baseline">
+                                <span class="text-base text-sky-400 font-semibold">Investimento Totale Stimato:</span>
+                                <div class="text-right">
+                                    <span id="res-totale" class="text-3xl font-extrabold text-emerald-400">€ 3.430</span>
+                                    <p class="text-[11px] text-slate-400 mt-1">Circa €1.715 a persona tutto compreso</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-slate-850/50 via-slate-900 to-slate-900 pointer-events-none"></div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 py-12 px-6 mt-16 border-t border-slate-900">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+                <p class="font-semibold text-white text-base">Consulenza Turistica Professionale</p>
+                <p class="text-xs text-slate-500 mt-1">Offerte soggette a disponibilità tariffaria in tempo reale al momento della prenotazione.</p>
+            </div>
+            <div class="flex gap-4 text-xs">
+                <a href="#confronto-voli" class="hover:text-white transition">Voli</a>
+                <a href="#itinerari" class="hover:text-white transition">Itinerari</a>
+                <a href="#burocrazia" class="hover:text-white transition">Consigli Pratici</a>
+            </div>
         </div>
-
-      </div>
-
-    </section><!-- /About Section -->
-
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Skills</h2>
-        <p>Here you are some of my main skills as a developer</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row skills-content skills-animation">
-
-          <div class="col-lg-6">
-
-            <div class="progress">
-              <span class="skill"><span>HTML</span> <i class="val">100%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-            <div class="progress">
-              <span class="skill"><span>CSS</span> <i class="val">90%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-            <div class="progress">
-              <span class="skill"><span>JavaScript</span> <i class="val">75%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-          </div>
-
-          <div class="col-lg-6">
-
-            <div class="progress">
-              <span class="skill"><span>Java</span> <i class="val">100%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-            <div class="progress">
-              <span class="skill"><span>C#</span> <i class="val">90%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-            <div class="progress">
-              <span class="skill"><span>Python</span> <i class="val">80%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- /Skills Section -->
-
-    <!-- Resume Section -->
-    <section id="resume" class="resume section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Resume</h2>
-        <p>Here are some of the most important milestones about my studies and jobs</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row">
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <h3 class="resume-title">Sumary</h3>
-
-            <div class="resume-item pb-0">
-              <h4>Brandon Johnson</h4>
-              <p><em>Innovative and deadline-driven Graphic Designer with 3+ years of experience designing and developing user-centered digital/print marketing material from initial concept to final, polished deliverable.</em></p>
-              <ul>
-                <li>Portland par 127,Orlando, FL</li>
-                <li>(123) 456-7891</li>
-                <li>alice.barkley@example.com</li>
-              </ul>
-            </div><!-- Edn Resume Item -->
-
-            <h3 class="resume-title">Education</h3>
-            <div class="resume-item">
-              <h4>Master of Fine Arts &amp; Graphic Design</h4>
-              <h5>2015 - 2016</h5>
-              <p><em>Rochester Institute of Technology, Rochester, NY</em></p>
-              <p>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend</p>
-            </div><!-- Edn Resume Item -->
-
-            <div class="resume-item">
-              <h4>Bachelor of Fine Arts &amp; Graphic Design</h4>
-              <h5>2010 - 2014</h5>
-              <p><em>Rochester Institute of Technology, Rochester, NY</em></p>
-              <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p>
-            </div><!-- Edn Resume Item -->
-
-          </div>
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <h3 class="resume-title">Professional Experience</h3>
-            <div class="resume-item">
-              <h4>Senior graphic design specialist</h4>
-              <h5>2019 - Present</h5>
-              <p><em>Experion, New York, NY </em></p>
-              <ul>
-                <li>Lead in the design, development, and implementation of the graphic, layout, and production communication materials</li>
-                <li>Delegate tasks to the 7 members of the design team and provide counsel on all aspects of the project. </li>
-                <li>Supervise the assessment of all graphic materials in order to ensure quality and accuracy of the design</li>
-                <li>Oversee the efficient use of production project budgets ranging from $2,000 - $25,000</li>
-              </ul>
-            </div><!-- Edn Resume Item -->
-
-            <div class="resume-item">
-              <h4>Graphic design specialist</h4>
-              <h5>2017 - 2018</h5>
-              <p><em>Stepping Stone Advertising, New York, NY</em></p>
-              <ul>
-                <li>Developed numerous marketing programs (logos, brochures,infographics, presentations, and advertisements).</li>
-                <li>Managed up to 5 projects or tasks at a given time while under pressure</li>
-                <li>Recommended and consulted with clients on the most appropriate graphic design</li>
-                <li>Created 4+ design presentations and proposals a month for clients and account managers</li>
-              </ul>
-            </div><!-- Edn Resume Item -->
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- /Resume Section -->
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Portfolio</h2>
-        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-
-          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">App</li>
-            <li data-filter=".filter-product">Card</li>
-            <li data-filter=".filter-branding">Web</li>
-          </ul><!-- End Portfolio Filters -->
-
-          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 1</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="assets/img/masonry-portfolio/masonry-portfolio-1.jpg" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Product 1</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="assets/img/masonry-portfolio/masonry-portfolio-2.jpg" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Branding 1</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="assets/img/masonry-portfolio/masonry-portfolio-3.jpg" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-4.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 2</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="assets/img/masonry-portfolio/masonry-portfolio-4.jpg" title="App 2" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-5.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Product 2</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="assets/img/masonry-portfolio/masonry-portfolio-5.jpg" title="Product 2" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-6.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Branding 2</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="assets/img/masonry-portfolio/masonry-portfolio-6.jpg" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-7.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 3</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="assets/img/masonry-portfolio/masonry-portfolio-7.jpg" title="App 3" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-8.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Product 3</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="assets/img/masonry-portfolio/masonry-portfolio-8.jpg" title="Product 3" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-9.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Branding 3</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="assets/img/masonry-portfolio/masonry-portfolio-9.jpg" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-          </div><!-- End Portfolio Container -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Portfolio Section -->
-
-    <!-- Services Section -->
-    <section id="services" class="services section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Services</h2>
-        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item item-cyan position-relative">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,521.0016835830174C376.1290562159157,517.8887921683347,466.0731472004068,529.7835943286574,510.70327084640275,468.03025145048787C554.3714126377745,407.6079735673963,508.03601936045806,328.9844924480964,491.2728898941984,256.3432110539036C474.5976632858925,184.082847569629,479.9380746630129,96.60480741107993,416.23090153303,58.64404602377083C348.86323505073057,18.502131276798302,261.93793281208167,40.57373210992963,193.5410806939664,78.93577620505333C130.42746243093433,114.334589627462,98.30271207620316,179.96522072025542,76.75703585869454,249.04625023123273C51.97151888228291,328.5150500222984,13.704378332031375,421.85034740162234,66.52175969318436,486.19268352777647C119.04800174914682,550.1803526380478,217.28368757567262,524.383925680826,300,521.0016835830174"></path>
-                </svg>
-                <i class="bi bi-activity"></i>
-              </div>
-              <a href="#" class="stretched-link">
-                <h3>Nesciunt Mete</h3>
-              </a>
-              <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item item-orange position-relative">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,582.0697525312426C382.5290701553225,586.8405444964366,449.9789794690241,525.3245884688669,502.5850820975895,461.55621195738473C556.606425686781,396.0723002908107,615.8543463187945,314.28637112970534,586.6730223649479,234.56875336149918C558.9533121215079,158.8439757836574,454.9685369536778,164.00468322053177,381.49747125262974,130.76875717737553C312.15926192815925,99.40240125094834,248.97055460311594,18.661163978235184,179.8680185752513,50.54337015887873C110.5421016452524,82.52863877960104,119.82277516462835,180.83849132639028,109.12597500060166,256.43424936330496C100.08760227029461,320.3096726198365,92.17705696193138,384.0621239912766,124.79988738764834,439.7174275375508C164.83382741302287,508.01625554203684,220.96474134820875,577.5009287672846,300,582.0697525312426"></path>
-                </svg>
-                <i class="bi bi-broadcast"></i>
-              </div>
-              <a href="#" class="stretched-link">
-                <h3>Eosle Commodi</h3>
-              </a>
-              <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item item-teal position-relative">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,541.5067337569781C382.14930387511276,545.0595476570109,479.8736841581634,548.3450877840088,526.4010558755058,480.5488172755941C571.5218469581645,414.80211281144784,517.5187510058486,332.0715597781072,496.52539010469104,255.14436215662573C477.37192572678356,184.95920475031193,473.57363656557914,105.61284051026155,413.0603344069578,65.22779650032875C343.27470386102294,18.654635553484475,251.2091493199835,5.337323636656869,175.0934190732945,40.62881213300186C97.87086631185822,76.43348514350839,51.98124368387456,156.15599469081315,36.44837278890362,239.84606092416172C21.716077023791087,319.22268207091537,43.775223500013084,401.1760424656574,96.891909868211,461.97329694683043C147.22146801428983,519.5804099606455,223.5754009179313,538.201503339737,300,541.5067337569781"></path>
-                </svg>
-                <i class="bi bi-easel"></i>
-              </div>
-              <a href="#" class="stretched-link">
-                <h3>Ledo Markt</h3>
-              </a>
-              <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item item-red position-relative">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,503.46388370962813C374.79870501325706,506.71871716319447,464.8034551963731,527.1746412648533,510.4981551193396,467.86667711651364C555.9287308511215,408.9015244558933,512.6030010748507,327.5744911775523,490.211057578863,256.5855673507754C471.097692560561,195.9906835881958,447.69079081568157,138.11976852964426,395.19560036434837,102.3242989838813C329.3053358748298,57.3949838291264,248.02791733380457,8.279543830951368,175.87071277845988,42.242879143198664C103.41431057327972,76.34704239035025,93.79494320519305,170.9812938413882,81.28167332365135,250.07896920659033C70.17666984294237,320.27484674793965,64.84698225790005,396.69656628748305,111.28512138212992,450.4950937839243C156.20124167950087,502.5303643271138,231.32542653798444,500.4755392045468,300,503.46388370962813"></path>
-                </svg>
-                <i class="bi bi-bounding-box-circles"></i>
-              </div>
-              <a href="#" class="stretched-link">
-                <h3>Asperiores Commodit</h3>
-              </a>
-              <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
-              <a href="#" class="stretched-link"></a>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="service-item item-indigo position-relative">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,532.3542879108572C369.38199826031484,532.3153073249985,429.10787420159085,491.63046689027357,474.5244479745417,439.17860296908856C522.8885846962883,383.3225815378663,569.1668002868075,314.3205725914397,550.7432151929288,242.7694973846089C532.6665558377875,172.5657663291529,456.2379748765914,142.6223662098291,390.3689995646985,112.34683881706744C326.66090330228417,83.06452184765237,258.84405631176094,53.51806209861945,193.32584062364296,78.48882559362697C121.61183558270385,105.82097193414197,62.805066853699245,167.19869350419734,48.57481801355237,242.6138429142374C34.843463184063346,315.3850353017275,76.69343916112496,383.4422959591041,125.22947124332185,439.3748458443577C170.7312796277747,491.8107796887764,230.57421082200815,532.3932930995766,300,532.3542879108572"></path>
-                </svg>
-                <i class="bi bi-calendar4-week icon"></i>
-              </div>
-              <a href="#" class="stretched-link">
-                <h3>Velit Doloremque</h3>
-              </a>
-              <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
-              <a href="#" class="stretched-link"></a>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-item item-pink position-relative">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,566.797414625762C385.7384707136149,576.1784315230908,478.7894351017131,552.8928747891023,531.9192734346935,484.94944893311C584.6109503024035,417.5663521118492,582.489472248146,322.67544863468447,553.9536738515405,242.03673114598146C529.1557734026468,171.96086150256528,465.24506316201064,127.66468636344209,395.9583748389544,100.7403814666027C334.2173773831606,76.7482773500951,269.4350130405921,84.62216499799875,207.1952322260088,107.2889140133804C132.92018162631612,134.33871894543012,41.79353780512637,160.00259165414826,22.644507872594943,236.69541883565114C3.319112789854554,314.0945973066697,72.72355303640163,379.243833228382,124.04198916343866,440.3218312028393C172.9286146004772,498.5055451809895,224.45579914871206,558.5317968840102,300,566.797414625762"></path>
-                </svg>
-                <i class="bi bi-chat-square-text"></i>
-              </div>
-              <a href="#" class="stretched-link">
-                <h3>Dolori Architecto</h3>
-              </a>
-              <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
-              <a href="#" class="stretched-link"></a>
-            </div>
-          </div><!-- End Service Item -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Services Section -->
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Testimonials</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="swiper init-swiper">
-          <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              }
+    </footer>
+
+    <!-- JavaScript per Interattività -->
+    <script>
+        // Inizializza icone Lucide
+        lucide.createIcons();
+
+        // Funzione per scroll morbido alle sezioni
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
             }
-          </script>
-          <div class="swiper-wrapper">
+        }
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="row gy-4 justify-content-center">
-                  <div class="col-lg-6">
-                    <div class="testimonial-content">
-                      <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
-                        <i class="bi bi-quote quote-icon-right"></i>
-                      </p>
-                      <h3>Saul Goodman</h3>
-                      <h4>Ceo &amp; Founder</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-2 text-center">
-                    <img src="assets/img/testimonials/testimonials-1.jpg" class="img-fluid testimonial-img" alt="">
-                  </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
+        // Selezione rapida destinazione dall'alto verso il calcolatore
+        function selezionaDestinazione(nome, prezzoVolo) {
+            const select = document.getElementById('calc-dest');
+            for (let option of select.options) {
+                if (option.value === nome) {
+                    option.selected = true;
+                    break;
+                }
+            }
+            
+            // Adatta alloggio in base alla destinazione scelta per coerenza di preventivo
+            const sliderAlloggio = document.getElementById('slider-alloggio');
+            if (nome === 'New York') {
+                sliderAlloggio.value = 170; // NYC alloggio leggermente più caro di base
+            } else if (nome === 'Boston') {
+                sliderAlloggio.value = 140;
+            } else {
+                sliderAlloggio.value = 120; // Toronto solitamente più economica
+            }
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="row gy-4 justify-content-center">
-                  <div class="col-lg-6">
-                    <div class="testimonial-content">
-                      <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
-                        <i class="bi bi-quote quote-icon-right"></i>
-                      </p>
-                      <h3>Sara Wilsson</h3>
-                      <h4>Designer</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-2 text-center">
-                    <img src="assets/img/testimonials/testimonials-2.jpg" class="img-fluid testimonial-img" alt="">
-                  </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
+            updateCalculatedBudget();
+            scrollToSection('budget-calculator');
+        }
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="row gy-4 justify-content-center">
-                  <div class="col-lg-6">
-                    <div class="testimonial-content">
-                      <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
-                        <i class="bi bi-quote quote-icon-right"></i>
-                      </p>
-                      <h3>Jena Karlis</h3>
-                      <h4>Store Owner</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-2 text-center">
-                    <img src="assets/img/testimonials/testimonials-3.jpg" class="img-fluid testimonial-img" alt="">
-                  </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
+        // Switch degli Itinerari tramite Tab
+        function switchItinerario(dest) {
+            // Hide tutti gli itinerari
+            document.getElementById('itinerario-boston').classList.add('hidden');
+            document.getElementById('itinerario-newyork').classList.add('hidden');
+            document.getElementById('itinerario-toronto').classList.add('hidden');
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="row gy-4 justify-content-center">
-                  <div class="col-lg-6">
-                    <div class="testimonial-content">
-                      <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
-                        <i class="bi bi-quote quote-icon-right"></i>
-                      </p>
-                      <h3>John Larson</h3>
-                      <h4>Entrepreneur</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-2 text-center">
-                    <img src="assets/img/testimonials/testimonials-4.jpg" class="img-fluid testimonial-img" alt="">
-                  </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
+            // Reset classi bottoni
+            const tabs = ['boston', 'newyork', 'toronto'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                btn.className = "py-3 px-6 font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 text-sm transition focus:outline-none";
+            });
 
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
+            // Mostra quello selezionato
+            document.getElementById(`itinerario-${dest}`).classList.remove('hidden');
+            document.getElementById(`tab-${dest}`).className = "py-3 px-6 font-semibold border-b-2 border-sky-600 text-sky-600 text-sm transition focus:outline-none";
+        }
 
-      </div>
+        // Calcolatore di Budget Dinamico
+        function updateCalculatedBudget() {
+            // Estrai Valori
+            const destSelect = document.getElementById('calc-dest');
+            const voloPersona = parseFloat(destSelect.options[destSelect.selectedIndex].getAttribute('data-price'));
+            
+            const prezzoNotte = parseInt(document.getElementById('slider-alloggio').value);
+            const ciboGiorno = parseInt(document.getElementById('slider-cibo').value);
+            const costoRimini = parseInt(document.getElementById('calc-rimini').value);
 
-    </section><!-- /Testimonials Section -->
+            // Aggiorna etichette dinamiche
+            document.getElementById('label-alloggio').innerText = `€ ${prezzoNotte} / notte`;
+            document.getElementById('label-cibo').innerText = `€ ${ciboGiorno} / giorno`;
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
+            // Calcoli
+            const totVoli = voloPersona * 2;
+            const totAlloggio = prezzoNotte * 7;
+            const totCibo = ciboGiorno * 8 * 2; // 8 giorni di permanenza per 2 persone
+            const totAssicurazioneEVisti = 140; // fisso stimato per 2 persone
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
+            const totaleComplessivo = totVoli + totAlloggio + totCibo + costoRimini + totAssicurazioneEVisti;
 
-      <div class="container" data-aos="fade" data-aos-delay="100">
+            // Scrittura dei risultati nel riepilogo
+            document.getElementById('res-voli').innerText = `€ ${totVoli.toLocaleString('it-IT')}`;
+            document.getElementById('res-alloggio').innerText = `€ ${totAlloggio.toLocaleString('it-IT')}`;
+            document.getElementById('res-cibo').innerText = `€ ${totCibo.toLocaleString('it-IT')}`;
+            document.getElementById('res-rimini').innerText = `€ ${costoRimini.toLocaleString('it-IT')}`;
+            document.getElementById('res-totale').innerText = `€ ${totaleComplessivo.toLocaleString('it-IT')}`;
+            
+            // Aggiorna quota pro-capite
+            const quotaPersona = Math.round(totaleComplessivo / 2);
+            document.querySelector('#budget-calculator p').innerText = `Circa €${quotaPersona.toLocaleString('it-IT')} a persona tutto compreso`;
+        }
 
-        <div class="row gy-4">
-
-          <div class="col-lg-4">
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
-              <i class="bi bi-geo-alt flex-shrink-0"></i>
-              <div>
-                <h3>Address</h3>
-                <p>A108 Adam Street, New York, NY 535022</p>
-              </div>
-            </div><!-- End Info Item -->
-
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
-              <i class="bi bi-telephone flex-shrink-0"></i>
-              <div>
-                <h3>Call Us</h3>
-                <p>+1 5589 55488 55</p>
-              </div>
-            </div><!-- End Info Item -->
-
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-              <i class="bi bi-envelope flex-shrink-0"></i>
-              <div>
-                <h3>Email Us</h3>
-                <p>info@example.com</p>
-              </div>
-            </div><!-- End Info Item -->
-
-          </div>
-
-          <div class="col-lg-8">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-              <div class="row gy-4">
-
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-                </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
-                </div>
-
-              </div>
-            </form>
-          </div><!-- End Contact Form -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Contact Section -->
-
-  </main>
-
-  <footer id="footer" class="footer position-relative light-background">
-    <div class="container">
-      <h3 class="sitename">Brandon Johnson</h3>
-      <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
-      <div class="social-links d-flex justify-content-center">
-        <a href=""><i class="bi bi-twitter-x"></i></a>
-        <a href=""><i class="bi bi-facebook"></i></a>
-        <a href=""><i class="bi bi-instagram"></i></a>
-        <a href=""><i class="bi bi-skype"></i></a>
-        <a href=""><i class="bi bi-linkedin"></i></a>
-      </div>
-      <div class="container">
-        <div class="copyright">
-          <span>Copyright</span> <strong class="px-1 sitename">Alex Smith</strong> <span>All Rights Reserved</span>
-        </div>
-        <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you've purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/typed.js/typed.umd.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
-
+        // Primo avvio calcolo
+        window.onload = function() {
+            updateCalculatedBudget();
+        }
+    </script>
 </body>
-
 </html>
