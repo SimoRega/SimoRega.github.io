@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preventivo di Viaggio - Nord America 2026</title>
+    <title>Piattaforma di Preventivazione & Consulenza Viaggi</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -13,597 +13,795 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+        /* Custom scrollbar to match theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
 
-    <!-- Header / Hero -->
-    <header class="bg-slate-900 text-white py-12 px-6 relative overflow-hidden">
+    <!-- Header / Hero Section -->
+    <header class="bg-slate-900 text-white py-12 px-6 relative overflow-hidden shadow-md">
         <div class="max-w-6xl mx-auto relative z-10">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                 <div>
-                    <span class="text-sky-400 font-semibold tracking-wider uppercase text-xs">Consulenza di Viaggio Personalizzata</span>
-                    <h1 class="text-3xl md:text-5xl font-bold mt-2">La Vostra Prima Volta in America</h1>
-                    <p class="text-slate-400 mt-2 text-lg max-w-2xl">Un'avventura indimenticabile bilanciata tra lo spirito autentico d'oltreoceano e l'ottimizzazione del budget. Analisi delle proposte per Boston, New York e Toronto.</p>
+                    <span class="text-sky-400 font-semibold tracking-wider uppercase text-xs">Piattaforma di Consulenza e Preventivazione Viaggi</span>
+                    <h1 class="text-3xl md:text-5xl font-bold mt-2 tracking-tight">Studio di Fattibilità & Itinerari</h1>
+                    <p class="text-slate-400 mt-2 text-lg max-w-2xl">Analisi comparativa per viaggiatori con partenza da Rimini. Ottimizzazione dei costi di trasferimento, alloggio e attività per mete nazionali ed estere nel periodo di fine estate.</p>
                 </div>
-                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 backdrop-blur-sm">
-                    <p class="text-xs text-slate-400 uppercase tracking-wider">Preparato per</p>
-                    <p class="font-semibold text-white text-lg">Coppia di Viaggiatori da Rimini</p>
+                <div class="bg-slate-800/90 p-5 rounded-xl border border-slate-700 backdrop-blur-sm shadow-lg shrink-0">
+                    <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Specifiche Cliente</p>
+                    <p class="font-bold text-white text-lg">Gruppo / Viaggiatori da Rimini</p>
                     <div class="flex items-center gap-2 mt-2 text-sm text-sky-400">
                         <i data-lucide="calendar" class="w-4 h-4"></i>
-                        <span>29 Ago - 5 Set (8 Giorni / 7 Notti)</span>
+                        <span>Periodo: Fine Agosto - Inizio Settembre 2026</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-sky-900/30 via-slate-900 to-slate-900 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-sky-900/20 via-slate-900 to-slate-900 pointer-events-none"></div>
     </header>
 
-    <!-- Main Content Grid -->
-    <main class="max-w-6xl mx-auto px-4 py-8 space-y-12">
+    <!-- Main Selector Section -->
+    <section class="max-w-6xl mx-auto w-full px-4 mt-8">
+        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+            <p class="text-xs uppercase font-bold tracking-wider text-slate-400 mb-3 text-center md:text-left">Selezionare la macro-destinazione di interesse per aggiornare l'intera scheda:</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <button onclick="switchMacroDestination('dolomiti')" id="macro-btn-dolomiti" class="flex items-center justify-between p-4 rounded-lg border-2 transition duration-200 text-left bg-slate-50 border-slate-200 hover:border-slate-300">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2.5 rounded-lg bg-emerald-50 text-emerald-600">
+                            <i data-lucide="mountain" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <span class="block font-bold text-slate-950 text-sm">Dolomiti (Cadore)</span>
+                            <span class="text-xs text-slate-500">Natura & Trekking montano</span>
+                        </div>
+                    </div>
+                    <span class="text-xs font-semibold px-2 py-1 bg-emerald-100 text-emerald-800 rounded-md">Da €729 pp</span>
+                </button>
 
-        <!-- Navigazione rapida sezioni -->
-        <section class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <button onclick="scrollToSection('confronto-voli')" class="flex items-center justify-center gap-2 p-3 bg-white hover:bg-slate-100 rounded-lg shadow-sm border border-slate-200 transition text-sm font-medium">
-                <i data-lucide="plane" class="w-4 h-4 text-sky-600"></i> Voli e Destinazioni
-            </button>
-            <button onclick="scrollToSection('collegamenti-rimini')" class="flex items-center justify-center gap-2 p-3 bg-white hover:bg-slate-100 rounded-lg shadow-sm border border-slate-200 transition text-sm font-medium">
-                <i data-lucide="train" class="w-4 h-4 text-sky-600"></i> Navette da Rimini
-            </button>
-            <button onclick="scrollToSection('itinerari')" class="flex items-center justify-center gap-2 p-3 bg-white hover:bg-slate-100 rounded-lg shadow-sm border border-slate-200 transition text-sm font-medium">
-                <i data-lucide="map" class="w-4 h-4 text-sky-600"></i> Itinerari e Attività
-            </button>
-            <button onclick="scrollToSection('burocrazia')" class="flex items-center justify-center gap-2 p-3 bg-white hover:bg-slate-100 rounded-lg shadow-sm border border-slate-200 transition text-sm font-medium">
-                <i data-lucide="shield-check" class="w-4 h-4 text-sky-600"></i> Visti e Consigli
-            </button>
-        </section>
+                <button onclick="switchMacroDestination('madeira')" id="macro-btn-madeira" class="flex items-center justify-between p-4 rounded-lg border-2 transition duration-200 text-left bg-slate-50 border-slate-200 hover:border-slate-300">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2.5 rounded-lg bg-sky-50 text-sky-600">
+                            <i data-lucide="palmtree" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <span class="block font-bold text-slate-950 text-sm">Isola di Madeira</span>
+                            <span class="text-xs text-slate-500">Trekking & Oceano Portoghese</span>
+                        </div>
+                    </div>
+                    <span class="text-xs font-semibold px-2 py-1 bg-sky-100 text-sky-800 rounded-md">Da €730 pp</span>
+                </button>
 
-        <!-- SEZIONE 1: CONFRONTO VOLI E DESTINAZIONI -->
-        <section id="confronto-voli" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+                <button onclick="switchMacroDestination('nordamerica')" id="macro-btn-nordamerica" class="flex items-center justify-between p-4 rounded-lg border-2 transition duration-200 text-left bg-slate-50 border-slate-200 hover:border-slate-300">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2.5 rounded-lg bg-indigo-50 text-indigo-600">
+                            <i data-lucide="globe-2" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <span class="block font-bold text-slate-950 text-sm">Nord America</span>
+                            <span class="text-xs text-slate-500">Usa & Canada (3 Varianti)</span>
+                        </div>
+                    </div>
+                    <span class="text-xs font-semibold px-2 py-1 bg-indigo-100 text-indigo-800 rounded-md">Da €1.500 pp</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Container Grid -->
+    <main class="max-w-6xl mx-auto w-full px-4 py-8 space-y-12 flex-grow">
+
+        <!-- SEZIONE 1: VOLI, LOGISTICA E TRASFERIMENTI -->
+        <section class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
             <div class="border-b border-slate-100 pb-4 mb-6">
                 <h2 class="text-2xl font-bold text-slate-950 flex items-center gap-2">
-                    <i data-lucide="compass" class="text-sky-600"></i>
-                    Analisi e Confronto delle Destinazioni
+                    <i data-lucide="plane" class="text-sky-600"></i>
+                    Logistica dei Trasferimenti & Punti di Partenza
                 </h2>
-                <p class="text-slate-500 text-sm mt-1">Dati estratti dalle migliori combinazioni di volo dirette da Roma Fiumicino (FCO) con partenza il 29 agosto e rientro il 5 settembre.</p>
+                <p class="text-slate-500 text-sm mt-1">Confronto dei costi e dei tempi di percorrenza per raggiungere i vari hub aeroportuali o mete di arrivo con partenza fisica da Rimini.</p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Opzione 1: Boston -->
-                <div class="border border-slate-200 hover:border-sky-400 rounded-xl p-5 transition flex flex-col justify-between bg-slate-50/50">
-                    <div>
-                        <div class="flex justify-between items-start">
-                            <span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-full font-medium">Consigliato Prima Volta</span>
-                            <span class="text-slate-400 text-xs flex items-center gap-1"><i data-lucide="leaf" class="w-3.5 h-3.5"></i> -19% CO₂</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 mt-3">Boston, Massachusetts</h3>
-                        <p class="text-slate-500 text-xs mt-1">La culla della storia americana. Perfetta per spostarsi interamente a piedi o con l'efficiente metropolitana, riducendo a zero i costi di noleggio auto.</p>
-                        
-                        <div class="mt-6 space-y-3 border-t border-b border-slate-100 py-4">
-                            <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Compagnia:</span>
-                                <span class="font-semibold text-slate-700">ITA Airways (Diretto)</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Andata (29 ago):</span>
-                                <span class="font-medium">10:25 FCO &rarr; 13:40 BOS</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Ritorno (5 set):</span>
-                                <span class="font-medium">17:05 BOS &rarr; 07:05<span class="text-xs text-sky-600 font-bold">+1</span> FCO</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Durata media volo:</span>
-                                <span class="font-medium text-slate-700">8h 38m</span>
-                            </div>
+            <!-- Panel Content for DOLOMITI -->
+            <div id="logistica-dolomiti" class="space-y-6 hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                            <i data-lucide="car" class="text-emerald-600 w-5 h-5"></i>
+                            Percorso Stradale Consigliato: Rimini &rarr; Cadore
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            La soluzione logistica ottimale consiste nel trasporto su gomma privato. La durata stimata del viaggio è di circa <strong>3 ore e 45 minuti</strong> (percorrenza di circa 340 km).
+                        </p>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-sm space-y-2">
+                            <div class="flex justify-between"><span class="text-slate-500">Percorso:</span> <span class="font-medium text-slate-800">A14 (Rimini &rarr; Bologna) &rarr; A13 (Padova) &rarr; A27 &rarr; SS51</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500">Costo Pedaggi (A/R):</span> <span class="font-semibold text-slate-800">circa €48,00</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500">Costo Carburante (A/R):</span> <span class="font-semibold text-slate-800">circa €90,00</span></div>
                         </div>
                     </div>
-                    <div class="mt-6">
-                        <div class="flex items-baseline justify-between">
-                            <span class="text-slate-500 text-sm">Tariffa Volo:</span>
-                            <span class="text-2xl font-bold text-slate-900">€ 552 <span class="text-xs font-normal text-slate-500">/persona</span></span>
+                    <div class="space-y-4">
+                        <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                            <i data-lucide="bus" class="text-emerald-600 w-5 h-5"></i>
+                            Mezzi di Trasporto Alternativi
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Qualora si preferisse evitare l'uso del mezzo proprio, è possibile combinare il trasporto su rotaia con navette dedicate stagionali fino alle valli del Cadore.
+                        </p>
+                        <ul class="text-xs space-y-2 text-slate-600">
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-600 font-bold">•</span>
+                                <span><strong>Treno (Trenitalia):</strong> Tratta Rimini - Venezia Mestre + Bus Sottogruppo Cortina Express (Costo indicativo: €45 - €70 a persona a tratta).</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-600 font-bold">•</span>
+                                <span><strong>Servizio Navette:</strong> Collegamenti diretti estivi di linea da Bologna o Venezia per Calalzo di Cadore.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel Content for MADEIRA -->
+            <div id="logistica-madeira" class="space-y-6 hidden">
+                <div class="bg-sky-50 border border-sky-100 p-4 rounded-xl text-xs text-sky-950 leading-relaxed mb-4">
+                    <span class="font-bold">Analisi Hub di Partenza:</span> Non essendoci collegamenti diretti dall'aeroporto di Bologna per Funchal (FNC), vengono analizzate e messe a confronto le due opzioni principali per ottimizzare il rapporto tempi/costi.
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Opzione BLQ -->
+                    <div class="border border-slate-200 p-5 rounded-xl bg-slate-50">
+                        <div class="flex justify-between items-center mb-3">
+                            <h4 class="font-bold text-slate-950 text-sm">Opzione A: Scalo Singolo da Bologna (BLQ)</h4>
+                            <span class="text-xs px-2 py-0.5 bg-blue-100 text-blue-800 rounded font-semibold">Comodità Massima</span>
                         </div>
-                        <button onclick="selezionaDestinazione('Boston', 552)" class="w-full mt-4 bg-slate-900 hover:bg-slate-800 text-white py-2 rounded-lg text-sm font-medium transition flex items-center justify-center gap-2">
-                            Seleziona per Preventivo <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </button>
+                        <p class="text-slate-600 text-xs leading-relaxed mb-4">
+                            Volo operato da <strong>TAP Air Portugal</strong> con scalo a Lisbona (LIS). Bologna dista appena 1h 15m di auto da Rimini. Questa opzione include la garanzia di re-routing automatico su un unico biglietto in caso di ritardi.
+                        </p>
+                        <div class="text-xs space-y-1 text-slate-500 border-t border-slate-200/60 pt-3">
+                            <div class="flex justify-between"><span>Distanza Rimini-BLQ:</span> <span class="font-medium text-slate-700">115 km (auto o treno regionale)</span></div>
+                            <div class="flex justify-between"><span>Costo parcheggio BLQ (5gg):</span> <span class="font-medium text-slate-700">circa €45 (Tariffa low-cost P4)</span></div>
+                            <div class="flex justify-between"><span>Prezzo volo stimato (A/R):</span> <span class="font-semibold text-sky-700">€250 - €350 / persona</span></div>
+                        </div>
+                    </div>
+                    <!-- Opzione MXP -->
+                    <div class="border border-slate-200 p-5 rounded-xl bg-slate-50">
+                        <div class="flex justify-between items-center mb-3">
+                            <h4 class="font-bold text-slate-950 text-sm">Opzione B: Volo Diretto da Milano Malpensa (MXP)</h4>
+                            <span class="text-xs px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded font-semibold">Risparmio Netto</span>
+                        </div>
+                        <p class="text-slate-600 text-xs leading-relaxed mb-4">
+                            Volo diretto low cost operato da <strong>Ryanair</strong>. Evita i rischi e i tempi di attesa dello scalo a Lisbona, ma richiede una percorrenza di terra nettamente maggiore da Rimini.
+                        </p>
+                        <div class="text-xs space-y-1 text-slate-500 border-t border-slate-200/60 pt-3">
+                            <div class="flex justify-between"><span>Distanza Rimini-MXP:</span> <span class="font-medium text-slate-700">340 km (~3h 30m di auto)</span></div>
+                            <div class="flex justify-between"><span>Spesa di trasferimento (carburante+tolls):</span> <span class="font-medium text-slate-700">circa €85 A/R</span></div>
+                            <div class="flex justify-between"><span>Prezzo volo stimato (A/R):</span> <span class="font-semibold text-emerald-700">€120 - €180 / persona</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel Content for NORD AMERICA -->
+            <div id="logistica-nordamerica" class="space-y-6">
+                <div class="bg-indigo-50 border border-indigo-100 p-4 rounded-xl text-xs text-indigo-950 mb-6">
+                    <span class="font-bold">Analisi Voli Diretti da Roma Fiumicino (FCO):</span> Di seguito si riportano i dati reali relativi alle tariffe d'acquisto riscontrate sui documenti d'archivio e gli screenshot di prenotazione per partenze il 29 agosto e rientro il 5 settembre.
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Boston card -->
+                    <div class="border border-slate-200 hover:border-indigo-500 rounded-xl p-5 transition flex flex-col justify-between bg-slate-50">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="bg-emerald-100 text-emerald-800 text-[11px] px-2 py-0.5 rounded font-semibold uppercase">Efficienza CO₂ (-19%)</span>
+                                <span class="text-slate-400 text-xs font-semibold">FCO &rarr; BOS</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 mt-2">Boston, Massachusetts</h3>
+                            <p class="text-slate-500 text-xs mt-1">Soluzione aerea ottimale per rapidità e impatto ecologico sulla rotta atlantica.</p>
+                            
+                            <div class="mt-4 space-y-2 border-t border-slate-100 pt-3 text-xs">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-500">Operatore:</span>
+                                    <span class="font-semibold text-slate-700">ITA Airways (Diretto)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-500">Andata:</span>
+                                    <span class="font-medium">10:25 &rarr; 13:40</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-500">Ritorno:</span>
+                                    <span class="font-medium">17:05 &rarr; 07:05 (+1)</span>
+                                </div>
+                                <div class="text-[10px] text-slate-400 mt-2 italic">
+                                    Vedi dettagli visualizzati in file <span class="font-semibold">image_0d0520.png</span>.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100">
+                            <div class="flex justify-between items-baseline">
+                                <span class="text-slate-500 text-xs">Tariffa Volo:</span>
+                                <span class="text-xl font-bold text-slate-950">€ 552 <span class="text-[11px] font-normal text-slate-500">pp</span></span>
+                            </div>
+                            <button onclick="selezionaDestinazionePredefinita('Boston', 552)" class="w-full mt-3 bg-slate-900 hover:bg-slate-800 text-white py-2 rounded-lg text-xs font-semibold transition">
+                                Seleziona per Preventivo
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- New York card -->
+                    <div class="border border-slate-200 hover:border-indigo-500 rounded-xl p-5 transition flex flex-col justify-between bg-slate-50">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="bg-amber-100 text-amber-800 text-[11px] px-2 py-0.5 rounded font-semibold uppercase">Grande Classico</span>
+                                <span class="text-slate-400 text-xs font-semibold">FCO &rarr; JFK</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 mt-2">New York, NY</h3>
+                            <p class="text-slate-500 text-xs mt-1">Connessione ottimale per orario di arrivo e flessibilità tariffaria.</p>
+                            
+                            <div class="mt-4 space-y-2 border-t border-slate-100 pt-3 text-xs">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-500">Operatore:</span>
+                                    <span class="font-semibold text-slate-700">ITA Airways (Diretto)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-500">Andata:</span>
+                                    <span class="font-medium">10:30 &rarr; 13:55</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-500">Ritorno:</span>
+                                    <span class="font-medium">21:10 &rarr; 11:50 (+1)</span>
+                                </div>
+                                <div class="text-[10px] text-slate-400 mt-2 italic">
+                                    Vedi dettagli visualizzati in file <span class="font-semibold">image_0d04e2.png</span>.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100">
+                            <div class="flex justify-between items-baseline">
+                                <span class="text-slate-500 text-xs">Tariffa Volo:</span>
+                                <span class="text-xl font-bold text-slate-950">€ 580 <span class="text-[11px] font-normal text-slate-500">pp</span></span>
+                            </div>
+                            <button onclick="selezionaDestinazionePredefinita('New York', 580)" class="w-full mt-3 bg-slate-900 hover:bg-slate-800 text-white py-2 rounded-lg text-xs font-semibold transition">
+                                Seleziona per Preventivo
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Toronto card -->
+                    <div class="border border-slate-200 hover:border-indigo-500 rounded-xl p-5 transition flex flex-col justify-between bg-slate-50">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="bg-blue-100 text-blue-800 text-[11px] px-2 py-0.5 rounded font-semibold uppercase">Multi-Nazione</span>
+                                <span class="text-slate-400 text-xs font-semibold">FCO &rarr; YYZ</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 mt-2">Toronto, Canada</h3>
+                            <p class="text-slate-500 text-xs mt-1">Tariffa combinata di bandiera, indicata per esplorazioni naturalistiche canadesi.</p>
+                            
+                            <div class="mt-4 space-y-2 border-t border-slate-100 pt-3 text-xs">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-500">Operatore:</span>
+                                    <span class="font-semibold text-slate-700">Air Canada (Diretto)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-500">Andata:</span>
+                                    <span class="font-medium">12:25 &rarr; 16:00</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-500">Ritorno:</span>
+                                    <span class="font-medium">20:00 &rarr; 10:20 (+1)</span>
+                                </div>
+                                <div class="text-[10px] text-slate-400 mt-2 italic">
+                                    Vedi dettagli visualizzati in file <span class="font-semibold">image_0d021c.png</span>.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100">
+                            <div class="flex justify-between items-baseline">
+                                <span class="text-slate-500 text-xs">Tariffa Volo:</span>
+                                <span class="text-xl font-bold text-slate-950">€ 659 <span class="text-[11px] font-normal text-slate-500">pp</span></span>
+                            </div>
+                            <button onclick="selezionaDestinazionePredefinita('Toronto', 659)" class="w-full mt-3 bg-slate-900 hover:bg-slate-800 text-white py-2 rounded-lg text-xs font-semibold transition">
+                                Seleziona per Preventivo
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Opzione 2: New York -->
-                <div class="border border-slate-200 hover:border-sky-400 rounded-xl p-5 transition flex flex-col justify-between bg-slate-50/50">
-                    <div>
-                        <div class="flex justify-between items-start">
-                            <span class="bg-amber-100 text-amber-800 text-xs px-2.5 py-1 rounded-full font-medium">Grande Classico</span>
-                            <span class="text-slate-400 text-xs flex items-center gap-1"><i data-lucide="leaf" class="w-3.5 h-3.5"></i> -12% CO₂</span>
+                <!-- Rimini to FCO shuttle box -->
+                <div class="mt-6 border border-slate-200 rounded-xl p-5 bg-slate-50">
+                    <h4 class="font-bold text-slate-950 text-sm flex items-center gap-2 mb-3">
+                        <i data-lucide="milestone" class="text-indigo-600 w-4 h-4"></i>
+                        Collegamenti Terrestri da Rimini ad Aeroporto Roma Fiumicino (FCO)
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                        <div class="p-3 bg-white border border-slate-200 rounded-lg">
+                            <span class="font-semibold text-slate-900 block">Treno Alta Velocità + Express</span>
+                            <p class="text-slate-500 mt-1">Rimini Centrale &rarr; Roma Termini + Leonardo Express. Durata: ~4h 30m. Costo: €45 - €85 pp.</p>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 mt-3">New York, NY</h3>
-                        <p class="text-slate-500 text-xs mt-1">L'icona mondiale. Energia impareggiabile, ma i costi per l'alloggio a Manhattan durante la fine dell'estate sono sensibilmente più alti delle altre mete.</p>
-                        
-                        <div class="mt-6 space-y-3 border-t border-b border-slate-100 py-4">
-                            <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Compagnia:</span>
-                                <span class="font-semibold text-slate-700">ITA Airways (Diretto)</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Andata (29 ago):</span>
-                                <span class="font-medium">10:30 FCO &rarr; 13:55 JFK</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Ritorno (5 set):</span>
-                                <span class="font-medium">21:10 JFK &rarr; 11:50<span class="text-xs text-sky-600 font-bold">+1</span> FCO</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Durata media volo:</span>
-                                <span class="font-medium text-slate-700">9h 03m</span>
-                            </div>
+                        <div class="p-3 bg-white border border-slate-200 rounded-lg">
+                            <span class="font-semibold text-slate-900 block">Flixbus / Bus Diretto</span>
+                            <p class="text-slate-500 mt-1">Partenza da Rimini (Via Fada) &rarr; Roma Tiburtina + FL1 regionale. Durata: ~6h 30m. Costo: €30 - €50 pp.</p>
+                        </div>
+                        <div class="p-3 bg-white border border-slate-200 rounded-lg">
+                            <span class="font-semibold text-slate-900 block">Auto + Parcheggio Lunga Sosta</span>
+                            <p class="text-slate-500 mt-1">Viaggio via E45 (380 km) + deposito auto in parcheggio ufficiale FCO Lunga Sosta. Costo auto (pedaggi+carburante): €90. Parcheggio (8gg): ~€55 - €70.</p>
                         </div>
                     </div>
-                    <div class="mt-6">
-                        <div class="flex items-baseline justify-between">
-                            <span class="text-slate-500 text-sm">Tariffa Volo:</span>
-                            <span class="text-2xl font-bold text-slate-900">€ 580 <span class="text-xs font-normal text-slate-500">/persona</span></span>
-                        </div>
-                        <button onclick="selezionaDestinazione('New York', 580)" class="w-full mt-4 bg-slate-900 hover:bg-slate-800 text-white py-2 rounded-lg text-sm font-medium transition flex items-center justify-center gap-2">
-                            Seleziona per Preventivo <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Opzione 3: Toronto -->
-                <div class="border border-slate-200 hover:border-sky-400 rounded-xl p-5 transition flex flex-col justify-between bg-slate-50/50">
-                    <div>
-                        <div class="flex justify-between items-start">
-                            <span class="bg-blue-100 text-blue-800 text-xs px-2.5 py-1 rounded-full font-medium">Natura e Metropoli</span>
-                            <span class="text-slate-400 text-xs flex items-center gap-1"><i data-lucide="leaf" class="w-3.5 h-3.5"></i> -12% CO₂</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 mt-3">Toronto, Canada</h3>
-                        <p class="text-slate-500 text-xs mt-1">Metropoli canadese pulita, sicura e multiculturale. Ottimo punto di partenza per una gita in giornata alle Cascate del Niagara senza spendere cifre esorbitanti.</p>
-                        
-                        <div class="mt-6 space-y-3 border-t border-b border-slate-100 py-4">
-                            <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Compagnia:</span>
-                                <span class="font-semibold text-slate-700">Air Canada (Diretto)</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Andata (29 ago):</span>
-                                <span class="font-medium">12:25 FCO &rarr; 16:00 YYZ</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Ritorno (5 set):</span>
-                                <span class="font-medium">20:00 YYZ &rarr; 10:20<span class="text-xs text-sky-600 font-bold">+1</span> FCO</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Durata media volo:</span>
-                                <span class="font-medium text-slate-700">8h 58m</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-6">
-                        <div class="flex items-baseline justify-between">
-                            <span class="text-slate-500 text-sm">Tariffa Volo:</span>
-                            <span class="text-2xl font-bold text-slate-900">€ 659 <span class="text-xs font-normal text-slate-500">/persona</span></span>
-                        </div>
-                        <button onclick="selezionaDestinazione('Toronto', 659)" class="w-full mt-4 bg-slate-900 hover:bg-slate-800 text-white py-2 rounded-lg text-sm font-medium transition flex items-center justify-center gap-2">
-                            Seleziona per Preventivo <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </button>
+                    <div class="mt-4 p-3.5 bg-amber-50 border border-amber-100 rounded-lg text-xs text-amber-900 flex items-start gap-2">
+                        <i data-lucide="info" class="w-4 h-4 shrink-0 mt-0.5"></i>
+                        <span>
+                            <strong>Nota Operativa Importante:</strong> I voli transatlantici per USA/Canada con partenza FCO tra le 10:25 e le 12:25 impongono la presenza al banco di accettazione almeno 3 ore prima. Per ragioni di sicurezza, non è consigliabile partire da Rimini la mattina stessa con il treno delle ore 05:00. Si suggerisce di pianificare il trasferimento nel tardo pomeriggio del 28 agosto pernottando nei pressi dell'aeroporto, o di optare per l'opzione auto con partenza notturna da Rimini.
+                        </span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEZIONE 2: COLLEGAMENTI DA RIMINI -->
-        <section id="collegamenti-rimini" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
-            <div class="border-b border-slate-100 pb-4 mb-6">
-                <h2 class="text-2xl font-bold text-slate-950 flex items-center gap-2">
-                    <i data-lucide="milestone" class="text-sky-600"></i>
-                    Collegamenti da Rimini a Roma Fiumicino (FCO)
-                </h2>
-                <p class="text-slate-500 text-sm mt-1">Le migliori opzioni studiate per un viaggio comodo ed economico per raggiungere l'aeroporto di partenza in tempo per i voli transatlantici.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Treno Alta Velocità + Leonardo Express -->
-                <div class="bg-slate-50 rounded-xl p-5 border border-slate-100">
-                    <div class="flex items-center gap-2 text-slate-900 font-semibold mb-3">
-                        <i data-lucide="train" class="text-sky-600 w-5 h-5"></i>
-                        <span>Opzione Treno (Consigliata)</span>
-                    </div>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Prendere un treno Frecciarossa o Intercity da <strong>Rimini Centrale</strong> a <strong>Roma Termini</strong>, per poi salire sul treno navetta <strong>Leonardo Express</strong> che parte ogni 15 minuti direttamente per l'aeroporto FCO.
-                    </p>
-                    <div class="mt-4 pt-4 border-t border-slate-200/60 space-y-2 text-xs text-slate-500">
-                        <div class="flex justify-between"><span>Tempo medio di viaggio:</span> <span class="font-semibold text-slate-700">~4h 30m</span></div>
-                        <div class="flex justify-between"><span>Costo indicativo a persona:</span> <span class="font-semibold text-emerald-600">€ 45 - € 85 (A/R)</span></div>
-                        <div class="flex justify-between"><span>Flessibilità oraria:</span> <span class="font-semibold text-slate-700">Molto alta</span></div>
-                    </div>
-                </div>
-
-                <!-- Autobus Diretto / Low Cost -->
-                <div class="bg-slate-50 rounded-xl p-5 border border-slate-100">
-                    <div class="flex items-center gap-2 text-slate-900 font-semibold mb-3">
-                        <i data-lucide="bus" class="text-sky-600 w-5 h-5"></i>
-                        <span>Opzione Autobus (Economica)</span>
-                    </div>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Autobus a lunga percorrenza (es. FlixBus o operatori regionali) da <strong>Rimini (Via Fada / Stazione)</strong> fino a <strong>Roma Tiburtina</strong>, e successivo treno regionale FL1 verso l'aeroporto di Fiumicino.
-                    </p>
-                    <div class="mt-4 pt-4 border-t border-slate-200/60 space-y-2 text-xs text-slate-500">
-                        <div class="flex justify-between"><span>Tempo medio di viaggio:</span> <span class="font-semibold text-slate-700">~6h 30m</span></div>
-                        <div class="flex justify-between"><span>Costo indicativo a persona:</span> <span class="font-semibold text-emerald-600">€ 30 - € 50 (A/R)</span></div>
-                        <div class="flex justify-between"><span>Flessibilità oraria:</span> <span class="font-semibold text-slate-700">Limitata</span></div>
-                    </div>
-                </div>
-
-                <!-- Auto propria + Parcheggio Lunga Sosta -->
-                <div class="bg-slate-50 rounded-xl p-5 border border-slate-100">
-                    <div class="flex items-center gap-2 text-slate-900 font-semibold mb-3">
-                        <i data-lucide="car" class="text-sky-600 w-5 h-5"></i>
-                        <span>Auto Propria + Parcheggio</span>
-                    </div>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Viaggio in automobile via E45 (circa 380 km) da Rimini direttamente ai parcheggi ufficiali "Lunga Sosta" di Roma Fiumicino con servizio navetta gratuito per i terminal.
-                    </p>
-                    <div class="mt-4 pt-4 border-t border-slate-200/60 space-y-2 text-xs text-slate-500">
-                        <div class="flex justify-between"><span>Tempo medio di viaggio:</span> <span class="font-semibold text-slate-700">~4h 15m</span></div>
-                        <div class="flex justify-between"><span>Costo carburante + pedaggi:</span> <span class="font-semibold text-slate-700">~€ 90 (A/R)</span></div>
-                        <div class="flex justify-between"><span>Costo Parcheggio (8 gg):</span> <span class="font-semibold text-emerald-600">~€ 55 - € 70</span></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-4 bg-sky-50 border border-sky-100 rounded-xl p-4 text-xs text-sky-800 flex items-start gap-3">
-                <i data-lucide="info" class="w-5 h-5 shrink-0 mt-0.5"></i>
-                <div>
-                    <span class="font-semibold">Nota di viaggio per la partenza:</span> I voli per gli Stati Uniti/Canada richiedono controlli di sicurezza speciali. Essendo il volo ITA per Boston/New York programmato alle 10:25/10:30, dovrete essere in aeroporto a Fiumicino **entro le ore 07:30**. Per questo motivo, l'opzione treno al mattino stesso potrebbe essere troppo rischiosa. Consigliamo di viaggiare in treno il pomeriggio del 28 agosto e pernottare in una struttura economica nei pressi di Fiumicino Paese o di optare per un viaggio notturno.
-                </div>
-            </div>
-        </section>
-
-        <!-- SEZIONE 3: ITINERARI COMPLETI (Interattivi) -->
+        <!-- SEZIONE 2: ITINERARIO DETTAGLIATO -->
         <section id="itinerari" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
             <div class="border-b border-slate-100 pb-4 mb-6">
                 <h2 class="text-2xl font-bold text-slate-950 flex items-center gap-2">
-                    <i data-lucide="map-pin" class="text-sky-600"></i>
-                    Itinerari di Viaggio Proposti (Giorno per Giorno)
+                    <i data-lucide="calendar-days" class="text-sky-600"></i>
+                    Sviluppo dell'Itinerario Giorno per Giorno
                 </h2>
-                <p class="text-slate-500 text-sm mt-1">Selezionate la destinazione desiderata per visualizzare l'itinerario ottimizzato con un perfetto bilanciamento tra attrazioni iconiche e segreti a basso costo.</p>
+                <p class="text-slate-500 text-sm mt-1">Visualizzazione analitica delle giornate di viaggio per massimizzare la conoscenza del territorio riducendo le uscite finanziarie non necessarie.</p>
             </div>
 
-            <!-- Tab Selettori -->
-            <div class="flex border-b border-slate-200 mb-6">
-                <button onclick="switchItinerario('boston')" id="tab-boston" class="py-3 px-6 font-semibold border-b-2 border-sky-600 text-sky-600 text-sm transition focus:outline-none">
-                    Itinerario Boston
-                </button>
-                <button onclick="switchItinerario('newyork')" id="tab-newyork" class="py-3 px-6 font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 text-sm transition focus:outline-none">
-                    Itinerario New York
-                </button>
-                <button onclick="switchItinerario('toronto')" id="tab-toronto" class="py-3 px-6 font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 text-sm transition focus:outline-none">
-                    Itinerario Toronto
-                </button>
-            </div>
-
-            <!-- Contenuto Itinerario BOSTON -->
-            <div id="itinerario-boston" class="space-y-6">
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col md:flex-row justify-between md:items-center gap-4">
+            <!-- ITINERARIO DOLOMITI -->
+            <div id="itinerario-dolomiti-content" class="space-y-6 hidden">
+                <div class="p-4 bg-emerald-50 border border-emerald-100 rounded-xl flex flex-col md:flex-row justify-between gap-4 text-xs">
                     <div>
-                        <h4 class="font-bold text-slate-900 text-base">Perché Boston è la scelta intelligente:</h4>
-                        <p class="text-slate-600 text-xs mt-1">Città fortemente universitaria (Harvard, MIT), ricca di parchi pubblici e atmosfera europea. Si gira benissimo a piedi, risparmiando sui mezzi di trasporto pubblici.</p>
+                        <span class="font-bold text-emerald-950 block">Dettagli di Base - Dolomiti di Cadore</span>
+                        <p class="text-emerald-800 mt-1">Alloggio strategico suggerito: Auronzo di Cadore o Pieve di Cadore per minimizzare gli spostamenti quotidiani.</p>
                     </div>
-                    <div class="shrink-0 bg-emerald-100 text-emerald-800 px-3 py-1.5 rounded-lg text-xs font-semibold">
-                        Stima Spesa Attività: ~ $90-120 a persona
+                    <div class="shrink-0 bg-emerald-200 text-emerald-900 px-3 py-1.5 rounded-lg font-bold flex items-center">
+                        Costo Attività Stimato: ~ €100 - €150 pp
                     </div>
                 </div>
 
-                <div class="relative border-l border-slate-200 ml-4 pl-6 space-y-8">
-                    <!-- Giorno 1 -->
+                <div class="relative border-l-2 border-slate-200 ml-4 pl-6 space-y-8 text-sm">
                     <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 1: Arrivo a Boston e Primo Contatto con il New England</h5>
-                        <p class="text-slate-600 text-sm mt-1">Atterraggio a Logan (BOS) alle 13:40. Trasferimento in centro rapido ed economico tramite la <strong>Blue Line</strong> della MBTA. Check-in in hotel/appartamento. Prima passeggiata rilassante lungo la passeggiata del porto (Boston Harborwalk) per superare il jet lag e cena informale a base di <em>Clam Chowder</em> (zuppa di vongole locale) al Quincy Market.</p>
+                        <span class="absolute -left-[31px] top-0.5 bg-emerald-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center text-[10px]"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 1 (31/08): Rimini - Auronzo di Cadore</h4>
+                        <p class="text-slate-600 mt-1">Partenza stradale da Rimini in mattinata. Arrivo in Cadore per il pranzo e sistemazione in hotel. Nel pomeriggio, cammino perimetrale lungo il Lago di Santa Caterina (Auronzo). È possibile noleggiare un pedalò o una canoa presso l'attracco per analizzare le pareti dolomitiche riflesse sullo specchio d'acqua. Cena a base di prodotti locali.</p>
                     </div>
-                    <!-- Giorno 2 -->
                     <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 2: Il Freedom Trail e la Storia Americana (Gratuito!)</h5>
-                        <p class="text-slate-600 text-sm mt-1">Seguite la famosa "linea rossa" mattonata dipinta sui marciapiedi della città che vi guiderà attraverso 16 storici siti della rivoluzione americana. Partenza dal Boston Common (il parco pubblico più antico degli USA) e arrivo fino a Charlestown per ammirare la USS Constitution. <strong class="text-emerald-700">Costo: €0</strong>. Pranzo al sacco lungo il percorso.</p>
+                        <span class="absolute -left-[31px] top-0.5 bg-emerald-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center text-[10px]"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 2 (01/09): Rifugio Auronzo, Cadini di Misurina & Trekking Tre Cime</h4>
+                        <p class="text-slate-600 mt-1">Accesso mattutino al Rifugio Auronzo (strada panoramica da Misurina, tariffa auto privata: €30, in alternativa autobus navetta da €10 pp A/R). Escursione verso il punto panoramico dei <strong>Cadini di Misurina</strong> tramite il sentiero 117 (circa 40 minuti, esposto). Successivamente, escursione intorno alle Tre Cime di Lavaredo. Sosta pomeridiana al Lago di Misurina con opzione noleggio barca a remi in legno gestita da Tre Cime Service (€30/ora).</p>
                     </div>
-                    <!-- Giorno 3 -->
                     <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 3: Beacon Hill e la Vita Universitaria di Harvard</h5>
-                        <p class="text-slate-600 text-sm mt-1">In mattinata passeggiata tra le strade acciottolate e i lampioni a gas di <strong>Beacon Hill</strong> (la zona più fotogenica della città, in particolare Acorn Street). Nel pomeriggio, prendete la Red Line della metropolitana fino a Cambridge per visitare lo storico campus di <strong>Harvard</strong>. È possibile fare un tour guidato gratuito gestito dagli studenti o semplicemente passeggiare per l'Harvard Yard.</p>
+                        <span class="absolute -left-[31px] top-0.5 bg-emerald-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center text-[10px]"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 3 (02/09): Fun Bob, E-Bike nella Foresta di Somadida & SPA pomeridiana</h4>
+                        <p class="text-slate-600 mt-1">Inizio di giornata sul comprensorio del Monte Agudo per la discesa con il Fun Bob su rotaia (percorso di 3 km, biglietti singoli ~€10). Nel pomeriggio, noleggio e-bike ad Auronzo (costo ~€40-50 per giornata intera) ed esplorazione della pista ciclabile pianeggiante e sterrata che costeggia il fiume Ansiei fino alla Riserva Naturale di Somadida. Tardo pomeriggio in SPA ad ore (senza obbligo di pernottamento, vedi dettagli nella sezione consigli).</p>
                     </div>
-                    <!-- Giorno 4 -->
                     <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 4: Boston Public Library e Back Bay</h5>
-                        <p class="text-slate-600 text-sm mt-1">Esplorazione del quartiere di Back Bay con i suoi splendidi edifici in mattoni rossi in stile vittoriano. Visita alla maestosa <strong>Boston Public Library</strong> (l'ingresso alla magnifica Bates Hall è completamente gratuito e spettacolare). Nel tardo pomeriggio, passeggiata rilassante lungo la Charles River Esplanade per vedere il tramonto sull'acqua.</p>
+                        <span class="absolute -left-[31px] top-0.5 bg-emerald-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center text-[10px]"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 4 (03/09): Trekking del Lago di Sorapis</h4>
+                        <p class="text-slate-600 mt-1">Partenza dal Passo Tre Croci lungo il Sentiero escursionistico 215. Percorso di media difficoltà (durata ~4 ore totali A/R) con alcuni tratti provvisti di cordino metallico di sicurezza. Pranzo al sacco lungo le rive del celebre lago turchese. Nel pomeriggio, sosta a Cortina d'Ampezzo per una passeggiata tecnica nel centro storico pedonale.</p>
                     </div>
-                    <!-- Giorno 5 -->
                     <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 5: Museo d'Arte Moderna (MFA) o Isabella Stewart Gardner Museum</h5>
-                        <p class="text-slate-600 text-sm mt-1">Visita ad uno dei musei di fama mondiale di Boston. Suggeriamo l'<strong>Isabella Stewart Gardner Museum</strong>, allestito all'interno di un palazzo in stile veneziano con un cortile interno mozzafiato (famoso anche per il più grande furto d'arte irrisolto della storia). Biglietto d'ingresso economico (~$20). Sera nel vivace quartiere italiano di North End per un'ottima pizza o cannolo da Mike's Pastry.</p>
+                        <span class="absolute -left-[31px] top-0.5 bg-emerald-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center text-[10px]"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 5 (04/09): Val Pusteria & Lago di Braies</h4>
+                        <p class="text-slate-600 mt-1">Spostamento in Val Pusteria. Visita al Lago di Braies (accesso stradale contingentato a settembre, arrivo raccomandato prima delle 09:00 o prenotazione online obbligatoria). Noleggio delle storiche imbarcazioni a remi in legno dal pontile (€30 per 30 min). Successivo spostamento per il pranzo a San Candido o Dobbiaco, con visita del centro e rientro pomeridiano in Cadore.</p>
                     </div>
-                    <!-- Giorno 6 -->
                     <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 6: Gita in traghetto a Salem (La città delle streghe)</h5>
-                        <p class="text-slate-600 text-sm mt-1">Prendete il traghetto veloce da Long Wharf per una gita in giornata nella storica cittadina costiera di Salem. Perfetta per gli amanti del mistero e del folklore marino, è visitabile interamente a piedi. Il traghetto offre anche una splendida vista sullo skyline di Boston dall'oceano.</p>
-                    </div>
-                    <!-- Giorno 7 & 8 -->
-                    <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 7 & 8: Shopping, relax e rientro in Italia</h5>
-                        <p class="text-slate-600 text-sm mt-1">Ultimi acquisti senza tasse sull'abbigliamento sotto i $175 (un grande vantaggio del Massachusetts!). Passeggiata al Boston Public Garden per un giro sulle celebri barche a forma di cigno. Nel pomeriggio del 5 settembre, trasferimento in metropolitana all'aeroporto per il volo diretto di rientro in Italia delle 17:05.</p>
+                        <span class="absolute -left-[31px] top-0.5 bg-emerald-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center text-[10px]"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 6 (05/09): Passo Giau & Rientro a Rimini</h4>
+                        <p class="text-slate-600 mt-1">Check-out dalla struttura ricettiva. Rientro pianificato via Belluno effettuando una deviazione panoramica d'alta quota attraverso il Passo Giau per ammirare le vette principali a 2236 metri prima del rientro a Rimini in serata.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Contenuto Itinerario NEW YORK -->
-            <div id="itinerario-newyork" class="space-y-6 hidden">
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col md:flex-row justify-between md:items-center gap-4">
+            <!-- ITINERARIO MADEIRA -->
+            <div id="itinerario-madeira-content" class="space-y-6 hidden">
+                <div class="p-4 bg-sky-50 border border-sky-100 rounded-xl flex flex-col md:flex-row justify-between gap-4 text-xs">
                     <div>
-                        <h4 class="font-bold text-slate-900 text-base">La Grande Mela in modalità Budget-Conscious:</h4>
-                        <p class="text-slate-600 text-xs mt-1">New York può essere molto cara, ma con i giusti trucchi (traghetti gratuiti, parchi sopraelevati e cibo di strada multietnico) è possibile vivere il sogno americano senza spendere troppo.</p>
+                        <span class="font-bold text-sky-950 block">Madeira Low-Cost - 5 o 6 Notti</span>
+                        <p class="text-sky-800 mt-1">Base alloggio consigliata: Machico o Santa Cruz. Strutture economiche, vicine all'aeroporto e ben connesse dalla superstrada gratuita Via Rápida.</p>
                     </div>
-                    <div class="shrink-0 bg-amber-100 text-amber-800 px-3 py-1.5 rounded-lg text-xs font-semibold">
-                        Stima Spesa Attività: ~ $140-180 a persona
+                    <div class="shrink-0 bg-sky-200 text-sky-900 px-3 py-1.5 rounded-lg font-bold flex items-center">
+                        Costo Attività Stimato: ~ €70 - €100 pp
                     </div>
                 </div>
 
-                <div class="relative border-l border-slate-200 ml-4 pl-6 space-y-8">
-                    <!-- Giorno 1 -->
+                <div class="relative border-l-2 border-slate-200 ml-4 pl-6 space-y-8 text-sm">
                     <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 1: Benvenuti a New York e Times Square</h5>
-                        <p class="text-slate-600 text-sm mt-1">Arrivo al JFK alle 13:55. Trasferimento economico a Manhattan utilizzando l'Airtrain combinato con la metropolitana (linea E). Check-in in hotel (consigliamo zone come Long Island City per risparmiare sull'alloggio). Prima uscita serale sotto le luci accecanti di <strong>Times Square</strong> per un impatto indimenticabile.</p>
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center text-[10px]"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 1: Arrivo, Ritiro Auto & Cabo Girão</h4>
+                        <p class="text-slate-600 mt-1">Arrivo all'aeroporto FNC, disbrigo delle pratiche e ritiro della vettura a noleggio (vivamente consigliato il noleggio di una **Renault Captur** o vettura similare con buona motorizzazione stradale a causa delle pendenze notevoli dell'isola che superano spesso il 25%. Vedasi preventivi di riferimento Sixt nel file d'archivio <span class="font-semibold">image_9e9aa8.jpg</span>). Sistemazione in struttura e spesa di rifornimento al supermercato locale Pingo Doce. Visita a Cabo Girão, scogliera a picco sull'oceano con passerella in vetro (ingresso: €2).</p>
                     </div>
-                    <!-- Giorno 2 -->
                     <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 2: Statua della Libertà (Gratis!) e Lower Manhattan</h5>
-                        <p class="text-slate-600 text-sm mt-1">Evitate i costosi battelli turistici e prendete lo <strong>Staten Island Ferry</strong>: è totalmente gratuito e passa vicinissimo alla Statua della Libertà regalando foto stupende dello skyline. All'approdo, esplorate Wall Street, la Trinity Church e il toccante memoriale dell'11 Settembre (Ground Zero).</p>
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center text-[10px]"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 2: Trekking Ponta de São Lourenço (PR8) & Spiaggia di Prainha</h4>
+                        <p class="text-slate-600 mt-1">Trekking di prima mattina lungo la penisola vulcanica di Ponta de São Lourenço. Tracciato spettacolare di circa 7 km (A/R) con dislivello di 400 metri. Nel pomeriggio, relax a Prainha, spiaggia naturale di sabbia nera vulcanica ad accesso interamente libero. Sera a Machico con assaggio della tipica bevanda locale Poncha (prezzo medio non turistico: €2.50 - €3.00).</p>
                     </div>
-                    <!-- Giorno 3 -->
                     <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 3: Central Park e i Grandi Musei</h5>
-                        <p class="text-slate-600 text-sm mt-1">Intera giornata dedicata al polmone verde di New York, <strong>Central Park</strong>. Potete noleggiare delle bici economiche o camminare fino a Bethesda Fountain e Strawberry Fields. Nel pomeriggio, visitate l'esterno del Guggenheim e del MET (l'ingresso a questi musei ha tariffe fisse ma è possibile fare passeggiate stupende anche solo nei dintorni della Fifth Avenue).</p>
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center text-[10px]"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 3: Foresta di Fanal (Laurissilva) & Piscine di Porto Moniz</h4>
+                        <p class="text-slate-600 mt-1">Guida verso l'altopiano interno per raggiungere la foresta millenaria di Fanal (patrimonio UNESCO), solitamente coperta da una suggestiva nebbia mattutina. Spostamento a Porto Moniz per un bagno nelle piscine naturali vulcaniche (opzione gratuita "Cachalote" o opzione attrezzata con biglietto d'ingresso da €3). Al rientro, sosta panoramica alla cascata Véu da Noiva e spiaggia di Seixal.</p>
                     </div>
-                    <!-- Giorno 4 -->
                     <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 4: High Line, Chelsea Market e Hudson Yards</h5>
-                        <p class="text-slate-600 text-sm mt-1">Camminate lungo la <strong>High Line</strong>, uno splendido parco lineare costruito su una ferrovia sopraelevata in disuso (completamente gratuito). Concludete la passeggiata al Chelsea Market per un pranzo veloce a base di tacos o lobster roll, ed esplorate l'avveniristico quartiere di Hudson Yards con la struttura "The Vessel".</p>
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center text-[10px]"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 4: Escursione Sopra le Nuvole: Pico do Arieiro a Pico Ruivo (PR1)</h4>
+                        <p class="text-slate-600 mt-1">Partenza programmata all'alba per il sentiero PR1. Collega le due vette più alte dell'isola offrendo panorami d'alta quota sopra le nuvole. Il percorso integrale è molto tecnico ed esigente (11 km A/R con gradini e gallerie nella roccia). Se si desidera ottimizzare lo sforzo, è possibile limitare il cammino fino al punto panoramico di Ninho da Manta (circa 40 minuti di percorrenza) e rientrare. Pomeriggio a Santana per la visita alle tradizionali casette storiche col tetto in paglia.</p>
                     </div>
-                    <!-- Giorno 5 -->
                     <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 5: Brooklyn, DUMBO e il Ponte al Tramonto</h5>
-                        <p class="text-slate-600 text-sm mt-1">Attraversate l'East River per esplorare il quartiere hipster di Williamsburg o la zona panoramica di DUMBO. Scattate la classica foto ricordo tra i vecchi magazzini di mattoni rossi con il ponte sullo sfondo. Rientrate a piedi a Manhattan attraversando il <strong>Ponte di Brooklyn</strong> al tramonto: un'esperienza magica ed emozionante a costo zero.</p>
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center text-[10px]"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 5: Levada delle 25 Fonti (PR6) & Avvistamento Cetacei in Catamarano</h4>
+                        <p class="text-slate-600 mt-1">Mattinata dedicata all'esplorazione dei canali di irrigazione (Levadas) con il percorso PR6 immerso nella lussureggiante vegetazione interna fino alle cascate finali (durata circa 3-4 ore). Nel pomeriggio, escursione nautica in catamarano dal porto di Funchal per l'osservazione di balene e delfini in ambiente protetto (costo medio con operatore VMT Madeira: €30 - €35 a persona per 3 ore di navigazione).</p>
                     </div>
-                    <!-- Giorno 6 -->
                     <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 6: Un Osservatorio Panoramico e Grand Central</h5>
-                        <p class="text-slate-600 text-sm mt-1">Scegliete un osservatorio per una vista dall'alto della città. Per un buon compromesso budget/esperienza, consigliamo il <strong>Top of the Rock</strong> (Rockefeller Center) per una vista pazzesca anche su Central Park ed Empire State Building. Successivamente, visitate la magnifica stazione ferroviaria Grand Central Terminal.</p>
-                    </div>
-                    <!-- Giorno 7 & 8 -->
-                    <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 7 & 8: Ultimo giorno a Manhattan e Rientro</h5>
-                        <p class="text-slate-600 text-sm mt-1">Mattinata dedicata allo shopping di souvenir vicino a Herald Square o esplorando Greenwich Village. Nel pomeriggio del 5 settembre, rientro in aeroporto JFK per il volo delle ore 21:10 diretto a Roma.</p>
+                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center text-[10px]"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 6: Funchal Market & Rientro in Italia</h4>
+                        <p class="text-slate-600 mt-1">Check-out dall'alloggio, riconsegna dell'auto presso il desk Sixt in aeroporto a Funchal (FNC) e imbarco sul volo di rientro.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Contenuto Itinerario TORONTO -->
-            <div id="itinerario-toronto" class="space-y-6 hidden">
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col md:flex-row justify-between md:items-center gap-4">
-                    <div>
-                        <h4 class="font-bold text-slate-900 text-base">La Grande e Accogliente Metropoli Canadese:</h4>
-                        <p class="text-slate-600 text-xs mt-1">Toronto unisce moderni grattacieli a quartieri storici unici, con la possibilità di una memorabile escursione alle maestose Cascate del Niagara a prezzi contenuti.</p>
+            <!-- ITINERARIO NORD AMERICA -->
+            <div id="itinerario-nordamerica-content" class="space-y-6">
+                <!-- Inner sub-selector for NA Cities -->
+                <div class="flex border-b border-slate-200 mb-4 bg-slate-50 p-2 rounded-lg">
+                    <button onclick="switchNASubCity('boston')" id="subtab-boston" class="py-2 px-4 rounded-md text-xs font-semibold bg-indigo-600 text-white transition focus:outline-none">
+                        Dettaglio Boston
+                    </button>
+                    <button onclick="switchNASubCity('newyork')" id="subtab-newyork" class="py-2 px-4 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 transition focus:outline-none">
+                        Dettaglio New York
+                    </button>
+                    <button onclick="switchNASubCity('toronto')" id="subtab-toronto" class="py-2 px-4 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 transition focus:outline-none">
+                        Dettaglio Toronto
+                    </button>
+                </div>
+
+                <!-- Sub-Itinerary Boston -->
+                <div id="itinerary-na-boston" class="space-y-4">
+                    <div class="p-3 bg-indigo-50 border border-indigo-100 rounded-lg text-xs text-indigo-900">
+                        <strong>Perché Boston è ottimale per il budget:</strong> È una città compatta, sicura e quasi interamente visitabile a piedi. Il sistema di metropolitana MBTA (T Line) è estremamente economico ed evita completamente i costi e le criticità di parcheggio o noleggio auto.
                     </div>
-                    <div class="shrink-0 bg-blue-100 text-blue-800 px-3 py-1.5 rounded-lg text-xs font-semibold">
-                        Stima Spesa Attività: ~ $110-140 a persona
+                    <div class="relative border-l-2 border-slate-200 ml-4 pl-6 space-y-6 text-sm">
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 1: Arrivo a Logan (BOS) & Waterfront</span>
+                            <p class="text-slate-600 text-xs mt-1">Arrivo alle 13:40 (ora locale). Trasferimento in centro tramite la linea Blue MBTA (molto economica). Sistemazione e primo percorso a piedi lungo il Boston Harborwalk fino a Quincy Market.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 2: Freedom Trail Storico (Attività Gratuita)</span>
+                            <p class="text-slate-600 text-xs mt-1">Seguendo la linea di mattoni rossi sul marciapiede, si attraversa la storia della rivoluzione americana per 4 km dal parco Boston Common fino a Charlestown per visitare gratuitamente la nave da guerra USS Constitution. Costo attività: €0.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 3: Quartiere di Beacon Hill & Campus di Harvard (Cambridge)</span>
+                            <p class="text-slate-600 text-xs mt-1">Passeggiata mattutina tra le case storiche in mattoni rossi di Beacon Hill. Nel pomeriggio, trasferimento via linea rossa MBTA a Cambridge per esplorare in totale autonomia i cortili storici della rinomata Harvard University.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 4: Boston Public Library & Back Bay</span>
+                            <p class="text-slate-600 text-xs mt-1">Esplorazione del quartiere vittoriano di Back Bay. Visita alla maestosa Boston Public Library, con accesso libero alla Bates Hall. Tardo pomeriggio lungo la Charles River Esplanade.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 5: Musei Nazionali o Isabella Stewart Gardner Museum</span>
+                            <p class="text-slate-600 text-xs mt-1">Visita culturale consigliata all'Isabella Stewart Gardner Museum, noto per lo storico furto d'arte irrisolto (biglietto d'ingresso: ~$20). Serata nel quartiere storico North End.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 6: Escursione in traghetto a Salem</span>
+                            <p class="text-slate-600 text-xs mt-1">Escursione tramite traghetto veloce da Long Wharf alla storica località costiera di Salem, interamente visitabile a piedi. Rientro serale in città.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 7 & 8: Acquisti esenti da tasse & Volo di Ritorno</span>
+                            <p class="text-slate-600 text-xs mt-1">Acquisti di abbigliamento (in Massachusetts i capi sotto i $175 sono esenti da tasse locali). Trasferimento pomeridiano in metropolitana all'aeroporto per il volo diretto delle ore 17:05 verso FCO.</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="relative border-l border-slate-200 ml-4 pl-6 space-y-8">
-                    <!-- Giorno 1 -->
-                    <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 1: Arrivo a Toronto e Primo Sguardo alla Città</h5>
-                        <p class="text-slate-600 text-sm mt-1">Atterraggio all'Aeroporto Pearson (YYZ) alle 16:00. Trasferimento rapido in centro con il treno <strong>UP Express</strong> che vi porta a Union Station in 25 minuti. Sistemazione in hotel/alloggio. Prima passeggiata serale in Yonge-Dundas Square (la Times Square canadese) per ammirare i cartelloni luminosi.</p>
+                <!-- Sub-Itinerary New York -->
+                <div id="itinerary-na-newyork" class="space-y-4 hidden">
+                    <div class="p-3 bg-indigo-50 border border-indigo-100 rounded-lg text-xs text-indigo-900">
+                        <strong>Strategia Budget per New York:</strong> Per contenere i costi di alloggio, si suggerisce la ricerca di strutture ricettive al di fuori dell'isola di Manhattan, in aree quali Long Island City (Queens) o Brooklyn, ottimamente connesse in metropolitana 24/7.
                     </div>
-                    <!-- Giorno 2 -->
-                    <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 2: CN Tower e lo Storico Distillery District</h5>
-                        <p class="text-slate-600 text-sm mt-1">In mattinata ammirate da sotto la maestosa <strong>CN Tower</strong> (salita facoltativa se il budget lo consente, altrimenti la vista migliore e gratuita si ha dai parchi limitrofi). Nel pomeriggio, camminate fino al <strong>Distillery District</strong>, una splendida area pedonale ricca di caffè, gallerie d'arte e negozi di design ricavati in antiche distillerie di epoca vittoriana.</p>
+                    <div class="relative border-l-2 border-slate-200 ml-4 pl-6 space-y-6 text-sm">
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 1: Arrivo al JFK & Times Square</span>
+                            <p class="text-slate-600 text-xs mt-1">Arrivo pomeridiano (13:55). Trasferimento low-cost con Airtrain + Metropolitana linea E (€11 pp circa). Sistemazione in struttura ed esplorazione delle aree pedonali illuminate di Times Square.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 2: Lower Manhattan & Statua della Libertà via Traghetto Gratuito</span>
+                            <p class="text-slate-600 text-xs mt-1">Ottimizzazione budget: utilizzo dello Staten Island Ferry, un servizio navetta pubblico completamente gratuito che transita nei pressi della Statua della Libertà offrendo ottimi punti di osservazione. Proseguimento a piedi tra Wall Street, Ground Zero e l'Oculus di Calatrava.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 3: Central Park & Museum Mile</span>
+                            <p class="text-slate-600 text-xs mt-1">Intera giornata dedicata all'esplorazione del polmone verde di Central Park (noleggio biciclette opzionale). Transito lungo la Fifth Avenue e perimetrazione esterna dei famosi musei Solomon R. Guggenheim e MET.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 4: High Line, Chelsea Market & Hudson Yards</span>
+                            <p class="text-slate-600 text-xs mt-1">Passeggiata guidata autonoma lungo la High Line, parco urbano lineare gratuito ricavato da una linea ferroviaria sopraelevata dismessa. Sosta gastronomica al Chelsea Market ed esplorazione dei moderni complessi di Hudson Yards.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 5: Brooklyn, DUMBO & Attraversamento a Piedi del Ponte</span>
+                            <p class="text-slate-600 text-xs mt-1">Trasferimento a Brooklyn per esplorare le zone industriali rivalutate di DUMBO. Rientro a piedi verso Manhattan lungo il Ponte di Brooklyn pianificato all'ora del tramonto per ammirare lo skyline della città senza alcuna spesa.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 6: Grand Central Terminal & Osservatorio Panoramico</span>
+                            <p class="text-slate-600 text-xs mt-1">Esplorazione degli interni della storica stazione ferroviaria. Per l'osservazione aerea della città, si suggerisce la salita al Top of the Rock (Rockefeller Center), ottimizzato per la visuale contemporanea di Central Park e dell'Empire State Building.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 7 & 8: Ultimi Acquisti & Volo Notturno</span>
+                            <p class="text-slate-600 text-xs mt-1">Mattinata a disposizione per compere a Herald Square o esplorazione del quartiere storico Greenwich Village. Nel pomeriggio del 5 settembre, rientro logistico al JFK per il volo serale delle ore 21:10 diretto a Roma Fiumicino.</p>
+                        </div>
                     </div>
-                    <!-- Giorno 3 -->
-                    <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 3: Le isole di Toronto (La vista migliore sullo Skyline)</h5>
-                        <p class="text-slate-600 text-sm mt-1">Prendete il traghetto pubblico economico (~$9 CAD andata e ritorno) per le <strong>Toronto Islands</strong>. Queste isole sul Lago Ontario sono interamente pedonali e offrono spiagge, prati per fare picnic e soprattutto la vista da cartolina più bella e famosa dell'intero skyline di Toronto.</p>
+                </div>
+
+                <!-- Sub-Itinerary Toronto -->
+                <div id="itinerary-na-toronto" class="space-y-4 hidden">
+                    <div class="p-3 bg-indigo-50 border border-indigo-100 rounded-lg text-xs text-indigo-900">
+                        <strong>Strategia di viaggio per Toronto:</strong> L'uso dei trasporti pubblici e dei bus a lunga percorrenza permette di raggiungere facilmente e a basso costo anche le Cascate del Niagara, evitando noleggi d'auto costosi.
                     </div>
-                    <!-- Giorno 4 -->
-                    <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 4: Escursione in Giornata alle Cascate del Niagara</h5>
-                        <p class="text-slate-600 text-sm mt-1">Prendete l'autobus economico (es. Flixbus o Megabus) da Toronto Union Station a Niagara Falls (circa 2 ore di viaggio per circa $20-30 CAD a/r). Potete ammirare le spettacolari e spumeggianti cascate gratuitamente camminando lungo il fiume. Per un'esperienza extra indimenticabile, il giro in battello "Maid of the Mist" / "Voyage to the Falls" costa circa $35 CAD.</p>
-                    </div>
-                    <!-- Giorno 5 -->
-                    <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 5: Kensington Market e Chinatown</h5>
-                        <p class="text-slate-600 text-sm mt-1">Visitate il coloratissimo e alternativo quartiere di <strong>Kensington Market</strong>, ricco di negozi vintage, murales e caffè biologici. È il posto perfetto per pranzare spendendo pochissimo provando specialità di street food da tutto il mondo. Accanto sorge una delle Chinatown più grandi del Nord America.</p>
-                    </div>
-                    <!-- Giorno 6 -->
-                    <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 6: Royal Ontario Museum (ROM) e Casa Loma</h5>
-                        <p class="text-slate-600 text-sm mt-1">Esplorate l'architettura avveniristica del Royal Ontario Museum (anche solo dall'esterno, se non volete pagare il biglietto). Successivamente, fate una camminata panoramica verso <strong>Casa Loma</strong>, un bizzarro castello in stile neogotico situato su una collina che domina la città, circondato da splendidi giardini.</p>
-                    </div>
-                    <!-- Giorno 7 & 8 -->
-                    <div class="relative">
-                        <span class="absolute -left-[31px] top-0.5 bg-sky-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
-                        <h5 class="font-bold text-slate-900 text-sm">Giorno 7 & 8: Shopping al St. Lawrence Market e Partenza</h5>
-                        <p class="text-slate-600 text-sm mt-1">In mattinata visitate lo storico <strong>St. Lawrence Market</strong> per assaggiare il famoso panino con "peameal bacon" (specialità locale). Fate gli ultimi acquisti all'enorme centro commerciale Eaton Centre. Nel pomeriggio del 5 settembre, rientro in aeroporto Pearson per il volo delle ore 20:00 diretto a Roma.</p>
+                    <div class="relative border-l-2 border-slate-200 ml-4 pl-6 space-y-6 text-sm">
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 1: Arrivo a Toronto Pearson (YYZ) & Downtown</span>
+                            <p class="text-slate-600 text-xs mt-1">Arrivo alle 16:00. Trasferimento rapido con treno UP Express fino a Union Station (25 minuti). Sistemazione ed esplorazione a piedi delle aree commerciali intorno a Yonge-Dundas Square.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 2: CN Tower & Distillery District</span>
+                            <p class="text-slate-600 text-xs mt-1">Osservazione della CN Tower. Nel pomeriggio, cammino pedonale fino al Distillery District, splendido complesso di epoca vittoriana interamente riqualificato, ricco di gallerie, caffè artigianali e installazioni artistiche ad accesso libero.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 3: Toronto Islands (Spostamento in Traghetto Economico)</span>
+                            <p class="text-slate-600 text-xs mt-1">Utilizzo del traghetto pubblico della città (~$9 CAD A/R) per raggiungere le antistanti Toronto Islands sul Lago Ontario. Le isole sono interamente pedonali e offrono una visuale panoramica eccezionale e gratuita dello skyline cittadino.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 4: Escursione Interurbana alle Cascate del Niagara</span>
+                            <p class="text-slate-600 text-xs mt-1">Utilizzo di pullman economici di linea (Flixbus o Megabus) da Union Station con destinazione Niagara Falls (durata ~2 ore, tariffe ~ $20-30 CAD A/R). Le spettacolari cascate si costeggiano interamente a piedi in via del tutto gratuita. Navigazione opzionale Maid of the Mist (~$35 CAD).</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 5: Kensington Market & Chinatown</span>
+                            <p class="text-slate-600 text-xs mt-1">Visita del colorato quartiere alternativo di Kensington Market, zona pedonale ottimale per il pranzo grazie alla presenza di street food multietnico a prezzi contenuti. Sosta nella vicina Chinatown.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 6: Royal Ontario Museum (ROM) & Casa Loma</span>
+                            <p class="text-slate-600 text-xs mt-1">Visita esterna all'architettura futuristica del ROM e cammino panoramico fino alla collina dominata da Casa Loma, castello in stile neogotico circondato da giardini terrazzati.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-900 block">Giorno 7 & 8: St. Lawrence Market & Rientro</span>
+                            <p class="text-slate-600 text-xs mt-1">Visita dello storico mercato coperto di St. Lawrence Market, rinomato per le tipiche specialità culinarie canadesi a basso costo (es. peameal bacon sandwich). Nel pomeriggio del 5 settembre, trasferimento in aeroporto Pearson per il volo delle ore 20:00 diretto a Roma.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEZIONE 4: GUIDA BUROCRATICA E CONSIGLI PRATICI -->
+        <!-- SEZIONE 3: GUIDA BUROCRATICA E INFORMAZIONI DOGANALI -->
         <section id="burocrazia" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
             <div class="border-b border-slate-100 pb-4 mb-6">
                 <h2 class="text-2xl font-bold text-slate-950 flex items-center gap-2">
                     <i data-lucide="shield-alert" class="text-sky-600"></i>
-                    Informazioni Burocratiche e Consigli per il Primo Viaggio
+                    Informazioni Burocratiche, Visti e Consigli Finanziari
                 </h2>
-                <p class="text-slate-500 text-sm mt-1">Tutto quello che occorre sapere prima della partenza per evitare spiacevoli sorprese alle dogane e vivere il soggiorno in totale serenità.</p>
+                <p class="text-slate-500 text-sm mt-1">Quadro normativo e consigli operativi differenziati per garantire la conformità d'ingresso nei vari Paesi analizzati.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Documenti d'Ingresso -->
+            <!-- Dynamic Advice for DOLOMITI -->
+            <div id="burocrazia-dolomiti" class="grid grid-cols-1 md:grid-cols-2 gap-8 hidden">
                 <div class="space-y-4">
                     <h3 class="font-semibold text-slate-900 text-lg flex items-center gap-2">
-                        <i data-lucide="file-text" class="text-sky-600 w-5 h-5"></i> Documenti Necessari
+                        <i data-lucide="clipboard-list" class="text-emerald-600 w-5 h-5"></i>
+                        Preparazione Tecnica ed Escursionistica
                     </h3>
-                    
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-3 text-sm">
                         <div>
-                            <span class="font-semibold text-slate-800 block">1. Passaporto Elettronico:</span>
-                            <p class="text-slate-600 text-xs">Deve essere in corso di validità. Si consiglia una validità residua di almeno 6 mesi dalla data di rientro.</p>
+                            <span class="font-bold text-slate-800 block">Abbigliamento Tecnico a Strati:</span>
+                            <p class="text-slate-600 text-xs">Le temperature alpine a fine estate possono variare rapidamente da 20°C a ridosso dello zero in quota. Indispensabili scarponcini da trekking con suola strutturata (Vibram), guscio antivento/antipioggia e zaino ergonomico.</p>
                         </div>
                         <div>
-                            <span class="font-semibold text-slate-800 block">2. Autorizzazione ESTA (Stati Uniti - Boston/NY):</span>
-                            <p class="text-slate-600 text-xs">Domanda da fare esclusivamente online sul sito ufficiale governativo degli Stati Uniti prima della partenza. Costo: **$21 USD**. Attenzione ai siti truffa intermediari.</p>
-                        </div>
-                        <div>
-                            <span class="font-semibold text-slate-800 block">3. Autorizzazione eTA (Canada - Toronto):</span>
-                            <p class="text-slate-600 text-xs">Se volate a Toronto, vi servirà l'eTA canadese, richiedibile online sul sito ufficiale del governo del Canada al costo di soli **$7 CAD**.</p>
+                            <span class="font-bold text-slate-800 block">Accessibilità e Prenotazione Laghi:</span>
+                            <p class="text-slate-600 text-xs">Il Lago di Braies attua un piano di contingentamento stradale. La prenotazione del parcheggio online è bloccata durante le ore centrali del giorno (09:30 - 16:00). Pianificare gli arrivi all'alba per evitare code e blocchi della polizia locale.</p>
                         </div>
                     </div>
                 </div>
-
-                <!-- Pagamenti e Valuta -->
                 <div class="space-y-4">
                     <h3 class="font-semibold text-slate-900 text-lg flex items-center gap-2">
-                        <i data-lucide="credit-card" class="text-sky-600 w-5 h-5"></i> Carte, Contanti e Pagamenti
+                        <i data-lucide="waves" class="text-emerald-600 w-5 h-5"></i>
+                        Punti di Riferimento Benessere & SPA ad Ore
                     </h3>
-                    
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-3 text-sm text-slate-600">
+                        <p class="text-xs">Per godersi un momento di benessere termale senza l'obbligo di pernottamento o l'acquisto di pacchetti alberghieri estremamente costosi, si segnalano tre strutture ad accesso orario nel raggio di 45 minuti d'auto:</p>
+                        <div class="space-y-2 text-xs">
+                            <div>
+                                <span class="font-semibold text-slate-800 block">1. Corte Spa (Borca di Cadore):</span>
+                                <p class="text-slate-500">Piscina riscaldata panoramica vetrata, saune e bagni turchi ai piedi del Monte Antelao. Tariffe: ~€60 pp per l'ingresso Day Spa infrasettimanale.</p>
+                            </div>
+                            <div>
+                                <span class="font-semibold text-slate-800 block">2. Wellness Lodge Santer (Dobbiaco):</span>
+                                <p class="text-slate-500">Oasi termale aperta ad esterni dalle ore 14:00 alle 20:00. Tariffe: ~€50 pp per l'ingresso pomeridiano comprendente kit teli e accappatoio.</p>
+                            </div>
+                            <div>
+                                <span class="font-semibold text-slate-800 block">3. Acquafun (San Candido) - Opzione Economica:</span>
+                                <p class="text-slate-500">Impianto pubblico con ottima area wellness/saune separata. Tariffe estremamente vantaggiose a fascia oraria: ~€20 - €25 pp per un pass di 3 ore.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Advice for MADEIRA -->
+            <div id="burocrazia-madeira" class="grid grid-cols-1 md:grid-cols-2 gap-8 hidden">
+                <div class="space-y-4">
+                    <h3 class="font-semibold text-slate-900 text-lg flex items-center gap-2">
+                        <i data-lucide="file-check-2" class="text-sky-600 w-5 h-5"></i>
+                        Formalità Doganali & Sanità (Madeira)
+                    </h3>
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-3 text-sm">
                         <div>
-                            <span class="font-semibold text-slate-800 block">Carte di Credito vs Debito:</span>
-                            <p class="text-slate-600 text-xs">In America il contante è quasi scomparso. È indispensabile che almeno uno di voi abbia una <strong>vera Carta di Credito</strong> (con i numeri in rilievo) per poter depositare cauzioni in hotel o per emergenze. Le prepagate ricaricabili (es. Postepay) sono utili per le spese quotidiane ma spesso rifiutate per garanzie hotel.</p>
+                            <span class="font-bold text-slate-800 block">Documentazione d'Identità:</span>
+                            <p class="text-slate-600 text-xs">Trattandosi di territorio portoghese (Unione Europea), per l'ingresso a Madeira è sufficiente la **Carta d'Identità valida per l'espatrio** in corso di validità. Non è richiesto passaporto né alcun visto d'ingresso.</p>
                         </div>
                         <div>
-                            <span class="font-semibold text-slate-800 block">Mance (Tips) negli USA:</span>
-                            <p class="text-slate-600 text-xs">A Boston e New York la mancia nei ristoranti con servizio al tavolo è <strong>obbligatoria</strong> dal punto di vista culturale (rappresenta lo stipendio dei camerieri). La percentuale standard varia dal <strong>15% al 20%</strong> da calcolare sul totale al netto delle tasse.</p>
+                            <span class="font-bold text-slate-800 block">Copertura Sanitaria:</span>
+                            <p class="text-slate-600 text-xs">La copertura medica è garantita dalla **Tessera Sanitaria Europea (TEAM)**, la quale permette l'accesso alle strutture sanitarie pubbliche portoghesi alle medesime condizioni dei residenti locali.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="font-semibold text-slate-900 text-lg flex items-center gap-2">
+                        <i data-lucide="help-circle" class="text-sky-600 w-5 h-5"></i>
+                        Consigli di Risparmio & App Utili
+                    </h3>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-3 text-sm">
+                        <div>
+                            <span class="font-bold text-slate-800 block">Mappe Offline e Orientamento Sentieri:</span>
+                            <p class="text-slate-600 text-xs">Tutti i percorsi ufficiali delle Levadas e dei trekking (PR) sono gratuiti e ottimamente tracciati. Non è necessario pagare costose guide escursionistiche. Si consiglia di scaricare l'app **WalkMe Madeira** o caricare le tracce offline su **AllTrails** prima della partenza.</p>
                         </div>
                         <div>
-                            <span class="font-semibold text-slate-800 block">Assicurazione Sanitaria (FONDAMENTALE):</span>
-                            <p class="text-slate-600 text-xs">Negli USA e in Canada la sanità è interamente privata e ha costi astronomici. Non partite mai senza aver stipulato una polizza assicurativa medica con massimale illimitato (costo di circa €40-50 a persona per una settimana).</p>
+                            <span class="font-bold text-slate-800 block">Rifornimento e Pranzi al Sacco:</span>
+                            <p class="text-slate-600 text-xs">La catena di supermercati portoghese *Pingo Doce* offre eccellenti banchi di gastronomia calda self-service a peso. È la soluzione ideale per comporre pranzi al sacco nutrienti spendendo circa un terzo rispetto a pranzi in ristoranti turistici.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Advice for NORD AMERICA -->
+            <div id="burocrazia-nordamerica" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <h3 class="font-semibold text-slate-900 text-lg flex items-center gap-2">
+                        <i data-lucide="file-key" class="text-indigo-600 w-5 h-5"></i>
+                        Visti e Requisiti d'Ingresso Stati Uniti / Canada
+                    </h3>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-3 text-sm">
+                        <div>
+                            <span class="font-bold text-slate-800 block">1. Passaporto Elettronico Obligatorio:</span>
+                            <p class="text-slate-600 text-xs">Necessario passaporto elettronico italiano in corso di validità. Si raccomanda una scadenza residua di almeno sei mesi successivi alla data prevista per il rientro.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-800 block">2. Autorizzazione ESTA (Stati Uniti):</span>
+                            <p class="text-slate-600 text-xs">Qualora si selezioni Boston o New York, è obbligatorio compilare online la richiesta ESTA esclusivamente sul sito ufficiale governativo statunitense prima della partenza. Costo: **$21 USD** per persona.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-800 block">3. Autorizzazione eTA (Canada):</span>
+                            <p class="text-slate-600 text-xs">Se si opta per Toronto, è necessario richiedere l'eTA canadese tramite il portale governativo ufficiale del Canada. Costo: **$7 CAD** per persona.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="font-semibold text-slate-900 text-lg flex items-center gap-2">
+                        <i data-lucide="banknote" class="text-indigo-600 w-5 h-5"></i>
+                        Pagamenti, Assicurazioni e Consuetudini Monetarie
+                    </h3>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-3 text-sm">
+                        <div>
+                            <span class="font-bold text-slate-800 block">Carta di Credito (Indispensabile):</span>
+                            <p class="text-slate-600 text-xs">Nel sistema bancario americano il contante è quasi inutilizzato. È tassativo che almeno uno dei viaggiatori possieda una **vera Carta di Credito** (con numeri in rilievo su circuito Visa o Mastercard, non ricaricabile o prepagata) per i depositi cauzionali obbligatori richiesti al check-in degli hotel.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-800 block">Mance Obbligatorie (Tips) negli USA:</span>
+                            <p class="text-slate-600 text-xs">A Boston e New York la mancia nei servizi di ristorazione al tavolo non è opzionale, in quanto costituisce la quota principale dello stipendio del personale di sala. La percentuale standard da calcolare sul totale lordo è compresa tra il **15% ed il 20%**.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-800 block">Polizza Assicurativa Sanitaria:</span>
+                            <p class="text-slate-600 text-xs">La sanità in Nord America è interamente privata e presenta tariffe astronomiche anche per prestazioni minime. È imperativo stipulare prima della partenza una polizza assicurativa medica integrativa con massimale illimitato (costo stimato: €40-€55 a persona).</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEZIONE 5: CALCOLATORE DI BUDGET INTERATTIVO -->
+        <!-- SEZIONE 4: PREVENTIVATORE E CALCOLATORE DI BUDGET DINAMICO -->
         <section id="budget-calculator" class="bg-slate-900 text-white rounded-2xl p-6 md:p-8 shadow-md relative overflow-hidden">
             <div class="relative z-10">
                 <div class="border-b border-slate-800 pb-4 mb-6">
                     <h2 class="text-2xl font-bold text-white flex items-center gap-2">
                         <i data-lucide="calculator" class="text-sky-400"></i>
-                        Simulatore di Budget Personalizzato (per 2 Persone)
+                        Simulatore Parametrico del Budget Complessivo (Stima per 2 Persone)
                     </h2>
-                    <p class="text-slate-400 text-sm mt-1">Regolate le variabili per stimare con precisione la spesa reale complessiva del vostro viaggio di coppia.</p>
+                    <p class="text-slate-400 text-sm mt-1">Regolare i parametri di alloggio, vitto e trasporti di terra per calcolare in tempo reale l'investimento reale stimato.</p>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- Configurazione -->
+                    <!-- Configurazione Parametri -->
                     <div class="space-y-6">
-                        <!-- Destinazione -->
+                        <!-- Destinazione di riferimento -->
                         <div>
-                            <label class="block text-sm font-medium text-slate-300 mb-2">Destinazione Scelta:</label>
-                            <select id="calc-dest" onchange="updateCalculatedBudget()" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-sky-400">
-                                <option value="Boston" data-price="552">Boston (Volo: €552 a testa)</option>
-                                <option value="New York" data-price="580" selected>New York (Volo: €580 a testa)</option>
-                                <option value="Toronto" data-price="659">Toronto (Volo: €659 a testa)</option>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Macro-Destinazione Selezionata:</label>
+                            <select id="calc-macro-dest" onchange="onCalculatorDestinationChange()" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:outline-none focus:border-sky-400">
+                                <option value="dolomiti" selected>Dolomiti (Auto privata da Rimini, 5 Notti)</option>
+                                <option value="madeira_blq">Madeira via Bologna BLQ (Volo TAP con scalo, 5 Notti)</option>
+                                <option value="madeira_mxp">Madeira via Milano MXP (Volo Ryanair diretto, 5 Notti)</option>
+                                <option value="na_boston">Nord America - Boston (Volo ITA Airways Diretto, 7 Notti)</option>
+                                <option value="na_newyork">Nord America - New York (Volo ITA Airways Diretto, 7 Notti)</option>
+                                <option value="na_toronto">Nord America - Toronto (Volo Air Canada Diretto, 7 Notti)</option>
                             </select>
                         </div>
 
-                        <!-- Alloggio -->
+                        <!-- Parametro Alloggio -->
                         <div>
                             <label class="block text-sm font-medium text-slate-300 mb-1 flex justify-between">
-                                <span>Tipologia Alloggio (7 Notti):</span>
-                                <span id="label-alloggio" class="text-sky-400 font-semibold">€ 150 / notte</span>
+                                <span>Tipologia & Budget Alloggio (a Notte per Camera):</span>
+                                <span id="label-alloggio-cost" class="text-sky-400 font-bold">€ 120 / notte</span>
                             </label>
-                            <input type="range" id="slider-alloggio" min="80" max="350" step="10" value="150" oninput="updateCalculatedBudget()" class="w-full accent-sky-400">
-                            <span class="text-xs text-slate-400">Da soluzioni low cost fuori centro (es. Queens/LIC per NY) a hotel di fascia media in centro.</span>
+                            <input type="range" id="slider-alloggio-cost" min="60" max="350" step="10" value="120" oninput="recalculateBudgetValues()" class="w-full accent-sky-400">
+                            <span id="label-alloggio-desc" class="text-[11px] text-slate-400 block mt-1">Stima indicativa per camera doppia in struttura standard.</span>
                         </div>
 
-                        <!-- Spese Cibo / Giorno -->
+                        <!-- Parametro Vitto / Giornaliero -->
                         <div>
                             <label class="block text-sm font-medium text-slate-300 mb-1 flex justify-between">
-                                <span>Cibo & Spese Giornaliere (a persona):</span>
-                                <span id="label-cibo" class="text-sky-400 font-semibold">€ 60 / giorno</span>
+                                <span>Vitto & Spese Quotidiane Accessorie (a Persona al Giorno):</span>
+                                <span id="label-vitto-cost" class="text-sky-400 font-bold">€ 50 / giorno</span>
                             </label>
-                            <input type="range" id="slider-cibo" min="40" max="150" step="5" value="60" oninput="updateCalculatedBudget()" class="w-full accent-sky-400">
-                            <span class="text-xs text-slate-400">Combina colazione e spuntini da asporto con cene occasionali al ristorante.</span>
+                            <input type="range" id="slider-vitto-cost" min="30" max="180" step="5" value="50" oninput="recalculateBudgetValues()" class="w-full accent-sky-400">
+                            <span class="text-[11px] text-slate-400 block mt-1">Include pasti principali, trasporti urbani locali e ingressi minori.</span>
                         </div>
 
-                        <!-- Collegamento Rimini -->
-                        <div>
-                            <label class="block text-sm font-medium text-slate-300 mb-2">Trasferimento da Rimini (Totale per 2 persone):</label>
-                            <select id="calc-rimini" onchange="updateCalculatedBudget()" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-sky-400">
-                                <option value="120">Treno A/R + Leonardo Express (~€120 tot)</option>
-                                <option value="80">Autobus Low Cost (~€80 tot)</option>
-                                <option value="160">Auto propria + Parcheggio Lunga Sosta (~€160 tot)</option>
+                        <!-- Parametro Trasferimento Rimini -->
+                        <div id="wrapper-rimini-transport">
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Trasferimento Terrestre da Rimini (Costo di Coppia A/R):</label>
+                            <select id="calc-rimini-transport" onchange="recalculateBudgetValues()" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:outline-none focus:border-sky-400">
+                                <option value="138" selected>Auto propria via autostrada + carburante (~€138)</option>
+                                <option value="110">Treno regionale o autobus di linea (~€110)</option>
                             </select>
                         </div>
                     </div>
 
-                    <!-- Risultato -->
-                    <div class="bg-slate-800/80 rounded-xl p-6 border border-slate-700 flex flex-col justify-between">
+                    <!-- Riepilogo di Coppia Proiettato -->
+                    <div class="bg-slate-800/80 rounded-xl p-6 border border-slate-700 flex flex-col justify-between shadow-inner">
                         <div>
-                            <h3 class="text-slate-400 uppercase tracking-wider text-xs font-semibold">Riepilogo Preventivo di Coppia</h3>
+                            <h3 class="text-slate-400 uppercase tracking-wider text-xs font-semibold">Proiezione dei Costi di Viaggio (2 Persone)</h3>
                             
-                            <div class="mt-6 space-y-4">
-                                <div class="flex justify-between text-sm border-b border-slate-700/50 pb-2">
-                                    <span class="text-slate-400">Voli Diretti (2 persone):</span>
-                                    <span id="res-voli" class="font-semibold text-white">€ 1.160</span>
+                            <div class="mt-6 space-y-4 text-sm">
+                                <div class="flex justify-between border-b border-slate-700/50 pb-2">
+                                    <span class="text-slate-400">Quota Voli / Spostamento Principale:</span>
+                                    <span id="summary-voli" class="font-semibold text-white">€ 0</span>
                                 </div>
-                                <div class="flex justify-between text-sm border-b border-slate-700/50 pb-2">
-                                    <span class="text-slate-400">Alloggio (7 notti totale):</span>
-                                    <span id="res-alloggio" class="font-semibold text-white">€ 1.050</span>
+                                <div class="flex justify-between border-b border-slate-700/50 pb-2">
+                                    <span class="text-slate-400">Pernottamenti (Totale Soggiorno):</span>
+                                    <span id="summary-alloggio" class="font-semibold text-white">€ 0</span>
                                 </div>
-                                <div class="flex justify-between text-sm border-b border-slate-700/50 pb-2">
-                                    <span class="text-slate-400">Vitto e Spese (2 persone, 8 giorni):</span>
-                                    <span id="res-cibo" class="font-semibold text-white">€ 960</span>
+                                <div class="flex justify-between border-b border-slate-700/50 pb-2">
+                                    <span class="text-slate-400">Stima Vitto & Spese (Totale 2p):</span>
+                                    <span id="summary-vitto" class="font-semibold text-white">€ 0</span>
                                 </div>
-                                <div class="flex justify-between text-sm border-b border-slate-700/50 pb-2">
-                                    <span class="text-slate-400">Rimini &harr; Fiumicino (Navetta):</span>
-                                    <span id="res-rimini" class="font-semibold text-white">€ 120</span>
+                                <div class="flex justify-between border-b border-slate-700/50 pb-2">
+                                    <span class="text-slate-400">Trasferimento da Rimini / Pedaggi:</span>
+                                    <span id="summary-rimini" class="font-semibold text-white">€ 0</span>
                                 </div>
-                                <div class="flex justify-between text-sm border-b border-slate-700/50 pb-2">
-                                    <span class="text-slate-400">Assicurazione Medica & Visti (Stima 2p):</span>
-                                    <span class="font-semibold text-white">€ 140</span>
+                                <div class="flex justify-between border-b border-slate-700/50 pb-2">
+                                    <span class="text-slate-400">Assicurazione / Tasse / Attività extra:</span>
+                                    <span id="summary-extra" class="font-semibold text-white">€ 0</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="mt-8 pt-6 border-t border-slate-700">
                             <div class="flex justify-between items-baseline">
-                                <span class="text-base text-sky-400 font-semibold">Investimento Totale Stimato:</span>
+                                <span class="text-base text-sky-400 font-semibold">Previsione Investimento Complessivo:</span>
                                 <div class="text-right">
-                                    <span id="res-totale" class="text-3xl font-extrabold text-emerald-400">€ 3.430</span>
-                                    <p class="text-[11px] text-slate-400 mt-1">Circa €1.715 a persona tutto compreso</p>
+                                    <span id="summary-total" class="text-3xl font-extrabold text-emerald-400">€ 0</span>
+                                    <p id="summary-per-capita" class="text-[11px] text-slate-400 mt-1">Circa €0 a persona tutto compreso</p>
                                 </div>
                             </div>
                         </div>
@@ -615,27 +813,32 @@
 
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-slate-950 text-slate-400 py-12 px-6 mt-16 border-t border-slate-900">
+    <!-- Footer Section -->
+    <footer class="bg-slate-950 text-slate-400 py-12 px-6 border-t border-slate-900">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
                 <p class="font-semibold text-white text-base">Consulenza Turistica Professionale</p>
-                <p class="text-xs text-slate-500 mt-1">Offerte soggette a disponibilità tariffaria in tempo reale al momento della prenotazione.</p>
+                <p class="text-xs text-slate-500 mt-1">Dati analitici aggiornati a scopo illustrativo basati su rilevazioni di mercato in tempo reale nel 2026.</p>
             </div>
             <div class="flex gap-4 text-xs">
-                <a href="#confronto-voli" class="hover:text-white transition">Voli</a>
+                <a href="#confronto-voli" class="hover:text-white transition">Voli & Trasporti</a>
                 <a href="#itinerari" class="hover:text-white transition">Itinerari</a>
-                <a href="#burocrazia" class="hover:text-white transition">Consigli Pratici</a>
+                <a href="#burocrazia" class="hover:text-white transition">Burocrazia & Visti</a>
+                <a href="#budget-calculator" class="hover:text-white transition">Calcolatore</a>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript per Interattività -->
+    <!-- JavaScript Section for Interactive Logic -->
     <script>
-        // Inizializza icone Lucide
+        // Inizializzazione icone Lucide
         lucide.createIcons();
 
-        // Funzione per scroll morbido alle sezioni
+        // Stato globale dell'applicazione web
+        let activeMacroDest = 'nordamerica'; // dolomiti, madeira, nordamerica
+        let activeNASubCity = 'boston'; // boston, newyork, toronto
+
+        // Funzione per scorrimento fluido tra sezioni
         function scrollToSection(id) {
             const element = document.getElementById(id);
             if (element) {
@@ -643,86 +846,246 @@
             }
         }
 
-        // Selezione rapida destinazione dall'alto verso il calcolatore
-        function selezionaDestinazione(nome, prezzoVolo) {
-            const select = document.getElementById('calc-dest');
-            for (let option of select.options) {
-                if (option.value === nome) {
-                    option.selected = true;
-                    break;
+        // Funzione per impostare la macro-destinazione principale
+        function switchMacroDestination(dest) {
+            activeMacroDest = dest;
+
+            // Reset classi e attivazioni sui bottoni principali
+            const macroIds = ['dolomiti', 'madeira', 'nordamerica'];
+            macroIds.forEach(id => {
+                const btn = document.getElementById(`macro-btn-${id}`);
+                if (id === dest) {
+                    btn.classList.add('border-sky-500', 'bg-sky-50/20');
+                    btn.classList.remove('border-slate-200', 'bg-slate-50');
+                } else {
+                    btn.classList.remove('border-sky-500', 'bg-sky-50/20');
+                    btn.classList.add('border-slate-200', 'bg-slate-50');
                 }
+            });
+
+            // Mostra o nasconde i pannelli logistici
+            document.getElementById('logistica-dolomiti').classList.add('hidden');
+            document.getElementById('logistica-madeira').classList.add('hidden');
+            document.getElementById('logistica-nordamerica').classList.add('hidden');
+            document.getElementById(`logistica-${dest}`).classList.remove('hidden');
+
+            // Mostra o nasconde gli itinerari
+            document.getElementById('itinerario-dolomiti-content').classList.add('hidden');
+            document.getElementById('itinerario-madeira-content').classList.add('hidden');
+            document.getElementById('itinerario-nordamerica-content').classList.add('hidden');
+            document.getElementById(`itinerario-${dest}-content`).classList.remove('hidden');
+
+            // Mostra o nasconde le schede informative burocratiche
+            document.getElementById('burocrazia-dolomiti').classList.add('hidden');
+            document.getElementById('burocrazia-madeira').classList.add('hidden');
+            document.getElementById('burocrazia-nordamerica').classList.add('hidden');
+            document.getElementById(`burocrazia-${dest}`).classList.remove('hidden');
+
+            // Allinea automaticamente il calcolatore di budget
+            const calcDestSelector = document.getElementById('calc-macro-dest');
+            if (dest === 'dolomiti') {
+                calcDestSelector.value = 'dolomiti';
+            } else if (dest === 'madeira') {
+                calcDestSelector.value = 'madeira_blq'; // default
+            } else if (dest === 'nordamerica') {
+                calcDestSelector.value = 'na_' + activeNASubCity;
             }
+
+            onCalculatorDestinationChange();
+        }
+
+        // Sotto-Navigazione Nord America (Boston, New York, Toronto)
+        function switchNASubCity(city) {
+            activeNASubCity = city;
+
+            // Nasconde tutte le sotto-città
+            document.getElementById('itinerary-na-boston').classList.add('hidden');
+            document.getElementById('itinerary-na-newyork').classList.add('hidden');
+            document.getElementById('itinerary-na-toronto').classList.add('hidden');
             
-            // Adatta alloggio in base alla destinazione scelta per coerenza di preventivo
-            const sliderAlloggio = document.getElementById('slider-alloggio');
+            // Attiva la città selezionata
+            document.getElementById(`itinerary-na-${city}`).classList.remove('hidden');
+
+            // Reset stile dei bottoni sub-tab
+            const subtabs = ['boston', 'newyork', 'toronto'];
+            subtabs.forEach(t => {
+                const btn = document.getElementById(`subtab-${t}`);
+                if (t === city) {
+                    btn.className = "py-2 px-4 rounded-md text-xs font-semibold bg-indigo-600 text-white transition focus:outline-none";
+                } else {
+                    btn.className = "py-2 px-4 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 transition focus:outline-none";
+                }
+            });
+
+            // Sincronizza calcolatore se la destinazione corrente è Nord America
+            if (activeMacroDest === 'nordamerica') {
+                document.getElementById('calc-macro-dest').value = 'na_' + city;
+                onCalculatorDestinationChange();
+            }
+        }
+
+        // Funzione per impostare rapidamente una città dal pannello voli
+        function selezionaDestinazionePredefinita(nome, prezzoVolo) {
+            switchMacroDestination('nordamerica');
+            switchNASubCity(nome.toLowerCase().replace(' ', ''));
+            
+            // Adatta alloggio indicativo in base alla metropoli selezionata
+            const sliderAlloggio = document.getElementById('slider-alloggio-cost');
             if (nome === 'New York') {
-                sliderAlloggio.value = 170; // NYC alloggio leggermente più caro di base
+                sliderAlloggio.value = 170; // Alloggi più costosi di media a NY
             } else if (nome === 'Boston') {
                 sliderAlloggio.value = 140;
             } else {
-                sliderAlloggio.value = 120; // Toronto solitamente più economica
+                sliderAlloggio.value = 120;
             }
 
-            updateCalculatedBudget();
+            recalculateBudgetValues();
             scrollToSection('budget-calculator');
         }
 
-        // Switch degli Itinerari tramite Tab
-        function switchItinerario(dest) {
-            // Hide tutti gli itinerari
-            document.getElementById('itinerario-boston').classList.add('hidden');
-            document.getElementById('itinerario-newyork').classList.add('hidden');
-            document.getElementById('itinerario-toronto').classList.add('hidden');
+        // Gestione cambiamento selezione nel calcolatore
+        function onCalculatorDestinationChange() {
+            const selectedVal = document.getElementById('calc-macro-dest').value;
+            const sliderAlloggio = document.getElementById('slider-alloggio-cost');
+            const sliderVitto = document.getElementById('slider-vitto-cost');
+            const riminiTransportWrapper = document.getElementById('wrapper-rimini-transport');
+            const riminiTransportSelect = document.getElementById('calc-rimini-transport');
 
-            // Reset classi bottoni
-            const tabs = ['boston', 'newyork', 'toronto'];
-            tabs.forEach(t => {
-                const btn = document.getElementById(`tab-${t}`);
-                btn.className = "py-3 px-6 font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 text-sm transition focus:outline-none";
-            });
+            // Adatta i limiti dei selettori in base alla destinazione per renderli realistici
+            if (selectedVal === 'dolomiti') {
+                riminiTransportWrapper.classList.remove('hidden');
+                riminiTransportSelect.innerHTML = `
+                    <option value="138" selected>Auto propria (carburante + pedaggi A/R) (~€138)</option>
+                    <option value="110">Treno regionale o bus di linea (~€110)</option>
+                `;
+                sliderAlloggio.min = "60";
+                sliderAlloggio.max = "250";
+                if (parseInt(sliderAlloggio.value) > 250 || parseInt(sliderAlloggio.value) < 60) sliderAlloggio.value = "100";
+                document.getElementById('label-alloggio-desc').innerText = "Stima per camera doppia in appartamento o garni in Cadore.";
 
-            // Mostra quello selezionato
-            document.getElementById(`itinerario-${dest}`).classList.remove('hidden');
-            document.getElementById(`tab-${dest}`).className = "py-3 px-6 font-semibold border-b-2 border-sky-600 text-sky-600 text-sm transition focus:outline-none";
+                sliderVitto.min = "30";
+                sliderVitto.max = "120";
+                if (parseInt(sliderVitto.value) > 120 || parseInt(sliderVitto.value) < 30) sliderVitto.value = "45";
+            } 
+            else if (selectedVal.startsWith('madeira')) {
+                riminiTransportWrapper.classList.remove('hidden');
+                if (selectedVal === 'madeira_blq') {
+                    riminiTransportSelect.innerHTML = `
+                        <option value="75" selected>Auto a Bologna BLQ (Carburante + Parcheggio 5gg) (~€75)</option>
+                        <option value="35">Treno per Bologna centrale + navetta Marconi Express (~€35)</option>
+                    `;
+                } else {
+                    riminiTransportSelect.innerHTML = `
+                        <option value="120" selected>Auto a Milano MXP (Carburante + Pedaggio + Parcheggio 5gg) (~€120)</option>
+                        <option value="90">Treno Rimini - Milano Centrale + bus per Malpensa (~€90)</option>
+                    `;
+                }
+                sliderAlloggio.min = "60";
+                sliderAlloggio.max = "220";
+                if (parseInt(sliderAlloggio.value) > 220 || parseInt(sliderAlloggio.value) < 60) sliderAlloggio.value = "80";
+                document.getElementById('label-alloggio-desc').innerText = "Stima per alloggio o guesthouse a Machico/Santa Cruz.";
+
+                sliderVitto.min = "30";
+                sliderVitto.max = "100";
+                if (parseInt(sliderVitto.value) > 100 || parseInt(sliderVitto.value) < 30) sliderVitto.value = "50";
+            } 
+            else if (selectedVal.startsWith('na_')) {
+                riminiTransportWrapper.classList.remove('hidden');
+                riminiTransportSelect.innerHTML = `
+                    <option value="155" selected>Auto a Roma FCO (Carburante + Pedaggio + Parcheggio Lunga Sosta 8gg) (~€155)</option>
+                    <option value="120">Treno AV Rimini-Termini + Leonardo Express (~€120)</option>
+                    <option value="80">Autobus low-cost Rimini-Roma Tiburtina + FL1 (~€80)</option>
+                `;
+                sliderAlloggio.min = "90";
+                sliderAlloggio.max = "350";
+                if (parseInt(sliderAlloggio.value) < 90) sliderAlloggio.value = "150";
+                document.getElementById('label-alloggio-desc').innerText = "Alloggio standard o hotel periferico ben connesso.";
+
+                sliderVitto.min = "40";
+                sliderVitto.max = "180";
+                if (parseInt(sliderVitto.value) < 40) sliderVitto.value = "70";
+            }
+
+            recalculateBudgetValues();
         }
 
-        // Calcolatore di Budget Dinamico
-        function updateCalculatedBudget() {
-            // Estrai Valori
-            const destSelect = document.getElementById('calc-dest');
-            const voloPersona = parseFloat(destSelect.options[destSelect.selectedIndex].getAttribute('data-price'));
-            
-            const prezzoNotte = parseInt(document.getElementById('slider-alloggio').value);
-            const ciboGiorno = parseInt(document.getElementById('slider-cibo').value);
-            const costoRimini = parseInt(document.getElementById('calc-rimini').value);
+        // Funzione principale per ricalcolare tutti i costi visualizzati
+        function recalculateBudgetValues() {
+            const selectedVal = document.getElementById('calc-macro-dest').value;
+            const pricePerNight = parseInt(document.getElementById('slider-alloggio-cost').value);
+            const foodCostPerDay = parseInt(document.getElementById('slider-vitto-cost').value);
+            const transportFromRimini = parseInt(document.getElementById('calc-rimini-transport').value);
 
-            // Aggiorna etichette dinamiche
-            document.getElementById('label-alloggio').innerText = `€ ${prezzoNotte} / notte`;
-            document.getElementById('label-cibo').innerText = `€ ${ciboGiorno} / giorno`;
+            // Aggiorna scritte etichette slider
+            document.getElementById('label-alloggio-cost').innerText = `€ ${pricePerNight} / notte`;
+            document.getElementById('label-vitto-cost').innerText = `€ ${foodCostPerDay} / giorno`;
 
-            // Calcoli
-            const totVoli = voloPersona * 2;
-            const totAlloggio = prezzoNotte * 7;
-            const totCibo = ciboGiorno * 8 * 2; // 8 giorni di permanenza per 2 persone
-            const totAssicurazioneEVisti = 140; // fisso stimato per 2 persone
+            // Variabili di calcolo
+            let flightCostPair = 0;
+            let totalNights = 5;
+            let totalDays = 6;
+            let extraCostsPair = 0; // Visti, assicurazioni sanitarie, noleggi, ingressi tipici
 
-            const totaleComplessivo = totVoli + totAlloggio + totCibo + costoRimini + totAssicurazioneEVisti;
+            if (selectedVal === 'dolomiti') {
+                flightCostPair = 0; // solo auto
+                totalNights = 5;
+                totalDays = 6;
+                extraCostsPair = 30 + 30 + 40; // Strada pedaggio rifugio Auronzo + noleggio barca a remi + attività Fun Bob
+            } 
+            else if (selectedVal === 'madeira_blq') {
+                flightCostPair = 300 * 2; // ~300€ pp per TAP con scalo
+                totalNights = 5;
+                totalDays = 6;
+                // Noleggio Captur Sixt (232€) + Carburante Madeira (80€) + Catamarano e ingressi (76€)
+                extraCostsPair = 231.91 + 80 + 76; 
+            } 
+            else if (selectedVal === 'madeira_mxp') {
+                flightCostPair = 150 * 2; // ~150€ pp per Ryanair diretto
+                totalNights = 5;
+                totalDays = 6;
+                extraCostsPair = 231.91 + 80 + 76; // Idem Madeira noleggio Sixt + attività
+            } 
+            else if (selectedVal === 'na_boston') {
+                flightCostPair = 552 * 2; // Reale da screenshot image_0d0520.png
+                totalNights = 7;
+                totalDays = 8;
+                extraCostsPair = 42 + 100 + 40; // ESTA (21 USD * 2) + Assicurazione medica obbligatoria + attrazioni minori
+            } 
+            else if (selectedVal === 'na_newyork') {
+                flightCostPair = 580 * 2; // Reale da screenshot image_0d04e2.png
+                totalNights = 7;
+                totalDays = 8;
+                extraCostsPair = 42 + 100 + 110; // ESTA + Assicurazione + biglietto osservatorio Top of the Rock
+            } 
+            else if (selectedVal === 'na_toronto') {
+                flightCostPair = 659 * 2; // Reale da screenshot image_0d021c.png
+                totalNights = 7;
+                totalDays = 8;
+                extraCostsPair = 10 + 100 + 80; // eTA Canadese + Assicurazione + Bus per Cascate del Niagara A/R per 2
+            }
 
-            // Scrittura dei risultati nel riepilogo
-            document.getElementById('res-voli').innerText = `€ ${totVoli.toLocaleString('it-IT')}`;
-            document.getElementById('res-alloggio').innerText = `€ ${totAlloggio.toLocaleString('it-IT')}`;
-            document.getElementById('res-cibo').innerText = `€ ${totCibo.toLocaleString('it-IT')}`;
-            document.getElementById('res-rimini').innerText = `€ ${costoRimini.toLocaleString('it-IT')}`;
-            document.getElementById('res-totale').innerText = `€ ${totaleComplessivo.toLocaleString('it-IT')}`;
-            
+            // Calcoli complessivi
+            const totalLodging = pricePerNight * totalNights;
+            const totalDining = foodCostPerDay * totalDays * 2; // per 2 persone
+            const totalComplessivo = flightCostPair + totalLodging + totalDining + transportFromRimini + extraCostsPair;
+
+            // Aggiorna UI riepilogo
+            document.getElementById('summary-voli').innerText = flightCostPair > 0 ? `€ ${flightCostPair.toLocaleString('it-IT')}` : "€ 0 (Mezzo Proprio)";
+            document.getElementById('summary-alloggio').innerText = `€ ${totalLodging.toLocaleString('it-IT')} (${totalNights} notti)`;
+            document.getElementById('summary-vitto').innerText = `€ ${totalDining.toLocaleString('it-IT')}`;
+            document.getElementById('summary-rimini').innerText = `€ ${transportFromRimini.toLocaleString('it-IT')}`;
+            document.getElementById('summary-extra').innerText = `€ ${Math.round(extraCostsPair).toLocaleString('it-IT')}`;
+            document.getElementById('summary-total').innerText = `€ ${Math.round(totalComplessivo).toLocaleString('it-IT')}`;
+
             // Aggiorna quota pro-capite
-            const quotaPersona = Math.round(totaleComplessivo / 2);
-            document.querySelector('#budget-calculator p').innerText = `Circa €${quotaPersona.toLocaleString('it-IT')} a persona tutto compreso`;
+            const quotaPersona = Math.round(totalComplessivo / 2);
+            document.getElementById('summary-per-capita').innerText = `Circa € ${quotaPersona.toLocaleString('it-IT')} a persona tutto compreso`;
         }
 
-        // Primo avvio calcolo
+        // Caricamento iniziale
         window.onload = function() {
-            updateCalculatedBudget();
+            // Imposta Nord America come macro attiva all'avvio coerentemente con l'archivio precedente
+            switchMacroDestination('nordamerica');
         }
     </script>
 </body>
