@@ -1,1724 +1,1319 @@
 <!DOCTYPE html>
-<html lang="it" class="h-full">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UltraPad - Intelligent AI Notepad</title>
+    <title>UltraPad - Cloud & AI Knowledge Hub</title>
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Lucide Icons CDN -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        serif: ['"Playfair Display"', 'serif'],
-                        mono: ['"JetBrains Mono"', 'monospace'],
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        }
                     }
                 }
             }
         }
     </script>
+
     <style>
-        /* Custom scrollbar and theme transitions */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow: hidden; 
         }
-        .custom-scrollbar::-webkit-scrollbar-track {
+
+        /* --- TEMA PASTELLO GRADIENTE ANIMATO (Con Glassmorphism) --- */
+        body.theme-pastel {
+            background: linear-gradient(-45deg, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb);
+            background-size: 400% 400%;
+            animation: pastelGradient 12s ease infinite;
+            color: #1f2937;
+        }
+
+        @keyframes pastelGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Vetro Satinato per Tema Pastello */
+        body.theme-pastel .glass-panel {
+            background: rgba(255, 255, 255, 0.4) !important;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        body.theme-pastel .glass-card {
+            background: rgba(255, 255, 255, 0.55) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        body.theme-pastel .glass-input {
+            background: rgba(255, 255, 255, 0.7) !important;
+            border: 1px solid rgba(255, 255, 255, 0.8) !important;
+        }
+
+        body.theme-pastel .glass-hover:hover {
+            background: rgba(255, 255, 255, 0.75) !important;
+        }
+
+        /* --- STILI UTILI PER EDITOR --- */
+        .editor-wysiwyg:empty:before {
+            content: attr(data-placeholder);
+            color: #9ca3af;
+            pointer-events: none;
+            display: block;
+        }
+        .editor-wysiwyg:focus {
+            outline: none;
+        }
+
+        /* Animazioni Custom */
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .animate-slide-in {
+            animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Scrollbar sottile */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
             background: transparent;
         }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            border-radius: 9999px;
-            background-color: rgba(156, 163, 175, 0.3);
+        ::-webkit-scrollbar-thumb {
+            background: rgba(156, 163, 175, 0.3);
+            border-radius: 10px;
         }
-        .theme-transition {
-            transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-                        border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-                        color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                        box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        /* Pastel background custom pattern */
-        .pastel-pattern {
-            background-color: #fcf8f2;
-            background-image: radial-gradient(#ebd9c5 0.75px, transparent 0.75px), radial-gradient(#ebd9c5 0.75px, #fcf8f2 0.75px);
-            background-size: 30px 30px;
-            background-position: 0 0, 15px 15px;
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(156, 163, 175, 0.5);
         }
     </style>
 </head>
-<body class="h-full w-full overflow-hidden theme-transition font-sans flex items-center justify-center p-0 sm:p-4 md:p-6 bg-slate-950" id="body-canvas">
+<body class="bg-gray-50 text-gray-900 h-screen w-full flex flex-col antialiased dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300" id="app-body">
 
-    <!-- Glowing Background blobs for depth -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <div class="absolute top-1/4 -left-20 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px] transition-all duration-700" id="blob-left"></div>
-        <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-indigo-600/10 rounded-full blur-[120px] transition-all duration-700" id="blob-right"></div>
-    </div>
-
-    <!-- Master Floating Container (The Card) -->
-    <div class="w-full h-full max-w-7xl sm:h-[92vh] rounded-none sm:rounded-[2rem] border shadow-2xl overflow-hidden flex flex-col z-10 theme-transition backdrop-blur-sm" id="master-card">
+    <div class="flex-1 flex w-full overflow-hidden relative">
         
-        <!-- Header -->
-        <header class="px-5 py-3.5 flex items-center justify-between border-b theme-transition select-none shrink-0" id="header-bar">
-            <div class="flex items-center space-x-3">
-                <div class="p-2.5 rounded-2xl bg-gradient-to-tr from-violet-600 to-indigo-600 text-white shadow-lg shadow-indigo-500/20 flex items-center justify-center">
-                    <i data-lucide="notebook" class="h-5 w-5"></i>
-                </div>
-                <div>
-                    <div class="flex items-center space-x-2">
-                        <span class="font-black tracking-tight text-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">UltraPad</span>
-                        <span class="text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20">PRO v1.2</span>
+        <!-- SIDEBAR SINISTRA: Navigazione, Ricerca, Note -->
+        <aside class="w-80 h-full flex flex-col border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 glass-panel transition-colors duration-300 shrink-0 z-10">
+            <!-- Brand -->
+            <div class="p-5 flex items-center justify-between border-b border-gray-100 dark:border-gray-800/80">
+                <div class="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity group" onclick="toggleFolderView()" title="Clicca per raggruppare per cartelle">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 text-white flex items-center justify-center shadow-md shadow-primary-500/20 group-hover:scale-105 transition-transform">
+                        <i class="ph-fill ph-lightning text-xl"></i>
                     </div>
-                    <p class="text-[9px] opacity-60 font-mono tracking-tight" id="header-subtitle">Spring Boot + MongoDB Hybrid Architecture</p>
+                    <div>
+                        <h1 class="text-lg font-bold tracking-tight">UltraPad</h1>
+                        <span class="text-[10px] text-gray-400 font-mono tracking-wider">v1.1.0-PRO</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-1">
+                    <button onclick="toggleModal('modal-tech')" class="p-2 text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 rounded-lg glass-hover transition-all" title="Specifiche Tecniche Stack">
+                        <i class="ph ph-cpu text-lg"></i>
+                    </button>
+                    <button onclick="toggleOfflineMode()" id="offline-toggle-btn" class="p-2 text-green-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all" title="Simula Offline (PWA)">
+                        <i class="ph ph-wifi-high text-lg" id="network-icon"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- Global Action Controls -->
-            <div class="flex items-center space-x-2 sm:space-x-4">
-                <!-- Theme Controller -->
-                <div class="flex items-center p-1 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10" id="theme-selector">
-                    <button onclick="setAppTheme('light')" id="btn-theme-light" class="p-1.5 rounded-lg transition-all" title="Tema Chiaro">
-                        <i data-lucide="sun" class="h-4 w-4"></i>
+            <!-- Selettore Temi Rapido -->
+            <div class="px-4 py-3 border-b border-gray-100 dark:border-gray-800/50">
+                <div class="flex bg-gray-100 dark:bg-gray-800/80 rounded-xl p-1 glass-input transition-colors duration-300">
+                    <button onclick="changeTheme('light')" id="theme-light-btn" class="flex-1 py-1 rounded-lg text-xs font-medium flex items-center justify-center gap-1 transition-all bg-white text-gray-900 shadow-sm dark:bg-transparent dark:text-gray-400 dark:shadow-none">
+                        <i class="ph ph-sun"></i> Chiaro
                     </button>
-                    <button onclick="setAppTheme('dark')" id="btn-theme-dark" class="p-1.5 rounded-lg transition-all" title="Tema Scuro">
-                        <i data-lucide="moon" class="h-4 w-4"></i>
+                    <button onclick="changeTheme('dark')" id="theme-dark-btn" class="flex-1 py-1 rounded-lg text-xs font-medium flex items-center justify-center gap-1 transition-all text-gray-400 dark:hover:text-gray-200">
+                        <i class="ph ph-moon"></i> Scuro
                     </button>
-                    <button onclick="setAppTheme('pastel')" id="btn-theme-pastel" class="p-1.5 rounded-lg transition-all" title="Tema Pastello">
-                        <i data-lucide="palette" class="h-4 w-4"></i>
+                    <button onclick="changeTheme('pastel')" id="theme-pastel-btn" class="flex-1 py-1 rounded-lg text-xs font-medium flex items-center justify-center gap-1 transition-all text-gray-400 dark:hover:text-gray-200">
+                        <i class="ph ph-palette"></i> Pastel
                     </button>
                 </div>
-
-                <!-- Sync Indicator -->
-                <button onclick="simulateSync()" class="p-2 rounded-xl transition-all flex items-center space-x-1.5 text-xs text-emerald-500 hover:bg-emerald-500/10 font-mono" id="sync-btn">
-                    <i data-lucide="wifi" class="h-4 w-4" id="network-icon"></i>
-                    <span class="hidden md:inline">Synced</span>
-                </button>
-
-                <!-- Auth/User Area -->
-                <div class="flex items-center space-x-2 pl-3 border-l" id="auth-header-section">
-                    <!-- Dynamic rendering via JS -->
-                </div>
-
-                <!-- Global Settings -->
-                <button onclick="toggleModal('settings-modal', true)" class="p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-xl transition-colors text-slate-400 hover:text-indigo-500">
-                    <i data-lucide="settings" class="h-5 w-5"></i>
-                </button>
             </div>
-        </header>
 
-        <!-- Main Workspace -->
-        <div class="flex-1 flex overflow-hidden relative" id="workspace-container">
+            <!-- Profilo & Login Stato -->
+            <div class="p-4 border-b border-gray-100 dark:border-gray-800/50 bg-gray-50/50 dark:bg-gray-900/30">
+                <div id="user-profile-widget" class="flex items-center justify-between">
+                    <!-- Dinamicamente popolato da javascript -->
+                </div>
+            </div>
+
+            <!-- Ricerca & Filtri -->
+            <div class="px-4 pt-3 pb-2 space-y-2">
+                <div class="relative">
+                    <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input oninput="handleSearch(this.value)" type="text" placeholder="Cerca appunti..." class="w-full text-xs pl-9 pr-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-xl border-none focus:ring-2 focus:ring-primary-500 outline-none glass-input">
+                </div>
+                <!-- Categoria Note Selezionabile -->
+                <div class="flex gap-1 overflow-x-auto pb-1" id="category-filters">
+                    <button onclick="filterNotes('all')" class="px-2.5 py-1 bg-primary-100 dark:bg-primary-900/40 text-primary-600 dark:text-primary-300 rounded-lg text-[11px] font-medium shrink-0" id="filter-all">Tutti</button>
+                    <button onclick="filterNotes('appunto')" class="px-2.5 py-1 bg-gray-100 dark:bg-gray-800/80 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-lg text-[11px] font-medium shrink-0" id="filter-appunto">Appunti</button>
+                    <button onclick="filterNotes('checklist')" class="px-2.5 py-1 bg-gray-100 dark:bg-gray-800/80 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-lg text-[11px] font-medium shrink-0" id="filter-checklist">Checklist</button>
+                    <button onclick="filterNotes('diario')" class="px-2.5 py-1 bg-gray-100 dark:bg-gray-800/80 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-lg text-[11px] font-medium shrink-0" id="filter-diario">Diari</button>
+                </div>
+            </div>
+
+            <!-- Note List Container -->
+            <div class="flex-1 overflow-y-auto px-2 py-2 space-y-1" id="notes-list-container">
+                <!-- Popolato dinamicamente da script.js -->
+            </div>
+
+            <!-- Nuova Nota Bottom Menu -->
+            <div class="p-4 border-t border-gray-100 dark:border-gray-800 flex gap-2">
+                <button onclick="createNewNote('appunto')" class="flex-1 py-2.5 px-3 bg-primary-500 hover:bg-primary-600 text-white rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all shadow-md active:scale-95">
+                    <i class="ph ph-plus-circle text-base"></i> Nuova Nota
+                </button>
+                <button onclick="triggerFileInput()" class="p-2.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-xl text-gray-600 dark:text-gray-300 transition-all shadow-sm" title="Importa file (TXT/MD/JSON)">
+                    <i class="ph ph-file-arrow-up text-lg"></i>
+                </button>
+                <input type="file" id="file-uploader-input" class="hidden" accept=".txt,.md,.json" onchange="handleFileImport(event)">
+            </div>
+        </aside>
+
+        <!-- AREA CENTRALE: Editor Semantico e Workspace -->
+        <main class="flex-1 flex flex-col h-full overflow-hidden bg-white dark:bg-gray-950/20 panel-bg relative">
             
-            <!-- Left Sidebar: Navigation & Document Tree -->
-            <aside class="w-80 border-r theme-transition flex flex-col shrink-0 overflow-hidden transition-all duration-300" id="sidebar-left">
-                <!-- Search & Filters -->
-                <div class="p-4 space-y-3 border-b theme-transition">
-                    <div class="relative">
-                        <i data-lucide="search" class="absolute left-3 top-2.5 h-4 w-4 opacity-40"></i>
-                        <input 
-                            type="text" 
-                            id="search-input"
-                            oninput="handleSearch(this.value)"
-                            placeholder="Cerca note e checklist..." 
-                            class="w-full pl-9 pr-8 py-2 rounded-xl text-xs focus:ring-1 focus:ring-indigo-500 outline-none transition-all"
-                        />
-                        <button onclick="clearSearch()" id="clear-search-btn" class="absolute right-3 top-2.5 opacity-50 hover:opacity-100 hidden">
-                            <i data-lucide="x" class="h-3.5 w-3.5"></i>
-                        </button>
-                    </div>
-
-                    <!-- Type Filter Tabs -->
-                    <div class="flex p-0.5 bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-lg text-xs" id="filter-type-tabs">
-                        <button onclick="setTypeFilter('all')" class="flex-1 py-1 rounded-md text-center transition-all font-bold" id="tab-all">Tutte</button>
-                        <button onclick="setTypeFilter('simple')" class="flex-1 py-1 rounded-md text-center transition-all opacity-60" id="tab-simple">Note</button>
-                        <button onclick="setTypeFilter('checklist')" class="flex-1 py-1 rounded-md text-center transition-all opacity-60" id="tab-checklist">Task</button>
-                        <button onclick="setTypeFilter('diary')" class="flex-1 py-1 rounded-md text-center transition-all opacity-60" id="tab-diary">Diari</button>
-                    </div>
-                </div>
-
-                <!-- Note Creators -->
-                <div class="px-4 py-3 flex space-x-2 shrink-0">
-                    <button onclick="createNewNote('simple')" class="flex-1 py-2 px-3 rounded-xl text-xs font-semibold flex items-center justify-center space-x-1.5 border hover:bg-indigo-500/10 transition-colors" id="btn-create-simple">
-                        <i data-lucide="plus" class="h-3.5 w-3.5"></i>
-                        <span>Nota</span>
-                    </button>
-                    <button onclick="createNewNote('checklist')" class="flex-1 py-2 px-3 rounded-xl text-xs font-semibold flex items-center justify-center space-x-1.5 border hover:bg-emerald-500/10 transition-colors" id="btn-create-checklist">
-                        <i data-lucide="check-square" class="h-3.5 w-3.5"></i>
-                        <span>Checklist</span>
-                    </button>
-                    <button onclick="createNewNote('diary')" class="flex-1 py-2 px-3 rounded-xl text-xs font-semibold flex items-center justify-center space-x-1.5 border hover:bg-rose-500/10 transition-colors" id="btn-create-diary">
-                        <i data-lucide="book" class="h-3.5 w-3.5"></i>
-                        <span>Diario</span>
-                    </button>
-                </div>
-
-                <!-- Tags scroll bar -->
-                <div class="px-4 py-1.5 flex items-center space-x-1.5 overflow-x-auto custom-scrollbar pb-2 shrink-0 border-b theme-transition" id="tags-filter-bar">
-                    <span class="text-[9px] font-bold uppercase opacity-40">Tags:</span>
-                    <!-- Dynamic tag buttons injected here -->
-                </div>
-
-                <!-- Scrollable Document List -->
-                <div class="flex-1 overflow-y-auto px-2 space-y-2 py-3 custom-scrollbar" id="notes-list-container">
-                    <!-- Dynamic list items injected here -->
-                </div>
-
-                <!-- MongoDB status monitor footer inside left panel -->
-                <div class="p-3 bg-black/5 dark:bg-white/5 border-t theme-transition text-[10px] font-mono flex items-center justify-between shrink-0" id="sidebar-left-footer">
-                    <span class="flex items-center space-x-1 text-emerald-500">
-                        <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span>MongoDB: Connected</span>
+            <!-- Editor Navbar / Actionbar -->
+            <header class="h-16 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between px-6 shrink-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md z-10 glass-panel">
+                <div class="flex items-center gap-3">
+                    <span id="note-type-badge" class="px-2.5 py-1 bg-indigo-50 dark:bg-indigo-950/50 text-primary-500 dark:text-indigo-300 rounded-full text-xs font-semibold tracking-wide uppercase flex items-center gap-1">
+                        <!-- Popolato dinamicamente -->
                     </span>
-                    <span class="opacity-50">API v1.2</span>
-                </div>
-            </aside>
-
-            <!-- Center Content Panel: Active Editor -->
-            <main class="flex-1 flex flex-col overflow-hidden theme-transition" id="editor-column">
-                
-                <!-- Command Bar for Sidebars toggling (Floating Controls) -->
-                <div class="px-4 py-2 border-b theme-transition flex items-center justify-between bg-black/5 dark:bg-white/5 shrink-0" id="editor-control-row">
-                    <div class="flex items-center space-x-2">
-                        <!-- Left Sidebar Toggle Button -->
-                        <button onclick="toggleLeftSidebar()" class="p-1.5 rounded-lg border theme-transition hover:bg-black/5 dark:hover:bg-white/5 flex items-center space-x-1 text-xs" title="Mostra/Nascondi Lista Note">
-                            <i data-lucide="sidebar" class="h-4 w-4"></i>
-                            <span class="hidden lg:inline text-[10px]">Lista</span>
-                        </button>
-                    </div>
-
-                    <div class="flex items-center space-x-2">
-                        <!-- Actions menu for note -->
-                        <button onclick="triggerShareAction()" class="p-1.5 rounded-lg border theme-transition hover:bg-black/5 dark:hover:bg-white/5 flex items-center space-x-1 text-xs" title="Condividi Nota">
-                            <i data-lucide="share-2" class="h-4 w-4"></i>
-                            <span class="hidden sm:inline text-[10px]">Condividi</span>
-                        </button>
-                        <button onclick="exportActiveNote()" class="p-1.5 rounded-lg border theme-transition hover:bg-black/5 dark:hover:bg-white/5 flex items-center space-x-1 text-xs" title="Esporta in Markdown">
-                            <i data-lucide="download" class="h-4 w-4"></i>
-                            <span class="hidden sm:inline text-[10px]">Esporta</span>
-                        </button>
-                        <button onclick="deleteActiveNote()" class="p-1.5 rounded-lg border border-red-500/20 text-red-500 hover:bg-red-500/10 flex items-center space-x-1 text-xs" title="Elimina Nota">
-                            <i data-lucide="trash-2" class="h-4 w-4"></i>
-                        </button>
-
-                        <div class="h-4 w-px bg-gray-300 dark:bg-zinc-800 mx-1"></div>
-
-                        <!-- Right Sidebar Toggle Button -->
-                        <button onclick="toggleRightSidebar()" class="p-1.5 rounded-lg border theme-transition hover:bg-black/5 dark:hover:bg-white/5 flex items-center space-x-1 text-xs text-purple-500 border-purple-500/20" title="Mostra/Nascondi AI Copilot">
-                            <i data-lucide="sparkles" class="h-4 w-4 animate-pulse"></i>
-                            <span class="hidden lg:inline text-[10px]">AI Copilot</span>
-                        </button>
-                    </div>
+                    <span class="w-px h-4 bg-gray-200 dark:bg-gray-800"></span>
+                    <span id="sync-status-indicator" class="text-xs text-gray-400 flex items-center gap-1 font-mono">
+                        <i class="ph-fill ph-cloud-check text-green-500"></i> Cloud Sincronizzato
+                    </span>
                 </div>
 
-                <!-- Workspace Interactive Canvas -->
-                <div class="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 custom-scrollbar" id="editor-workspace">
-                    <!-- Dynamic rendering of active note content -->
-                </div>
-            </main>
-
-            <!-- Right Sidebar: Smart AI Copilot -->
-            <aside class="w-80 border-l theme-transition flex flex-col shrink-0 overflow-hidden transition-all duration-300" id="sidebar-right">
-                <!-- AI Header -->
-                <div class="p-4 border-b theme-transition flex items-center justify-between shrink-0">
-                    <div class="flex items-center space-x-2">
-                        <i data-lucide="sparkles" class="h-5 w-5 text-violet-500 animate-pulse"></i>
-                        <h3 class="font-bold text-sm tracking-tight">UltraPad AI Copilot</h3>
-                    </div>
-                    <span class="text-[9px] px-2 py-0.5 rounded-full font-mono font-bold" id="ai-version-badge">Gemini 2.5</span>
-                </div>
-
-                <!-- AI Content Area -->
-                <div class="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar" id="ai-workspace-container">
+                <div class="flex items-center gap-2">
+                    <!-- Export Note -->
+                    <button onclick="exportCurrentNote()" class="p-2 text-gray-500 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-all" title="Esporta Nota (.md)">
+                        <i class="ph ph-download-simple text-lg"></i>
+                    </button>
+                    <!-- Condividi Nota -->
+                    <button onclick="openShareModal()" class="p-2 text-gray-500 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-all" title="Condivisione e Collaboratori">
+                        <i class="ph ph-share-network text-lg"></i>
+                    </button>
                     
-                    <!-- Cloud configuration API Key -->
-                    <div class="p-3 bg-black/5 dark:bg-white/5 rounded-2xl space-y-2 border border-black/10 dark:border-white/10">
-                        <div class="flex items-center justify-between">
-                            <span class="text-[10px] font-bold uppercase opacity-60 flex items-center space-x-1">
-                                <i data-lucide="key" class="h-3 w-3"></i>
-                                <span>Connessione Cloud AI</span>
+                    <span class="w-px h-6 bg-gray-200 dark:bg-gray-800 mx-1"></span>
+
+                    <!-- Pulsante Assistente AI -->
+                    <button onclick="toggleAIPanel()" class="pl-3.5 pr-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white rounded-xl font-semibold text-xs flex items-center gap-2 transition-all shadow-md shadow-indigo-500/20 active:scale-95">
+                        <i class="ph-fill ph-sparkle text-sm"></i> Chiedi all'AI
+                    </button>
+                </div>
+            </header>
+
+            <!-- Editor Workspace -->
+            <div class="flex-1 overflow-y-auto w-full flex justify-center py-10 px-6 pb-24" id="editor-viewport" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+                <div class="w-full max-w-3xl flex flex-col h-full">
+                    
+                    <!-- Diario Info Bar (Visibile solo se tipo nota = diario) -->
+                    <div id="diary-meta-panel" class="mb-4 p-3 bg-yellow-50/50 dark:bg-yellow-950/10 border border-yellow-100 dark:border-yellow-900/30 rounded-2xl hidden items-center justify-between text-xs text-yellow-800 dark:text-yellow-300">
+                        <div class="flex items-center gap-2">
+                            <i class="ph ph-calendar"></i>
+                            <span id="diary-date">15 Luglio 2026</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="flex items-center gap-1">
+                                Mood: 
+                                <select id="diary-mood" onchange="updateDiaryMood(this.value)" class="bg-transparent border-none font-semibold focus:outline-none cursor-pointer">
+                                    <option value="😃 Felice">😃 Felice</option>
+                                    <option value="☕ Produttivo">☕ Produttivo</option>
+                                    <option value="🔋 Carico">🔋 Carico</option>
+                                    <option value="💤 Stanco">💤 Stanco</option>
+                                </select>
                             </span>
-                            <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
-                        </div>
-                        <p class="text-[10px] opacity-70">L'applicazione è pre-configurata con accesso automatico sicuro. Facoltativamente puoi inserire la tua API Key Gemini.</p>
-                        <input 
-                            type="password" 
-                            id="ai-api-key-input"
-                            oninput="updateApiKey(this.value)"
-                            placeholder="Inserisci API Key proprietaria..." 
-                            class="w-full px-2.5 py-1.5 rounded-xl text-[10px] outline-none"
-                        />
-                    </div>
-
-                    <!-- Short AI presets actions -->
-                    <div class="space-y-2">
-                        <p class="text-[10px] font-bold uppercase tracking-wider opacity-60">Scorciatoie Generative</p>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button onclick="callAI('summarize')" class="p-2.5 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 rounded-xl text-left transition-all border border-black/5 dark:border-white/10">
-                                <span class="font-bold text-xs block">📄 Riassumi</span>
-                                <span class="text-[9px] opacity-60">Punti chiave</span>
-                            </button>
-                            <button onclick="callAI('fix-grammar')" class="p-2.5 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 rounded-xl text-left transition-all border border-black/5 dark:border-white/10">
-                                <span class="font-bold text-xs block">✨ Ottimizza</span>
-                                <span class="text-[9px] opacity-60">Stile e sintassi</span>
-                            </button>
-                            <button onclick="callAI('brainstorm')" class="p-2.5 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 rounded-xl text-left transition-all border border-black/5 dark:border-white/10">
-                                <span class="font-bold text-xs block">🧠 Idee Nuove</span>
-                                <span class="text-[9px] opacity-60">Brainstorming</span>
-                            </button>
-                            <button onclick="callAI('checklist')" class="p-2.5 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 rounded-xl text-left transition-all border border-black/5 dark:border-white/10">
-                                <span class="font-bold text-xs block">📋 Tasks list</span>
-                                <span class="text-[9px] opacity-60">Estrai compiti</span>
-                            </button>
                         </div>
                     </div>
 
-                    <!-- Custom Prompt area -->
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-bold uppercase tracking-wider opacity-60">Istruzione Personalizzata AI</label>
-                        <div class="relative">
-                            <textarea 
-                                id="ai-prompt-input"
-                                placeholder="Esempio: Traduci in inglese, cambia tono in formale, scrivi un codice associato..." 
-                                rows="3"
-                                class="w-full p-2.5 rounded-xl text-xs outline-none resize-none"
-                            ></textarea>
-                            <button onclick="callAICustom()" class="absolute bottom-2.5 right-2.5 p-1.5 rounded-lg bg-violet-600 hover:bg-violet-700 text-white transition-all">
-                                <i data-lucide="chevron-right" class="h-4 w-4"></i>
-                            </button>
-                        </div>
+                    <!-- Input Titolo -->
+                    <input oninput="handleTitleChange(this.value)" id="note-title-input" type="text" class="w-full text-3xl sm:text-4xl font-bold bg-transparent border-none outline-none text-gray-900 dark:text-white placeholder-gray-300 dark:placeholder-gray-700 mb-3 tracking-tight" placeholder="Nuovo Titolo...">
+
+                    <!-- Tags / Chips Container -->
+                    <div id="note-tags-container" class="flex flex-wrap gap-2 mb-6">
+                        <!-- Popolato dinamicamente da script.js -->
                     </div>
 
-                    <!-- AI Streaming/Processing Panel logs -->
-                    <div id="ai-output-panel" class="hidden p-3.5 bg-violet-500/10 border border-violet-500/20 rounded-2xl space-y-3">
-                        <div id="ai-loading-indicator" class="flex items-center space-x-2.5 text-xs text-violet-400">
-                            <i data-lucide="refresh-cw" class="h-4 w-4 animate-spin"></i>
-                            <span class="animate-pulse">Analisi neurale in corso...</span>
-                        </div>
-                        <div id="ai-error-message" class="text-xs text-rose-400 leading-relaxed hidden"></div>
-                        
-                        <div id="ai-result-box" class="space-y-2.5 hidden">
-                            <div class="flex items-center justify-between text-[10px] font-mono opacity-60 border-b border-violet-500/10 pb-1.5">
-                                <span>Risposta Elaborata</span>
-                                <button onclick="copyAiOutputToClipboard()" class="hover:text-violet-400 transition-colors">Copia</button>
-                            </div>
-                            <div id="ai-output-text" class="text-xs leading-relaxed font-mono whitespace-pre-wrap max-h-60 overflow-y-auto custom-scrollbar"></div>
-                            
-                            <button onclick="injectAiResultToNote()" class="w-full py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-xs font-semibold flex items-center justify-center space-x-1.5 transition-all">
-                                <i data-lucide="plus" class="h-3.5 w-3.5"></i>
-                                <span>Inietta nella Nota</span>
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Footer right panel -->
-                <div class="p-3 bg-black/5 dark:bg-white/5 border-t theme-transition text-[9px] font-mono text-center opacity-50 shrink-0">
-                    Powered by Google Gemini Language Models
-                </div>
-            </aside>
-
-        </div>
-
-        <!-- System Console Output (Spring Boot simulation) -->
-        <section class="h-44 border-t theme-transition flex flex-col font-mono select-none overflow-hidden shrink-0" id="backend-console-panel">
-            <div class="bg-black/20 px-4 py-1.5 flex items-center justify-between text-xs border-b theme-transition">
-                <div class="flex items-center space-x-2">
-                    <i data-lucide="terminal" class="h-4 w-4 text-purple-400"></i>
-                    <span class="font-bold text-zinc-400">Console Server (Spring Boot / Spring Security / MongoDB Live Logs)</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <span class="text-[9px] bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded">STATUS: ACTIVE (8080)</span>
-                    <button onclick="clearLogs()" class="hover:text-white transition-colors text-[10px] opacity-60">Pulisci Logs</button>
-                    <button onclick="toggleConsole(false)" class="hover:text-white transition-colors text-[10px] opacity-60">Nascondi Console</button>
-                </div>
-            </div>
-            <div class="flex-1 overflow-y-auto p-3 text-[10.5px] space-y-1.5 custom-scrollbar bg-black/40 text-zinc-300" id="console-logs-container">
-                <!-- Log items live here -->
-            </div>
-        </section>
-
-    </div>
-
-    <!-- Floating Trigger button to Restore Console -->
-    <button onclick="toggleConsole(true)" class="fixed bottom-4 right-4 p-3.5 bg-zinc-900 border border-zinc-800 text-purple-400 hover:text-white rounded-full shadow-2xl transition-all z-30 hidden" id="restore-console-btn">
-        <i data-lucide="terminal" class="h-5 w-5"></i>
-    </button>
-
-    <!-- Interactive Authentication Modal (PWA & OAuth simulation) -->
-    <div id="auth-modal" class="fixed inset-0 bg-black/75 backdrop-blur-sm flex items-center justify-center z-50 p-4 hidden">
-        <div class="bg-zinc-900 border border-zinc-800 text-white rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl">
-            <div class="flex items-center justify-between">
-                <h3 class="text-lg font-bold">Autenticazione UltraPad</h3>
-                <button onclick="toggleModal('auth-modal', false)" class="text-zinc-400 hover:text-white">
-                    <i data-lucide="x" class="h-5 w-5"></i>
-                </button>
-            </div>
-            <p class="text-xs text-zinc-400 leading-relaxed">Accedi con il tuo account Spring Security o provider OAuth2 per sbloccare la sincronizzazione istantanea su MongoDB Cluster.</p>
-            
-            <div class="space-y-2">
-                <button onclick="handleSocialLogin('Google')" class="w-full py-2.5 px-4 bg-white hover:bg-zinc-100 text-zinc-900 font-bold rounded-xl text-xs flex items-center justify-center space-x-2 transition-all">
-                    <span>Accedi tramite Google</span>
-                </button>
-                <button onclick="handleSocialLogin('GitHub')" class="w-full py-2.5 px-4 bg-zinc-800 hover:bg-zinc-700 text-white font-bold rounded-xl text-xs flex items-center justify-center space-x-2 transition-all">
-                    <span>Accedi tramite GitHub</span>
-                </button>
-            </div>
-
-            <div class="relative flex py-1.5 items-center">
-                <div class="flex-grow border-t border-zinc-800"></div>
-                <span class="flex-shrink mx-3 text-[9px] text-zinc-500 uppercase tracking-widest">Oppure</span>
-                <div class="flex-grow border-t border-zinc-800"></div>
-            </div>
-
-            <form onsubmit="handleCredentialsLogin(event)" class="space-y-3">
-                <div>
-                    <label class="text-[9px] font-bold uppercase opacity-50 block mb-1">Email di Sviluppo</label>
-                    <input type="email" required id="auth-email-input" value="developer@ultrapad.io" class="w-full px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-xs outline-none focus:border-indigo-500 text-white">
-                </div>
-                <div>
-                    <label class="text-[9px] font-bold uppercase opacity-50 block mb-1">Password</label>
-                    <input type="password" required id="auth-password-input" value="jwt_super_secret" class="w-full px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-xs outline-none focus:border-indigo-500 text-white">
-                </div>
-                <button type="submit" class="w-full py-2.5 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-xl text-xs transition-all shadow-lg shadow-violet-900/30">
-                    Invia Credenziali con Secure JWT
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Architectural Settings & Reset Database Modal -->
-    <div id="settings-modal" class="fixed inset-0 bg-black/75 backdrop-blur-sm flex items-center justify-center z-50 p-4 hidden">
-        <div class="bg-zinc-900 border border-zinc-800 text-white rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl">
-            <div class="flex items-center justify-between">
-                <h3 class="text-lg font-bold flex items-center space-x-2">
-                    <i data-lucide="settings" class="text-violet-400 h-5 w-5"></i>
-                    <span>Parametri di Architettura</span>
-                </h3>
-                <button onclick="toggleModal('settings-modal', false)" class="text-zinc-400 hover:text-white">
-                    <i data-lucide="x" class="h-5 w-5"></i>
-                </button>
-            </div>
-
-            <div class="space-y-4 text-xs">
-                <div class="p-3.5 bg-zinc-950 rounded-2xl space-y-2 font-mono border border-zinc-800">
-                    <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-wider">Backend Cloud Infrastructure Details</p>
-                    <p><span class="text-purple-400">Engine Core:</span> Java 17 LTS</p>
-                    <p><span class="text-purple-400">Framework:</span> Spring Boot v3.2.0</p>
-                    <p><span class="text-purple-400">Stateless Security:</span> Spring Security with JWT Auths</p>
-                    <p><span class="text-purple-400">Database Driver:</span> MongoTemplate Community Cluster</p>
-                </div>
-
-                <div class="space-y-2">
-                    <h4 class="font-bold">Interfaccia Console Server Logs</h4>
-                    <p class="text-[10px] text-zinc-400 leading-normal">Permette di monitorare l'attività del backend di autenticazione e delle query MongoDB in tempo reale.</p>
-                    <button onclick="toggleConsoleFromSettings()" id="settings-console-toggle-btn" class="w-full py-2 px-3 rounded-xl font-semibold text-center border transition-colors text-xs">
-                        Attiva/Disattiva Console
-                    </button>
-                </div>
-
-                <div class="space-y-2">
-                    <h4 class="font-bold text-red-400">Reset Dati Locali (Purge)</h4>
-                    <p class="text-[10px] text-zinc-400 leading-normal">Elimina tutte le note create dall'utente sintonizzando nuovamente i documenti di template iniziali.</p>
-                    <button onclick="resetAppDatabase()" class="w-full py-2 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl text-xs transition-colors shadow-lg shadow-red-950/20">
-                        Resetta Database (Pulisci localStorage)
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- UI Core Logic (Pure Reactive ES6 Native App) -->
-    <script>
-        // Default Mock Data
-        const INITIAL_NOTES = [
-            {
-                id: 'note-1',
-                title: '🚀 Visione Progetto UltraPad',
-                content: `### UltraPad: Il Futuro del Knowledge Management\n\nUltraPad unisce la flessibilità di un markdown editor alla potenza dell'intelligenza artificiale generativa.\n\n### Caratteristiche Chiave:\n- **Editor Semantico**: Gestione di note, checklist e diari personali in un unico luogo.\n- **AI Nativa**: Chiedi al modello di riassumere, trovare bug nel codice, o espandere i concetti.\n- **Sincronizzazione Cloud**: Basato su architettura Spring Boot & MongoDB.\n\n*Pronto a rivoluzionare i tuoi appunti quotidiani!*`,
-                type: 'simple',
-                tags: ['Strategia', 'Ingegneria'],
-                lastModified: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
-                pinned: true,
-                color: 'indigo'
-            },
-            {
-                id: 'note-2',
-                title: '✅ Tabella di Marcia Rilascio PWA',
-                content: 'Processo di ottimizzazione frontend ed endpoint Spring Boot',
-                type: 'checklist',
-                checklistItems: [
-                    { id: 'cli-1', text: 'Configurare Spring Security con JWT e autenticazione stateless', completed: true },
-                    { id: 'cli-2', text: 'Ottimizzare query MongoDB per caricamenti sotto i 100ms', completed: true },
-                    { id: 'cli-3', text: 'Configurare Workbox per il caching delle rotte offline-first', completed: false },
-                    { id: 'cli-4', text: 'Implementare sincronizzazione silente tramite Service Workers', completed: false },
-                    { id: 'cli-5', text: 'Audit di sicurezza con test end-to-end su Cypress', completed: false }
-                ],
-                tags: ['Sviluppo', 'PWA'],
-                lastModified: new Date(Date.now() - 1000 * 60 * 180).toISOString(),
-                pinned: false,
-                color: 'emerald'
-            },
-            {
-                id: 'note-3',
-                title: '📓 Diario di Bordo: Idee Nuova Architettura',
-                content: 'Oggi ho riflettuto sulla possibilità di aggiungere un layer Redis davanti a MongoDB per conservare le sessioni di modifica collaborativa in tempo reale. Le risposte del server sono eccellenti, ma scalare i websocket richiede un broker di messaggi robusto.',
-                type: 'diary',
-                mood: 'Eccitato',
-                weather: 'Soleggiato',
-                isLocked: true,
-                tags: ['Idee', 'Architettura'],
-                lastModified: new Date(Date.now() - 1000 * 60 * 1440).toISOString(),
-                pinned: false,
-                color: 'rose'
-            }
-        ];
-
-        const AVAILABLE_TAGS = ['Strategia', 'Ingegneria', 'Sviluppo', 'PWA', 'Idee', 'Architettura', 'Personale', 'Studio'];
-        const MOODS = ['Felice', 'Eccitato', 'Produttivo', 'Stanco', 'Pensieroso', 'Calmo'];
-        const WEATHERS = ['Soleggiato', 'Nuvoloso', 'Piovoso', 'Ventoso', 'Tempesta'];
-
-        // App Reactive State
-        let state = {
-            notes: JSON.parse(localStorage.getItem('ultrapad_notes')) || INITIAL_NOTES,
-            activeNoteId: null,
-            theme: localStorage.getItem('ultrapad_theme') || 'dark', // light, dark, pastel
-            searchQuery: '',
-            selectedTagFilter: '',
-            selectedTypeFilter: 'all',
-            sidebarLeftOpen: true,
-            sidebarRightOpen: true,
-            consoleOpen: true,
-            aiApiKey: localStorage.getItem('ultrapad_ai_api_key') || '',
-            aiLoading: false,
-            aiError: '',
-            aiOutput: '',
-            currentUser: {
-                name: 'Ing. Alessandro Rossi',
-                email: 'alessandro.rossi@ultrapad.io',
-                avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
-                token: 'jwt_header_payload.signature_xxx'
-            },
-            backendLogs: [
-                { time: new Date().toLocaleTimeString(), msg: 'Spring Boot v3.2.0 initialized successfully.' },
-                { time: new Date().toLocaleTimeString(), msg: 'Connected to MongoDB Cluster0 (lat: 12ms).' },
-                { time: new Date().toLocaleTimeString(), msg: 'JWT Validation Server Listening on port 8080.' }
-            ]
-        };
-
-        // Initialize App on DOM Content Loaded
-        window.addEventListener('DOMContentLoaded', () => {
-            if (state.notes.length > 0) {
-                state.activeNoteId = state.notes[0].id;
-            }
-            // Populate initial custom API Key field if present
-            document.getElementById('ai-api-key-input').value = state.aiApiKey;
-            
-            // Setup Initial theme
-            setAppTheme(state.theme);
-            
-            // Initial Render Cycles
-            logBackend('CLIENT: DOM loaded. Bootstrapping UI core structures.');
-            renderApp();
-            
-            // Sync with browser online status
-            window.addEventListener('online', () => updateNetworkStatus(true));
-            window.addEventListener('offline', () => updateNetworkStatus(false));
-        });
-
-        // Logger Helper
-        function logBackend(message, type = 'info') {
-            const time = new Date().toLocaleTimeString();
-            state.backendLogs.unshift({ time, msg: message, type });
-            if (state.backendLogs.length > 50) state.backendLogs.pop();
-            renderConsoleLogs();
-        }
-
-        // Network Online Status Changes
-        function updateNetworkStatus(isOnline) {
-            const icon = document.getElementById('network-icon');
-            const span = document.querySelector('#sync-btn span');
-            if (isOnline) {
-                icon.setAttribute('data-lucide', 'wifi');
-                span.innerText = "Synced";
-                span.parentElement.classList.remove('text-rose-500');
-                span.parentElement.classList.add('text-emerald-500');
-                logBackend('NETWORK: Connection restored. Sychronization channels re-opened.');
-            } else {
-                icon.setAttribute('data-lucide', 'wifi-off');
-                span.innerText = "Offline Mode";
-                span.parentElement.classList.remove('text-emerald-500');
-                span.parentElement.classList.add('text-rose-500');
-                logBackend('NETWORK ERROR: Connection lost. Local storage (IndexedDB caching) activated.', 'ERROR');
-            }
-            lucide.createIcons();
-        }
-
-        // Toggle Sidebar Visibility Functions (Requested Feature)
-        function toggleLeftSidebar() {
-            state.sidebarLeftOpen = !state.sidebarLeftOpen;
-            const sidebar = document.getElementById('sidebar-left');
-            if (state.sidebarLeftOpen) {
-                sidebar.style.width = '20rem'; // w-80 is 20rem
-                sidebar.style.borderRightWidth = '1px';
-            } else {
-                sidebar.style.width = '0px';
-                sidebar.style.borderRightWidth = '0px';
-            }
-            logBackend(`VIEWPORT: Left Sidebar (Note List) ${state.sidebarLeftOpen ? 'Expanded' : 'Collapsed'}`);
-        }
-
-        function toggleRightSidebar() {
-            state.sidebarRightOpen = !state.sidebarRightOpen;
-            const sidebar = document.getElementById('sidebar-right');
-            if (state.sidebarRightOpen) {
-                sidebar.style.width = '20rem'; // w-80
-                sidebar.style.borderLeftWidth = '1px';
-            } else {
-                sidebar.style.width = '0px';
-                sidebar.style.borderLeftWidth = '0px';
-            }
-            logBackend(`VIEWPORT: Right Sidebar (AI Copilot) ${state.sidebarRightOpen ? 'Expanded' : 'Collapsed'}`);
-        }
-
-        function toggleConsole(show) {
-            state.consoleOpen = show;
-            const panel = document.getElementById('backend-console-panel');
-            const triggerBtn = document.getElementById('restore-console-btn');
-            if (show) {
-                panel.classList.remove('hidden');
-                triggerBtn.classList.add('hidden');
-                logBackend('CONSOLE: Opened logs panel window.');
-            } else {
-                panel.classList.add('hidden');
-                triggerBtn.classList.remove('hidden');
-            }
-            updateSettingsModalConsoleButton();
-        }
-
-        function toggleConsoleFromSettings() {
-            toggleConsole(!state.consoleOpen);
-        }
-
-        function updateSettingsModalConsoleButton() {
-            const btn = document.getElementById('settings-console-toggle-btn');
-            if (state.consoleOpen) {
-                btn.className = "w-full py-2 px-3 rounded-xl font-semibold text-center border text-xs border-red-500/20 text-red-500 hover:bg-red-500/10";
-                btn.innerText = "Nascondi Console Terminale";
-            } else {
-                btn.className = "w-full py-2 px-3 rounded-xl font-semibold text-center border text-xs border-emerald-500/20 text-emerald-500 hover:bg-emerald-500/10";
-                btn.innerText = "Mostra Console Terminale";
-            }
-        }
-
-        // Modal triggers
-        function toggleModal(id, show) {
-            const modal = document.getElementById(id);
-            if (show) {
-                modal.classList.remove('hidden');
-            } else {
-                modal.classList.add('hidden');
-            }
-            if (id === 'settings-modal' && show) {
-                updateSettingsModalConsoleButton();
-            }
-        }
-
-        // Real API / Simulated Key Update
-        function updateApiKey(key) {
-            state.aiApiKey = key;
-            localStorage.setItem('ultrapad_ai_api_key', key);
-        }
-
-        // Theme Style Classes Definitions
-        const themes = {
-            light: {
-                bodyBg: 'bg-slate-100 p-4',
-                masterCard: 'bg-white border-slate-200 text-slate-800 shadow-xl',
-                header: 'bg-slate-50 border-slate-200',
-                sidebarLeft: 'bg-slate-50 border-slate-200 text-slate-800',
-                sidebarRight: 'bg-slate-50 border-slate-200 text-slate-800',
-                card: 'bg-white border-slate-200 hover:shadow-md hover:border-slate-300',
-                activeCard: 'border-indigo-500 ring-2 ring-indigo-500/20 bg-indigo-50/20',
-                input: 'bg-white border-slate-200 focus:border-indigo-500 text-slate-900',
-                badge: 'bg-slate-200/60 text-slate-700',
-                activeTypeTab: 'bg-white text-slate-900 shadow-sm font-semibold',
-                editorBg: 'bg-white',
-                consolePanel: 'bg-slate-900 text-slate-300 border-slate-200',
-                tagBadge: 'bg-indigo-100 text-indigo-800 border border-indigo-200/50',
-                colorPastel: {
-                    indigo: 'bg-indigo-100 text-indigo-800 border border-indigo-200/50',
-                    emerald: 'bg-emerald-100 text-emerald-800 border border-emerald-200/50',
-                    rose: 'bg-rose-100 text-rose-800 border border-rose-200/50'
-                }
-            },
-            dark: {
-                bodyBg: 'bg-slate-950 p-4',
-                masterCard: 'bg-zinc-950 border-zinc-800 text-zinc-100 shadow-2xl',
-                header: 'bg-zinc-900/40 border-zinc-800',
-                sidebarLeft: 'bg-zinc-900/40 border-zinc-800 text-zinc-300',
-                sidebarRight: 'bg-zinc-900/40 border-zinc-800 text-zinc-300',
-                card: 'bg-zinc-900/80 border-zinc-800/80 hover:border-zinc-700 hover:shadow-lg',
-                activeCard: 'border-violet-500 ring-2 ring-violet-500/30 bg-violet-950/10',
-                input: 'bg-zinc-950 border-zinc-800 focus:border-violet-500 text-zinc-100',
-                badge: 'bg-zinc-850 text-zinc-400',
-                activeTypeTab: 'bg-zinc-800 text-zinc-100 shadow-inner font-semibold',
-                editorBg: 'bg-zinc-950',
-                consolePanel: 'bg-zinc-950 text-zinc-300 border-zinc-900',
-                tagBadge: 'bg-violet-950/40 text-violet-300 border border-violet-900/40',
-                colorPastel: {
-                    indigo: 'bg-indigo-950/40 text-indigo-300 border border-indigo-900/50',
-                    emerald: 'bg-emerald-950/40 text-emerald-300 border border-emerald-900/50',
-                    rose: 'bg-rose-950/40 text-rose-300 border border-rose-900/50'
-                }
-            },
-            pastel: {
-                bodyBg: 'pastel-pattern p-4',
-                masterCard: 'bg-[#fffdfb] border-[#e9dfd3] text-[#4a3f35] shadow-xl',
-                header: 'bg-[#f6ebd9]/50 border-[#e9dfd3]',
-                sidebarLeft: 'bg-[#fcfbf9]/60 border-[#e9dfd3] text-[#5c4e40]',
-                sidebarRight: 'bg-[#fcfbf9]/60 border-[#e9dfd3] text-[#5c4e40]',
-                card: 'bg-white border-[#ecd9c5]/60 hover:shadow-md hover:border-[#dfc6ab]',
-                activeCard: 'border-[#c5a075] ring-2 ring-[#c5a075]/10 bg-[#fbf9f4]',
-                input: 'bg-[#fdfcfb] border-[#e5d9c9] focus:border-[#c5a075] text-[#4a3f35]',
-                badge: 'bg-[#eedec9]/70 text-[#5c4e40]',
-                activeTypeTab: 'bg-white text-[#5c4e40] shadow-sm border border-[#ebd9c5] font-semibold',
-                editorBg: 'bg-[#fffdfb] font-serif',
-                consolePanel: 'bg-[#2d2620] text-[#eedec9] border-[#4a3f35]',
-                tagBadge: 'bg-[#ebd9c5]/40 text-[#5c4e40] border border-[#dfc6ab]/40',
-                colorPastel: {
-                    indigo: 'bg-blue-50 text-blue-800 border border-blue-100',
-                    emerald: 'bg-teal-50 text-teal-800 border border-teal-100',
-                    rose: 'bg-rose-50 text-rose-800 border border-rose-100'
-                }
-            }
-        };
-
-        // Apply Theme Globally
-        function setAppTheme(themeName) {
-            state.theme = themeName;
-            localStorage.setItem('ultrapad_theme', themeName);
-
-            const activeColors = themes[themeName];
-            const htmlEl = document.documentElement;
-            const bodyCanvas = document.getElementById('body-canvas');
-            const masterCard = document.getElementById('master-card');
-            const headerBar = document.getElementById('header-bar');
-            const sidebarLeft = document.getElementById('sidebar-left');
-            const sidebarRight = document.getElementById('sidebar-right');
-            const consolePanel = document.getElementById('backend-console-panel');
-
-            // Apply body classes
-            bodyCanvas.className = `h-full w-full overflow-hidden theme-transition flex items-center justify-center transition-all duration-300 ${activeColors.bodyBg}`;
-            
-            // Master structures styling
-            masterCard.className = `w-full h-full max-w-7xl sm:h-[92vh] rounded-none sm:rounded-[2.5rem] border overflow-hidden flex flex-col z-10 theme-transition backdrop-blur-md ${activeColors.masterCard}`;
-            headerBar.className = `px-5 py-3.5 flex items-center justify-between border-b theme-transition select-none shrink-0 ${activeColors.header}`;
-            sidebarLeft.className = `w-80 border-r theme-transition flex flex-col shrink-0 overflow-hidden transition-all duration-300 ${activeColors.sidebarLeft}`;
-            sidebarRight.className = `w-80 border-l theme-transition flex flex-col shrink-0 overflow-hidden transition-all duration-300 ${activeColors.sidebarRight}`;
-            consolePanel.className = `h-44 border-t theme-transition flex flex-col font-mono select-none overflow-hidden shrink-0 ${activeColors.consolePanel}`;
-
-            // Highlight Theme select buttons
-            ['light', 'dark', 'pastel'].forEach(t => {
-                const btn = document.getElementById(`btn-theme-${t}`);
-                if (t === themeName) {
-                    btn.className = "p-1.5 rounded-lg transition-all bg-indigo-500/20 text-indigo-500 font-bold scale-105 shadow-sm";
-                } else {
-                    btn.className = "p-1.5 rounded-lg transition-all opacity-40 hover:opacity-100 text-current";
-                }
-            });
-
-            // Refresh UI components
-            renderApp();
-            logBackend(`SYSTEM: UI Theme redefined to ${themeName.toUpperCase()}`);
-        }
-
-        // Active Note Selector helper
-        function getActiveNote() {
-            return state.notes.find(n => n.id === state.activeNoteId) || null;
-        }
-
-        // Render functions
-        function renderApp() {
-            renderAuthHeader();
-            renderTagsFilter();
-            renderNotesList();
-            renderActiveEditor();
-            renderConsoleLogs();
-        }
-
-        function renderAuthHeader() {
-            const container = document.getElementById('auth-header-section');
-            if (state.currentUser) {
-                container.innerHTML = `
-                    <div class="flex items-center space-x-2">
-                        <img src="${state.currentUser.avatar}" alt="Avatar" class="h-8 w-8 rounded-full border border-purple-500/40 object-cover shadow-sm">
-                        <div class="hidden lg:block text-left select-none">
-                            <p class="text-xs font-bold truncate max-w-[110px] leading-tight">${state.currentUser.name}</p>
-                            <p class="text-[9px] opacity-50 truncate max-w-[110px] leading-none">${state.currentUser.email}</p>
-                        </div>
-                        <button onclick="logout()" class="p-1.5 hover:bg-red-500/10 text-red-400 rounded-lg transition-colors" title="Sconnetti Account">
-                            <i data-lucide="log-out" class="h-4 w-4"></i>
+                    <!-- Quill Toolbar Simulato (WYSIWYG) -->
+                    <div class="flex flex-wrap items-center gap-1 bg-gray-50 dark:bg-gray-900/50 p-2 rounded-2xl border border-gray-100 dark:border-gray-800/80 mb-6 glass-input">
+                        <button onclick="formatDoc('bold')" class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg text-gray-600 dark:text-gray-300" title="Grassetto">
+                            <i class="ph ph-text-bolder text-sm"></i>
+                        </button>
+                        <button onclick="formatDoc('italic')" class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg text-gray-600 dark:text-gray-300" title="Corsivo">
+                            <i class="ph ph-text-italic text-sm"></i>
+                        </button>
+                        <button onclick="formatDoc('underline')" class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg text-gray-600 dark:text-gray-300" title="Sottolineato">
+                            <i class="ph ph-text-underline text-sm"></i>
+                        </button>
+                        <span class="w-px h-4 bg-gray-300 dark:bg-gray-700 mx-1"></span>
+                        <button onclick="insertList('insertUnorderedList')" class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg text-gray-600 dark:text-gray-300" title="Lista puntata">
+                            <i class="ph ph-list-bullets text-sm"></i>
+                        </button>
+                        <button onclick="insertList('insertOrderedList')" class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg text-gray-600 dark:text-gray-300" title="Lista numerata">
+                            <i class="ph ph-list-numbers text-sm"></i>
+                        </button>
+                        <button onclick="insertCheckbox()" class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg text-gray-600 dark:text-gray-300" title="Aggiungi Checklist">
+                            <i class="ph ph-check-square-offset text-sm"></i>
+                        </button>
+                        <span class="w-px h-4 bg-gray-300 dark:bg-gray-700 mx-1"></span>
+                        <button onclick="formatDoc('formatBlock', 'H1')" class="px-2 py-0.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg text-gray-600 dark:text-gray-300 text-xs font-semibold">
+                            H1
+                        </button>
+                        <button onclick="formatDoc('formatBlock', 'H3')" class="px-2 py-0.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg text-gray-600 dark:text-gray-300 text-xs font-semibold">
+                            H2
+                        </button>
+                        <button onclick="formatDoc('formatBlock', 'PRE')" class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg text-gray-600 dark:text-gray-300" title="Blocco Codice">
+                            <i class="ph ph-code text-sm"></i>
                         </button>
                     </div>
-                `;
-            } else {
-                container.innerHTML = `
-                    <button onclick="toggleModal('auth-modal', true)" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-violet-600 hover:bg-violet-700 text-white transition-all shadow-md shadow-violet-900/20 flex items-center space-x-1.5">
-                        <i data-lucide="user" class="h-3.5 w-3.5"></i>
-                        <span>Accedi</span>
-                    </button>
-                `;
-            }
-            lucide.createIcons();
-        }
 
-        function renderTagsFilter() {
-            const bar = document.getElementById('tags-filter-bar');
-            const activeColors = themes[state.theme];
+                    <!-- Editor Semantico Reale (WYSIWYG) -->
+                    <div oninput="handleContentChange()" id="editor-body" class="editor-wysiwyg prose dark:prose-invert max-w-none text-gray-800 dark:text-gray-200 focus:outline-none min-h-[300px] text-sm md:text-base leading-relaxed" contenteditable="true" data-placeholder="Inizia a scrivere o trascina un file qui...">
+                        <!-- Popolato dinamicamente -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- PANNELLO AI LATERALE -->
+        <aside id="ai-panel" class="w-80 h-full border-l border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 glass-panel flex flex-col absolute right-0 transform translate-x-full transition-transform duration-300 ease-in-out z-20 shadow-2xl">
             
-            let html = `<span class="text-[9px] font-bold uppercase opacity-50 mr-1 shrink-0">Tags:</span>`;
-            
-            // All Tag
-            const isAllSelected = !state.selectedTagFilter;
-            html += `
-                <button onclick="setTagFilter('')" class="text-[10px] px-2.5 py-1 rounded-full whitespace-nowrap transition-colors ${
-                    isAllSelected ? 'bg-indigo-600 text-white font-bold shadow-sm' : 'bg-black/5 dark:bg-white/5 opacity-80 hover:opacity-100'
-                }">
-                    Tutti
+            <div class="h-16 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between px-5 bg-gradient-to-r from-indigo-50/50 to-purple-50/50 dark:from-indigo-900/10 dark:to-purple-900/10">
+                <div class="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-semibold text-sm">
+                    <i class="ph-fill ph-sparkle text-lg"></i> AI Nativa
+                </div>
+                <button onclick="toggleAIPanel()" class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                    <i class="ph ph-x"></i>
                 </button>
-            `;
+            </div>
 
-            AVAILABLE_TAGS.forEach(tag => {
-                const isSelected = state.selectedTagFilter === tag;
-                html += `
-                    <button onclick="setTagFilter('${tag}')" class="text-[10px] px-2.5 py-1 rounded-full whitespace-nowrap transition-colors ${
-                        isSelected ? 'bg-indigo-600 text-white font-bold shadow-sm' : 'bg-black/5 dark:bg-white/5 opacity-80 hover:opacity-100'
-                    }">
-                        #${tag}
+            <!-- Chat Area -->
+            <div id="ai-chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 text-xs md:text-sm">
+                <!-- Messaggio Iniziale AI -->
+                <div class="flex gap-2.5">
+                    <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white shrink-0 shadow-sm mt-0.5">
+                        <i class="ph-fill ph-robot text-xs"></i>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-gray-800 rounded-2xl rounded-tl-sm p-3 text-gray-800 dark:text-gray-200 leading-relaxed glass-input">
+                        Ciao! Sono l'assistente AI nativo di UltraPad. Posso analizzare la tua nota corrente, trovare bug nel codice o formattare i concetti. Prova le azioni rapide qui sotto!
+                    </div>
+                </div>
+
+                <!-- Suggerimenti Rapidi AI -->
+                <div class="flex flex-wrap gap-1.5 pl-9" id="ai-suggestions">
+                    <button onclick="triggerAICall('Riassumi questo documento in poche righe di sintesi')" class="text-[10px] md:text-xs bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 px-2.5 py-1.5 rounded-full hover:border-primary-500 hover:text-primary-500 dark:hover:text-primary-400 transition-all shadow-sm">
+                        ✨ Riassumi
                     </button>
-                `;
-            });
+                    <button onclick="triggerAICall('Trova bug o ottimizza la struttura in base alle linee guida di Spring Boot')" class="text-[10px] md:text-xs bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 px-2.5 py-1.5 rounded-full hover:border-primary-500 hover:text-primary-500 dark:hover:text-primary-400 transition-all shadow-sm">
+                        🐛 Debug Code
+                    </button>
+                    <button onclick="triggerAICall('Aggiungi 3 checklist interattive utili per completare questo documento')" class="text-[10px] md:text-xs bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 px-2.5 py-1.5 rounded-full hover:border-primary-500 hover:text-primary-500 dark:hover:text-primary-400 transition-all shadow-sm">
+                        📋 Genera Checklist
+                    </button>
+                </div>
+            </div>
 
-            bar.innerHTML = html;
+            <!-- Input AI -->
+            <div class="p-3 border-t border-gray-200 dark:border-gray-800">
+                <div class="relative">
+                    <input type="text" id="ai-input" placeholder="Fai una domanda sulla nota..." class="w-full bg-gray-100 dark:bg-gray-800 border-none rounded-xl py-2.5 pl-3 pr-10 text-xs focus:ring-2 focus:ring-primary-500 outline-none glass-input placeholder-gray-500" onkeypress="handleAIEnter(event)">
+                    <button onclick="sendAIChatMessage()" class="absolute right-1.5 top-1/2 transform -translate-y-1/2 w-7 h-7 flex items-center justify-center rounded-lg bg-primary-500 text-white hover:bg-primary-600 transition-colors shadow-sm">
+                        <i class="ph-fill ph-paper-plane-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- MODALE AUTENTICAZIONE JWT / LOGIN -->
+    <div id="modal-auth" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-gray-900 w-full max-w-md p-6 rounded-3xl shadow-2xl transform scale-95 transition-transform duration-300 mx-4" id="modal-auth-card">
+            <div class="flex justify-between items-center mb-5">
+                <h3 class="text-lg font-bold flex items-center gap-2">
+                    <i class="ph ph-lock-key text-primary-500"></i> Area Riservata JWT
+                </h3>
+                <button onclick="toggleModal('modal-auth')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                    <i class="ph ph-x text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Login / Registrazione Tabs -->
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 mb-1">Indirizzo Email</label>
+                    <input type="email" id="auth-email" value="developer@ultrapad.io" class="w-full text-sm px-4 py-2.5 bg-gray-100 dark:bg-gray-800 rounded-xl border-none outline-none focus:ring-2 focus:ring-primary-500 placeholder-gray-400">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 mb-1">Password</label>
+                    <input type="password" id="auth-password" value="SuperSecretP@ss" class="w-full text-sm px-4 py-2.5 bg-gray-100 dark:bg-gray-800 rounded-xl border-none outline-none focus:ring-2 focus:ring-primary-500 placeholder-gray-400">
+                </div>
+                
+                <button onclick="handleMockLogin()" class="w-full py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-xl text-xs font-bold transition-all shadow-md active:scale-95">
+                    Accedi ed Emetti JWT Token
+                </button>
+
+                <!-- Divisore per OAuth2 -->
+                <div class="relative flex py-2 items-center">
+                    <div class="flex-grow border-t border-gray-200 dark:border-gray-800"></div>
+                    <span class="flex-shrink mx-4 text-gray-400 text-[10px] font-semibold uppercase">O connetti tramite OAuth2</span>
+                    <div class="flex-grow border-t border-gray-200 dark:border-gray-800"></div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="handleOAuthLogin('Google')" class="py-2.5 border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl text-xs font-medium flex items-center justify-center gap-2 transition-all">
+                        <i class="ph-fill ph-google-logo text-red-500"></i> Google Auth
+                    </button>
+                    <button onclick="handleOAuthLogin('Github')" class="py-2.5 border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl text-xs font-medium flex items-center justify-center gap-2 transition-all">
+                        <i class="ph-fill ph-github-logo text-gray-900 dark:text-white"></i> Github Auth
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALE CONDIVISIONE / COLLABORATORI -->
+    <div id="modal-share" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-gray-900 w-full max-w-md p-6 rounded-3xl shadow-2xl transform scale-95 transition-transform duration-300 mx-4" id="modal-share-card">
+            <div class="flex justify-between items-center mb-5">
+                <h3 class="text-lg font-bold flex items-center gap-2">
+                    <i class="ph ph-share-network text-primary-500"></i> Condivisione Sicura
+                </h3>
+                <button onclick="toggleModal('modal-share')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                    <i class="ph ph-x text-lg"></i>
+                </button>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 mb-1">Aggiungi Collaboratore (Email)</label>
+                    <div class="flex gap-2">
+                        <input type="email" id="share-email" placeholder="nome@azienda.it" class="flex-1 text-xs px-3 py-2 bg-gray-100 dark:bg-gray-800 rounded-xl border-none outline-none focus:ring-2 focus:ring-primary-500">
+                        <button onclick="addCollaborator()" class="px-4 py-2 bg-primary-500 text-white rounded-xl text-xs font-bold shadow-md hover:bg-primary-600">Aggiungi</button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 mb-2">Chi ha accesso:</label>
+                    <div class="space-y-2" id="collaborators-list">
+                        <!-- Popolato dinamicamente da script.js -->
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <label class="block text-xs font-semibold text-gray-500 mb-1">Link di Condivisione Pubblico (Simulato)</label>
+                    <div class="flex bg-gray-50 dark:bg-gray-800/50 p-2 rounded-xl items-center justify-between border border-gray-100 dark:border-gray-800">
+                        <span class="text-[10px] font-mono truncate max-w-[240px] text-gray-500" id="share-link-text">https://ultrapad.io/shared/note-991823...</span>
+                        <button onclick="copyShareLink()" class="px-2.5 py-1 bg-gray-200 dark:bg-gray-700 hover:bg-primary-500 hover:text-white rounded-lg text-[10px] font-bold transition-all">Copia</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALE TECH STACK & ARCHITETTURA -->
+    <div id="modal-tech" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-gray-900 w-full max-w-lg p-6 rounded-3xl shadow-2xl transform scale-95 transition-transform duration-300 mx-4 max-h-[85vh] overflow-y-auto" id="modal-tech-card">
+            <div class="flex justify-between items-center mb-5">
+                <h3 class="text-lg font-bold flex items-center gap-2 text-indigo-500">
+                    <i class="ph ph-info"></i> Architettura & Stack UltraPad
+                </h3>
+                <button onclick="toggleModal('modal-tech')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                    <i class="ph ph-x text-lg"></i>
+                </button>
+            </div>
+
+            <div class="space-y-4 text-xs md:text-sm">
+                <p class="text-gray-500">Questa schermata illustra l'architettura tecnica prevista per lo sviluppo finale, utile a fini di presentazione o validazione tecnica con il cliente.</p>
+
+                <!-- Backend Specifications -->
+                <div class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-2xl border border-gray-100 dark:border-gray-800">
+                    <h4 class="font-bold text-gray-900 dark:text-white flex items-center gap-1.5 mb-2">
+                        <i class="ph ph-app-window-df text-primary-500"></i> Backend (Spring Boot & Security)
+                    </h4>
+                    <ul class="list-disc pl-4 space-y-1.5 text-gray-600 dark:text-gray-300">
+                        <li><strong>Java 17 / Spring Boot:</strong> Core engine con Maven per la gestione delle dipendenze.</li>
+                        <li><strong>Spring Security:</strong> Configurazione JWT stateless + OAuth2 per Google login.</li>
+                        <li><strong>MongoDB:</strong> Storage NoSQL flessibile per document model strutturati a blocchi.</li>
+                    </ul>
+                </div>
+
+                <!-- Frontend Specifications -->
+                <div class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-2xl border border-gray-100 dark:border-gray-800">
+                    <h4 class="font-bold text-gray-900 dark:text-white flex items-center gap-1.5 mb-2">
+                        <i class="ph ph-code text-primary-500"></i> Frontend (React & PWA)
+                    </h4>
+                    <ul class="list-disc pl-4 space-y-1.5 text-gray-600 dark:text-gray-300">
+                        <li><strong>React.js (ES6+):</strong> Interfaccia reattiva a componenti.</li>
+                        <li><strong>State Management:</strong> Redux Toolkit per coordinamento globale dei dati.</li>
+                        <li><strong>Offline-First:</strong> Utilizzo di Service Worker e IndexedDB (tramite Workbox) per buffering dei salvataggi quando offline.</li>
+                    </ul>
+                </div>
+
+                <!-- UI & Libs -->
+                <div class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-2xl border border-gray-100 dark:border-gray-800">
+                    <h4 class="font-bold text-gray-900 dark:text-white flex items-center gap-1.5 mb-2">
+                        <i class="ph ph-palette text-primary-500"></i> UI & Componenti Editor
+                    </h4>
+                    <ul class="list-disc pl-4 space-y-1.5 text-gray-600 dark:text-gray-300">
+                        <li><strong>Tailwind CSS:</strong> Layout moderno a griglie, flessibile, responsive ed ottimizzato per temi multipli.</li>
+                        <li><strong>QuillJS Integration:</strong> Core editor di testo semantico per note ricche.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION TOAST WRAPPER -->
+    <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-2 pointer-events-none">
+        <!-- I toast appariranno qui -->
+    </div>
+
+    <script>
+        // --- DATASET INIZIALE & STATE MANAGEMENT ---
+        let state = {
+            isFolderView: false,
+            notes: [
+                {
+                    id: "1",
+                    title: "🚀 Visione Progetto UltraPad",
+                    content: "<h1>UltraPad: Il Futuro del Knowledge Management</h1><p>UltraPad unisce la flessibilità di un markdown editor alla potenza dell'intelligenza artificiale generativa.</p><h3>Caratteristiche Chiave:</h3><ul><li><strong>Editor Semantico</strong>: Gestione di note, checklist e diari personali in un unico luogo.</li><li><strong>AI Nativa</strong>: Chiedi al modello di riassumere, trovare bug nel codice, o espandere i concetti direttamente dalla nota.</li><li><strong>Sincronizzazione Cloud</strong>: Basato su architettura robusta con Spring Boot & MongoDB.</li></ul><p><em>Pronto a rivoluzionare i tuoi appunti quotidiani!</em></p>",
+                    type: "appunto",
+                    updatedAt: "2 min fa",
+                    collaborators: ["admin@ultrapad.io", "team@ultrapad.io"],
+                    mood: "☕ Produttivo",
+                    tags: ["Progetto", "Visione", "Presentazione"]
+                },
+                {
+                    id: "2",
+                    title: "📋 Checklist per il Lancio della Demo",
+                    content: "<h1>Attività Prioritarie</h1><p>Ecco la lista dei compiti da finalizzare prima del meeting di validazione tecnica:</p><div><input type='checkbox' checked style='margin-right: 8px;'> Validare la struttura dei log del backend nel terminale</div><div><input type='checkbox' checked style='margin-right: 8px;'> Implementare la simulazione offline della PWA</div><div><input type='checkbox' checked style='margin-right: 8px;'> Aggiungere tags e cartelle</div><div><input type='checkbox' style='margin-right: 8px;'> Testare esportazione PDF/MD</div>",
+                    type: "checklist",
+                    updatedAt: "1 ora fa",
+                    collaborators: ["admin@ultrapad.io"],
+                    mood: "🔋 Carico",
+                    tags: ["Demo", "Urgent", "To-Do"]
+                },
+                {
+                    id: "3",
+                    title: "✍️ Diario di bordo: Demo Day",
+                    content: "<h1>Incontro di Allineamento Tecnico</h1><p>Oggi presentiamo il mockup di UltraPad. Ho integrato sia il tema scuro che un gradiente pastello che dà un tocco creativo e di alto design.</p><p>Spero che il cliente apprezzi la pulizia dell'interfaccia e la versatilità dei tag!</p>",
+                    type: "diario",
+                    updatedAt: "Ieri",
+                    collaborators: ["admin@ultrapad.io"],
+                    mood: "😃 Felice",
+                    tags: ["Personale", "Riflessioni", "Meeting"]
+                },
+                {
+                    id: "4",
+                    title: "💡 Idee Sviluppo App Mobile",
+                    content: "<h1>Brainstorming React Native</h1><p>Valutare l'uso di React Native Expo per velocizzare il porting della PWA verso App nativa.</p><ul><li>Usare le stesse API di Spring Boot.</li><li>Persistenza con AsyncStorage.</li></ul>",
+                    type: "appunto",
+                    updatedAt: "3 giorni fa",
+                    collaborators: ["dev@ultrapad.io"],
+                    mood: "☕ Produttivo",
+                    tags: ["Mobile", "Architettura", "React Native"]
+                },
+                {
+                    id: "5",
+                    title: "🛒 Spesa Aziendale",
+                    content: "<h1>Hardware per il Team</h1><div><input type='checkbox' checked style='margin-right: 8px;'> 3x Monitor 4K Dell</div><div><input type='checkbox' style='margin-right: 8px;'> 2x Machenical Keyboard Keychron</div><div><input type='checkbox' style='margin-right: 8px;'> 1x Licenza Enterprise IDE</div>",
+                    type: "checklist",
+                    updatedAt: "La scorsa settimana",
+                    collaborators: [],
+                    mood: "😃 Felice",
+                    tags: ["Acquisti", "Team", "Budget"]
+                },
+                {
+                    id: "6",
+                    title: "✈️ Viaggio Meeting Londra",
+                    content: "<h1>Dettagli Volo e Hotel</h1><p>Partenza: 24 Novembre, Volo BA502.<br>Sistemazione presso l'Hilton London. Ricordarsi di preparare i pitch deck e il prototipo su iPad.</p>",
+                    type: "diario",
+                    updatedAt: "2 settimane fa",
+                    collaborators: ["admin@ultrapad.io"],
+                    mood: "🔋 Carico",
+                    tags: ["Viaggio", "Meeting", "Londra"]
+                }
+            ],
+            activeNoteId: "1",
+            activeFilter: "all",
+            searchTerm: "",
+            user: {
+                username: "Demo User",
+                email: "developer@ultrapad.io",
+                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZXZlbG9wZXJAdWx0cmFwYWQuaW8iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iXSwiaWF0IjoxNzEwMTIzNDU2fQ.mockSignature"
+            },
+            isOffline: false,
+            currentTheme: "light",
+            aiThread: []
+        };
+
+        // --- INIZIALIZZAZIONE WINDOW ONLOAD ---
+        window.onload = function() {
+            renderNotes();
+            loadActiveNote();
+            renderUserProfile();
+        };
+
+        // --- FUNZIONE SVUOTATA PER RIMUOVERE IL TERMINALE ---
+        function logTerminal(level, text) {
+            // Logica disabilitata per massimizzare lo spazio della pagina
         }
 
-        function renderNotesList() {
-            const container = document.getElementById('notes-list-container');
-            const activeColors = themes[state.theme];
+        function clearLogs() {}
 
-            // Filter items
-            const filtered = state.notes.filter(note => {
-                const matchesSearch = note.title.toLowerCase().includes(state.searchQuery.toLowerCase()) || 
-                                      note.content.toLowerCase().includes(state.searchQuery.toLowerCase());
-                const matchesTag = state.selectedTagFilter ? note.tags.includes(state.selectedTagFilter) : true;
-                const matchesType = state.selectedTypeFilter === 'all' ? true : note.type === state.selectedTypeFilter;
-                return matchesSearch && matchesTag && matchesType;
+        // --- GESTIONE FOLDER VIEW ---
+        function toggleFolderView() {
+            state.isFolderView = !state.isFolderView;
+            renderNotes();
+            
+            if(state.isFolderView) {
+                showToast("Visualizzazione a cartelle attivata");
+            } else {
+                showToast("Visualizzazione a lista cronologica attivata");
+            }
+        }
+
+        // --- GESTIONE DEI TEMI ---
+        function changeTheme(theme) {
+            const body = document.getElementById("app-body");
+            const html = document.documentElement;
+            
+            // Rimuovi vecchi temi
+            body.classList.remove("theme-pastel");
+            html.classList.remove("dark");
+            
+            // Rimuovi stili bottoni attivi
+            const buttons = ["light", "dark", "pastel"];
+            buttons.forEach(b => {
+                const btn = document.getElementById(`theme-${b}-btn`);
+                btn.className = "flex-1 py-1 rounded-lg text-xs font-medium flex items-center justify-center gap-1 transition-all text-gray-500 dark:text-gray-400";
             });
 
-            // Manage Search Close button
-            const clearSearchBtn = document.getElementById('clear-search-btn');
-            if (state.searchQuery) {
-                clearSearchBtn.classList.remove('hidden');
-            } else {
-                clearSearchBtn.classList.add('hidden');
+            state.currentTheme = theme;
+
+            if (theme === "light") {
+                document.getElementById("theme-light-btn").className = "flex-1 py-1 rounded-lg text-xs font-medium flex items-center justify-center gap-1 transition-all bg-white text-gray-900 shadow-sm";
+            } else if (theme === "dark") {
+                html.classList.add("dark");
+                document.getElementById("theme-dark-btn").className = "flex-1 py-1 rounded-lg text-xs font-medium flex items-center justify-center gap-1 transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm";
+            } else if (theme === "pastel") {
+                body.classList.add("theme-pastel");
+                document.getElementById("theme-pastel-btn").className = "flex-1 py-1 rounded-lg text-xs font-medium flex items-center justify-center gap-1 transition-all bg-white/60 text-gray-900 shadow-sm";
             }
 
-            // Sync type filter visual tabs
-            ['all', 'simple', 'checklist', 'diary'].forEach(type => {
-                const tab = document.getElementById(`tab-${type}`);
-                if (state.selectedTypeFilter === type) {
-                    tab.className = `flex-1 py-1 rounded-md text-center transition-all ${activeColors.activeTypeTab}`;
-                } else {
-                    tab.className = "flex-1 py-1 rounded-md text-center transition-all opacity-60 hover:opacity-100";
-                }
+            logTerminal("INFO", `Configurazione UI: Cambio tema effettuato su '${theme.toUpperCase()}'`);
+        }
+
+        // --- GESTIONE NOTE: CREAZIONE, MODIFICA, CANCELLAZIONE ---
+        function renderNotes() {
+            const container = document.getElementById("notes-list-container");
+            container.innerHTML = "";
+
+            const filtered = state.notes.filter(note => {
+                const matchesFilter = state.activeFilter === "all" || note.type === state.activeFilter;
+                const matchesSearch = note.title.toLowerCase().includes(state.searchTerm.toLowerCase()) || 
+                                      note.content.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
+                                      (note.tags && note.tags.some(t => t.toLowerCase().includes(state.searchTerm.toLowerCase())));
+                return matchesFilter && matchesSearch;
             });
 
             if (filtered.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-12 px-4 opacity-50 select-none">
-                        <i data-lucide="file-text" class="h-8 w-8 mx-auto mb-2 opacity-30"></i>
-                        <p class="text-xs">Nessun appunto corrisponde alla ricerca.</p>
-                    </div>
-                `;
-                lucide.createIcons();
+                container.innerHTML = `<div class="text-center py-8 text-gray-400 text-xs">Nessuna nota trovata</div>`;
                 return;
             }
 
-            let html = '';
-            filtered.forEach(note => {
+            const renderNoteItem = (note) => {
                 const isActive = note.id === state.activeNoteId;
                 
-                // Metrics for checklist items
-                let metricsHtml = '';
-                if (note.type === 'checklist' && note.checklistItems) {
-                    const total = note.checklistItems.length;
-                    const completed = note.checklistItems.filter(i => i.completed).length;
-                    const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
-                    metricsHtml = `
-                        <div class="mt-2 space-y-1">
-                            <div class="flex justify-between text-[10px] opacity-60">
-                                <span>${completed}/${total} compiti</span>
-                                <span>${percent}%</span>
-                            </div>
-                            <div class="w-full h-1 bg-black/10 dark:bg-white/10 rounded-full overflow-hidden">
-                                <div class="h-full bg-emerald-500 transition-all duration-300" style="width: ${percent}%"></div>
-                            </div>
-                        </div>
-                    `;
+                let icon = "ph-file-text";
+                let badgeColor = "bg-indigo-100 text-primary-500 dark:bg-indigo-900/30 dark:text-indigo-300";
+                
+                if (note.type === "checklist") {
+                    icon = "ph-list-checks";
+                    badgeColor = "bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-300";
+                } else if (note.type === "diario") {
+                    icon = "ph-book-bookmark";
+                    badgeColor = "bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-300";
                 }
 
-                // Moods for diary
-                let diaryHtml = '';
-                if (note.type === 'diary') {
-                    diaryHtml = `
-                        <div class="mt-1.5 flex items-center space-x-2 text-[10px]">
-                            <span class="px-1.5 py-0.5 bg-rose-500/10 text-rose-500 dark:text-rose-400 rounded-full flex items-center space-x-1 font-semibold">
-                                <i data-lucide="heart" class="h-2.5 w-2.5"></i>
-                                <span>${note.mood || 'Calmo'}</span>
-                            </span>
-                            <span class="opacity-50">• ${note.weather || 'Soleggiato'}</span>
-                        </div>
-                    `;
-                }
+                // Genera HTML per i tags (Chips)
+                const tagsHtml = note.tags && note.tags.length > 0 
+                    ? note.tags.map(tag => `<span class="px-1.5 py-0.5 bg-gray-200 dark:bg-gray-700/50 text-gray-600 dark:text-gray-300 rounded-md text-[9px] font-semibold tracking-wide">${tag}</span>`).join('') 
+                    : '';
 
-                // Simple content previews
-                let bodyPreview = '';
-                if (note.type === 'simple') {
-                    const cleanText = note.content ? note.content.replace(/[#*`]/g, '') : 'Vuoto...';
-                    bodyPreview = `<p class="text-[11px] opacity-60 line-clamp-2 mt-1 leading-relaxed">${cleanText}</p>`;
-                }
+                const item = document.createElement("div");
+                item.className = `p-3 rounded-2xl cursor-pointer transition-all ${
+                    isActive 
+                    ? "bg-primary-50 border border-primary-100 text-primary-900 dark:bg-primary-900/20 dark:border-primary-900/30 dark:text-primary-300 shadow-sm" 
+                    : "hover:bg-gray-100/80 dark:hover:bg-gray-800/40 border border-transparent text-gray-700 dark:text-gray-300"
+                }`;
+                item.onclick = () => selectNote(note.id);
 
-                // Colors
-                const badgeColorClass = activeColors.colorPastel[note.color] || activeColors.tagBadge;
+                item.innerHTML = `
+                    <div class="flex items-start justify-between gap-1 mb-1">
+                        <span class="font-medium text-xs md:text-sm truncate pr-1">${note.title || "Senza Titolo"}</span>
+                        <span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-md shrink-0 ${badgeColor}">${note.type}</span>
+                    </div>
+                    <p class="text-[10px] opacity-70 truncate mb-1.5">${stripHtml(note.content) || "Testo vuoto..."}</p>
+                    ${tagsHtml ? `<div class="flex flex-wrap gap-1 mb-2">${tagsHtml}</div>` : ''}
+                    <div class="flex items-center justify-between text-[9px] opacity-60">
+                        <span class="flex items-center gap-1"><i class="ph ${icon}"></i> Aggiornato ${note.updatedAt}</span>
+                        ${note.collaborators && note.collaborators.length > 1 ? '<span class="flex items-center gap-0.5"><i class="ph ph-users"></i> Condiviso</span>' : ''}
+                    </div>
+                `;
+                return item;
+            };
 
-                html += `
-                    <div 
-                        onclick="setActiveNoteId('${note.id}')"
-                        class="p-3.5 rounded-2xl cursor-pointer relative group transition-all duration-200 border ${
-                            isActive ? activeColors.activeCard : activeColors.card
-                        }"
-                    >
-                        <div class="flex items-center justify-between">
-                            <span class="text-[9px] uppercase font-bold px-2 py-0.5 rounded-full tracking-wide ${badgeColorClass}">
-                                ${note.type}
-                            </span>
-                            
-                            <div class="flex items-center space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button onclick="event.stopPropagation(); togglePinNote('${note.id}')" class="p-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 ${note.pinned ? 'text-amber-500' : 'opacity-40'}" title="Fissa nota">
-                                    <i data-lucide="sparkle" class="h-3.5 w-3.5 ${note.pinned ? 'fill-amber-500 text-amber-500' : ''}"></i>
-                                </button>
-                                <button onclick="event.stopPropagation(); deleteNote('${note.id}')" class="p-1 rounded-lg hover:bg-red-500/10 text-red-500" title="Elimina">
-                                    <i data-lucide="trash-2" class="h-3.5 w-3.5"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <h4 class="font-bold text-sm mt-2 truncate pr-8">${note.title || 'Senza Titolo'}</h4>
+            if (state.isFolderView) {
+                // Logica raggruppamento per cartelle
+                const types = ["appunto", "checklist", "diario"];
+                types.forEach(type => {
+                    const typeNotes = filtered.filter(n => n.type === type);
+                    if (typeNotes.length > 0) {
+                        const typeHeader = document.createElement("div");
+                        typeHeader.className = "text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider px-2 pt-3 pb-1.5 flex items-center gap-1.5";
                         
-                        ${bodyPreview}
-                        ${metricsHtml}
-                        ${diaryHtml}
+                        let folderIcon = "ph-folder";
+                        if(type === "checklist") folderIcon = "ph-folder-dashed";
+                        if(type === "diario") folderIcon = "ph-folder-lock";
 
-                        <div class="mt-3 flex items-center justify-between">
-                            <div class="flex flex-wrap gap-1 max-w-[70%]">
-                                ${note.tags.map(t => `
-                                    <span class="text-[9px] px-1.5 py-0.2 rounded-full ${activeColors.badge}">#${t}</span>
-                                `).join('')}
-                            </div>
-                            <span class="text-[9px] opacity-40 font-mono">
-                                ${new Date(note.lastModified).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                            </span>
-                        </div>
-                    </div>
-                `;
-            });
+                        typeHeader.innerHTML = `<i class="ph-fill ${folderIcon} text-primary-500 text-sm"></i> Cartella ${type} <span class="ml-auto bg-gray-200 dark:bg-gray-800 px-1.5 py-0.5 rounded-md text-[9px] font-mono">${typeNotes.length}</span>`;
+                        container.appendChild(typeHeader);
 
-            container.innerHTML = html;
-            lucide.createIcons();
-        }
-
-        function renderActiveEditor() {
-            const container = document.getElementById('editor-workspace');
-            const activeNote = getActiveNote();
-            const activeColors = themes[state.theme];
-
-            // If no active note is present
-            if (!activeNote) {
-                container.innerHTML = `
-                    <div class="h-full flex flex-col items-center justify-center text-center py-20 opacity-60 select-none">
-                        <i data-lucide="notebook" class="h-16 w-16 mb-4 stroke-[1.25] text-indigo-500 animate-bounce"></i>
-                        <h3 class="text-lg font-bold">Nessun appunto attivo</h3>
-                        <p class="text-sm max-w-xs mt-2 leading-relaxed">Seleziona un documento dalla colonna laterale o creane uno nuovo per iniziare ad utilizzare UltraPad.</p>
-                        <button onclick="createNewNote('simple')" class="mt-5 px-5 py-2.5 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg transition-all">
-                            Crea Appunto Semplice
-                        </button>
-                    </div>
-                `;
-                lucide.createIcons();
-                return;
-            }
-
-            let typeSpecificHtml = '';
-            
-            // Build Simple Text Editor
-            if (activeNote.type === 'simple') {
-                typeSpecificHtml = `
-                    <div class="flex-1 flex flex-col space-y-3">
-                        <div class="flex items-center space-x-1 p-1 bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-xl w-max text-xs select-none shrink-0">
-                            <button onclick="injectMarkdownText('# ')" class="px-2.5 py-1 hover:bg-black/5 dark:hover:bg-white/10 rounded font-bold" title="Aggiungi Titolo">H1</button>
-                            <button onclick="injectMarkdownText('**')" class="px-2.5 py-1 hover:bg-black/5 dark:hover:bg-white/10 rounded font-bold" title="Grassetto">B</button>
-                            <button onclick="injectMarkdownText('*')" class="px-2.5 py-1 hover:bg-black/5 dark:hover:bg-white/10 rounded italic" title="Corsivo">I</button>
-                            <button onclick="injectMarkdownText(' - ')" class="px-2.5 py-1 hover:bg-black/5 dark:hover:bg-white/10 rounded" title="Lista puntata">• lista</button>
-                            <button onclick="injectMarkdownText('\\n\`\`\`javascript\\n// Scrivi codice\\n\`\`\`')" class="px-2.5 py-1 hover:bg-black/5 dark:hover:bg-white/10 rounded font-mono" title="Blocco di codice">&lt;/&gt;</button>
-                        </div>
-                        <textarea
-                            id="editor-content-textarea"
-                            oninput="updateActiveNoteContent(this.value)"
-                            placeholder="Inizia a scrivere la tua nota intelligente in formato Markdown..."
-                            class="w-full flex-1 min-h-[300px] bg-transparent border-none outline-none resize-none font-mono text-sm leading-relaxed focus:ring-0 text-current"
-                        >${activeNote.content}</textarea>
-                    </div>
-                `;
-            }
-
-            // Build Checklist Editor
-            if (activeNote.type === 'checklist') {
-                const completedItems = activeNote.checklistItems.filter(i => i.completed).length;
-                const totalItems = activeNote.checklistItems.length;
-                const percent = totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0;
-
-                let itemsHtml = '';
-                activeNote.checklistItems.forEach(item => {
-                    itemsHtml += `
-                        <div class="flex items-center space-x-3 group/item">
-                            <button 
-                                onclick="toggleChecklistItem('${item.id}')"
-                                class="p-1 rounded-xl transition-all ${
-                                    item.completed ? 'bg-emerald-500/20 text-emerald-500' : 'bg-black/10 dark:bg-white/10 hover:bg-emerald-500/10 hover:text-emerald-500'
-                                }"
-                            >
-                                ${item.completed ? '<i data-lucide="check" class="h-4 w-4"></i>' : '<div class="h-4 w-4 rounded border-2 border-current"></div>'}
-                            </button>
-                            <input 
-                                type="text"
-                                value="${item.text}"
-                                oninput="updateChecklistItemText('${item.id}', this.value)"
-                                placeholder="Specifica attività..."
-                                class="flex-1 bg-transparent border-none focus:ring-0 outline-none text-sm transition-all ${
-                                    item.completed ? 'line-through opacity-40' : ''
-                                }"
-                            />
-                            <button 
-                                onclick="deleteChecklistItem('${item.id}')"
-                                class="p-1.5 opacity-0 group-hover/item:opacity-100 hover:bg-red-500/15 text-red-500 rounded-lg transition-all"
-                            >
-                                <i data-lucide="x" class="h-3.5 w-3.5"></i>
-                            </button>
-                        </div>
-                    `;
+                        const folderContainer = document.createElement("div");
+                        folderContainer.className = "pl-2 border-l-2 border-primary-200/50 dark:border-primary-900/30 ml-3.5 space-y-1 mb-2";
+                        
+                        typeNotes.forEach(note => {
+                            folderContainer.appendChild(renderNoteItem(note));
+                        });
+                        container.appendChild(folderContainer);
+                    }
                 });
-
-                typeSpecificHtml = `
-                    <div class="space-y-4 flex-1 flex flex-col">
-                        <!-- Progress Board -->
-                        <div class="p-4 bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 select-none">
-                            <div class="space-y-1">
-                                <p class="text-[10px] font-bold uppercase tracking-wider opacity-60">Stato di Avanzamento</p>
-                                <h3 class="text-3xl font-black">${percent}%</h3>
-                            </div>
-                            <div class="flex-1 max-w-sm">
-                                <div class="flex justify-between text-[11px] mb-1 font-semibold">
-                                    <span>${completedItems} di ${totalItems} completati</span>
-                                    <span>Rimanenti: ${totalItems - completedItems}</span>
-                                </div>
-                                <div class="w-full h-2 bg-black/10 dark:bg-white/15 rounded-full overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-300" style="width: ${percent}%"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tasks wrapper -->
-                        <div class="space-y-3 flex-1 overflow-y-auto custom-scrollbar max-h-[400px]">
-                            ${itemsHtml}
-                            
-                            <button 
-                                onclick="addChecklistItem()"
-                                class="mt-4 flex items-center space-x-1.5 text-xs font-semibold py-2 px-4 rounded-xl border border-dashed border-emerald-500/30 hover:bg-emerald-500/10 text-emerald-500 transition-all"
-                            >
-                                <i data-lucide="plus" class="h-4 w-4"></i>
-                                <span>Aggiungi Compito</span>
-                            </button>
-                        </div>
-                    </div>
-                `;
+            } else {
+                // Logica visualizzazione lista classica
+                filtered.forEach(note => {
+                    container.appendChild(renderNoteItem(note));
+                });
             }
-
-            // Build Diary Journal
-            if (activeNote.type === 'diary') {
-                typeSpecificHtml = `
-                    <div class="space-y-4 flex-grow flex flex-col">
-                        <!-- Metadata and locks -->
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3 bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-2xl">
-                            
-                            <!-- Mood -->
-                            <div class="space-y-1">
-                                <label class="text-[9px] font-bold uppercase tracking-widest opacity-60">Stato d'Animo</label>
-                                <div class="flex items-center space-x-2">
-                                    <span class="p-1.5 rounded-lg bg-rose-500/15 text-rose-500">
-                                        <i data-lucide="smile" class="h-4 w-4"></i>
-                                    </span>
-                                    <select 
-                                        onchange="updateDiaryMetadata('mood', this.value)"
-                                        class="bg-transparent border-none outline-none text-xs focus:ring-0 text-current font-bold"
-                                    >
-                                        ${MOODS.map(m => `<option value="${m}" ${activeNote.mood === m ? 'selected' : ''}>${m}</option>`).join('')}
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Weather -->
-                            <div class="space-y-1">
-                                <label class="text-[9px] font-bold uppercase tracking-widest opacity-60">Meteo Attuale</label>
-                                <div class="flex items-center space-x-2">
-                                    <span class="p-1.5 rounded-lg bg-indigo-500/15 text-indigo-400">
-                                        <i data-lucide="cloud-rain" class="h-4 w-4"></i>
-                                    </span>
-                                    <select 
-                                        onchange="updateDiaryMetadata('weather', this.value)"
-                                        class="bg-transparent border-none outline-none text-xs focus:ring-0 text-current font-bold"
-                                    >
-                                        ${WEATHERS.map(w => `<option value="${w}" ${activeNote.weather === m => m === w ? 'selected' : ''}>${w}</option>`).join('')}
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Secure Privacy toggle -->
-                            <div class="space-y-1 flex flex-col justify-center">
-                                <label class="text-[9px] font-bold uppercase tracking-widest opacity-60">Privacy del Documento</label>
-                                <button 
-                                    onclick="toggleDiaryLock()"
-                                    class="flex items-center space-x-1.5 text-xs py-1 px-3 rounded-lg border w-max transition-all ${
-                                        activeNote.isLocked 
-                                            ? 'border-amber-500/30 bg-amber-500/10 text-amber-500' 
-                                            : 'border-zinc-500/30 text-zinc-500 hover:bg-black/5 dark:hover:bg-white/5'
-                                    }"
-                                >
-                                    ${activeNote.isLocked ? `
-                                        <i data-lucide="lock" class="h-3.5 w-3.5"></i>
-                                        <span class="font-bold">Privata (Crittografata)</span>
-                                    ` : `
-                                        <i data-lucide="unlock" class="h-3.5 w-3.5"></i>
-                                        <span>Pubblica</span>
-                                    `}
-                                </button>
-                            </div>
-
-                        </div>
-
-                        <!-- Diary content area -->
-                        <textarea
-                            oninput="updateActiveNoteContent(this.value)"
-                            placeholder="Caro diario, oggi ho scoperto..."
-                            class="w-full flex-grow min-h-[300px] bg-transparent border-none outline-none resize-none text-base leading-relaxed focus:ring-0 text-current font-serif italic"
-                        >${activeNote.content}</textarea>
-                    </div>
-                `;
-            }
-
-            // Outer wrapper for active editor layout
-            container.innerHTML = `
-                <div class="space-y-4 flex flex-col h-full">
-                    <!-- Note Title inputs -->
-                    <div>
-                        <input 
-                            type="text"
-                            value="${activeNote.title}"
-                            oninput="updateActiveNoteTitle(this.value)"
-                            placeholder="Senza Titolo..."
-                            class="w-full bg-transparent font-extrabold text-2xl md:text-3xl border-none outline-none focus:ring-0 placeholder-opacity-50 text-current"
-                        />
-                    </div>
-
-                    <!-- Tags list association -->
-                    <div class="flex flex-wrap items-center gap-2 select-none">
-                        <span class="text-xs opacity-50 font-semibold">Tags:</span>
-                        ${activeNote.tags.map(tag => `
-                            <span class="text-xs px-2.5 py-0.5 rounded-full flex items-center space-x-1.5 ${activeColors.badge}">
-                                <span>#${tag}</span>
-                                <button onclick="removeTagFromNote('${tag}')" class="opacity-60 hover:opacity-100 transition-opacity">
-                                    <i data-lucide="x" class="h-3 w-3 text-red-400"></i>
-                                </button>
-                            </span>
-                        `).join('')}
-
-                        <select 
-                            onchange="addTagToNote(this.value); this.value='';"
-                            class="text-xs bg-transparent border border-black/10 dark:border-white/10 rounded-full px-2.5 py-0.5 outline-none font-semibold cursor-pointer"
-                        >
-                            <option value="">+ Tag</option>
-                            ${AVAILABLE_TAGS.filter(t => !activeNote.tags.includes(t)).map(tag => `
-                                <option value="${tag}">${tag}</option>
-                            `).join('')}
-                        </select>
-                    </div>
-
-                    <!-- Custom Type Editor -->
-                    ${typeSpecificHtml}
-                </div>
-            `;
-            lucide.createIcons();
         }
 
-        function renderConsoleLogs() {
-            const container = document.getElementById('console-logs-container');
-            if (!container) return;
-
-            let html = '';
-            state.backendLogs.forEach(log => {
-                let colorClass = 'text-zinc-300';
-                if (log.type === 'ERROR' || log.msg.includes('ERROR')) {
-                    colorClass = 'text-red-400 font-bold';
-                } else if (log.msg.includes('SECURITY') || log.msg.includes('JWT') || log.msg.includes('OAUTH')) {
-                    colorClass = 'text-amber-400';
-                } else if (log.msg.includes('AI') || log.msg.includes('Gemini')) {
-                    colorClass = 'text-violet-400';
-                } else if (log.msg.includes('MONGODB') || log.msg.includes('REST')) {
-                    colorClass = 'text-emerald-400';
-                }
-
-                html += `
-                    <div class="flex items-start space-x-2 px-1 py-0.5 rounded hover:bg-white/5">
-                        <span class="text-zinc-600 shrink-0">[${log.time}]</span>
-                        <span class="${colorClass}">${log.msg}</span>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
-        }
-
-        // Active State Modification triggers
-        function setActiveNoteId(id) {
+        function selectNote(id) {
             state.activeNoteId = id;
-            // Clear AI outputs
-            state.aiOutput = '';
-            state.aiError = '';
-            document.getElementById('ai-output-panel').classList.add('hidden');
+            renderNotes();
+            loadActiveNote();
+        }
+
+        function loadActiveNote() {
+            const note = state.notes.find(n => n.id === state.activeNoteId);
+            if (!note) return;
+
+            document.getElementById("note-title-input").value = note.title;
             
-            renderApp();
-            logBackend(`REST: GET /api/v1/notes/${id} - Fetched document tree successfully.`);
+            // Renderizza i Tag nell'editor
+            const tagsContainer = document.getElementById("note-tags-container");
+            if(tagsContainer) {
+                tagsContainer.innerHTML = note.tags && note.tags.length > 0 ? 
+                    note.tags.map(tag => `<span class="px-2.5 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-lg text-xs font-medium flex items-center gap-1 shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors cursor-pointer"><i class="ph ph-hash"></i> ${tag}</span>`).join('') 
+                    : '<span class="px-2.5 py-1 text-gray-400 dark:text-gray-500 text-xs font-medium flex items-center gap-1 border border-dashed border-gray-300 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"><i class="ph ph-plus"></i> Aggiungi Tag</span>';
+            }
+
+            const editorBody = document.getElementById("editor-body");
+            editorBody.innerHTML = note.content;
+
+            // Aggiorna Badge Tipo Nota
+            const typeBadge = document.getElementById("note-type-badge");
+            let iconMarkup = '<i class="ph ph-file-text"></i>';
+            if (note.type === "checklist") iconMarkup = '<i class="ph ph-list-checks"></i>';
+            if (note.type === "diario") iconMarkup = '<i class="ph ph-book-bookmark"></i>';
+            
+            typeBadge.innerHTML = `${iconMarkup} ${note.type}`;
+
+            // Gestione dei metadati specifici del diario
+            const diaryMeta = document.getElementById("diary-meta-panel");
+            if (note.type === "diario") {
+                diaryMeta.classList.remove("hidden");
+                diaryMeta.classList.add("flex");
+                document.getElementById("diary-mood").value = note.mood || "☕ Produttivo";
+            } else {
+                diaryMeta.classList.remove("flex");
+                diaryMeta.classList.add("hidden");
+            }
+
+            // Popola il link di condivisione simulato nella modale
+            document.getElementById("share-link-text").innerText = `https://ultrapad.io/shared/note-${note.id}`;
         }
 
         function createNewNote(type) {
-            const id = `note-${Date.now()}`;
-            const titles = {
-                simple: 'Nuovo Appunto Intellegente',
-                checklist: 'Nuova Checklist Ingegneria',
-                diary: 'Nuova Pagina di Diario'
+            const id = (state.notes.length + 1).toString();
+            const newNote = {
+                id: id,
+                title: `Nuova Nota (${type.toUpperCase()})`,
+                content: type === "checklist" 
+                    ? "<h1>Cose da Fare</h1><div><input type='checkbox' style='margin-right: 8px;'> Primo Task</div><div><input type='checkbox' style='margin-right: 8px;'> Secondo Task</div>" 
+                    : type === "diario" 
+                    ? "<h1>Diario Personale</h1><p>Oggi è stata una giornata intensa...</p>" 
+                    : "<h1>Nuovo Documento</h1><p>Scrivi i tuoi appunti qui...</p>",
+                type: type,
+                updatedAt: "Adesso",
+                collaborators: [state.user ? state.user.email : "admin@ultrapad.io"],
+                mood: "☕ Produttivo",
+                tags: ["Nuovo", type]
             };
 
-            const defaultNote = {
-                id,
-                title: titles[type],
-                content: type === 'simple' ? `### ${titles[type]}\nInizia a scrivere la tua nota intelligente in markdown...` : '',
-                type,
-                tags: ['Personale'],
-                lastModified: new Date().toISOString(),
-                pinned: false,
-                color: type === 'simple' ? 'indigo' : type === 'checklist' ? 'emerald' : 'rose',
-                checklistItems: type === 'checklist' ? [
-                    { id: `cli-${Date.now()}-1`, text: 'Configura endpoint Spring Boot', completed: false }
-                ] : undefined,
-                mood: type === 'diary' ? 'Calmo' : undefined,
-                weather: type === 'diary' ? 'Soleggiato' : undefined,
-                isLocked: type === 'diary' ? false : undefined
-            };
-
-            state.notes.unshift(defaultNote);
+            state.notes.unshift(newNote);
             state.activeNoteId = id;
-            saveNotesToLocalStorage();
-            renderApp();
-            logBackend(`REST: POST /api/v1/notes - Created successfully [ID: ${id}]`);
+            
+            renderNotes();
+            loadActiveNote();
+            showToast("Nuova nota creata con successo!");
         }
 
-        function updateActiveNoteTitle(title) {
-            const active = getActiveNote();
-            if (!active) return;
-            active.title = title;
-            active.lastModified = new Date().toISOString();
-            saveNotesToLocalStorage();
-            renderNotesList();
-        }
-
-        function updateActiveNoteContent(content) {
-            const active = getActiveNote();
-            if (!active) return;
-            active.content = content;
-            active.lastModified = new Date().toISOString();
-            saveNotesToLocalStorage();
-            renderNotesList();
-        }
-
-        function togglePinNote(id) {
-            const note = state.notes.find(n => n.id === id);
+        // --- GESTIONE DEI CAMBIAMENTI DI CONTENUTO E TITOLO ---
+        function handleTitleChange(value) {
+            const note = state.notes.find(n => n.id === state.activeNoteId);
             if (note) {
-                note.pinned = !note.pinned;
-                saveNotesToLocalStorage();
-                renderNotesList();
-                logBackend(`MONGODB: Document [ID: ${id}] set pin state to ${note.pinned}`);
+                note.title = value;
+                note.updatedAt = "Adesso";
+                
+                // Aggiorna l'elemento della lista a sinistra senza resettare il focus
+                renderNotes();
+                triggerAutoSave();
             }
         }
 
-        function deleteNote(id) {
-            state.notes = state.notes.filter(n => n.id !== id);
-            if (state.activeNoteId === id) {
-                state.activeNoteId = state.notes.length > 0 ? state.notes[0].id : null;
-            }
-            saveNotesToLocalStorage();
-            renderApp();
-            logBackend(`REST: DELETE /api/v1/notes/${id} - Marked for safe deletion.`);
-        }
-
-        function deleteActiveNote() {
-            const active = getActiveNote();
-            if (active) deleteNote(active.id);
-        }
-
-        // Checklist Interactions
-        function addChecklistItem() {
-            const active = getActiveNote();
-            if (!active || active.type !== 'checklist') return;
-            active.checklistItems.push({
-                id: `cli-${Date.now()}`,
-                text: '',
-                completed: false
-            });
-            active.lastModified = new Date().toISOString();
-            saveNotesToLocalStorage();
-            renderActiveEditor();
-            renderNotesList();
-        }
-
-        function toggleChecklistItem(itemId) {
-            const active = getActiveNote();
-            if (!active || active.type !== 'checklist') return;
-            const item = active.checklistItems.find(i => i.id === itemId);
-            if (item) {
-                item.completed = !item.completed;
-                active.lastModified = new Date().toISOString();
-                saveNotesToLocalStorage();
-                renderActiveEditor();
-                renderNotesList();
-                logBackend(`SYSTEM: Checklist task [${item.text || 'Vuoto'}] set to ${item.completed ? 'COMPLETED' : 'PENDING'}`);
+        function handleContentChange() {
+            const note = state.notes.find(n => n.id === state.activeNoteId);
+            if (note) {
+                note.content = document.getElementById("editor-body").innerHTML;
+                note.updatedAt = "Adesso";
+                triggerAutoSave();
             }
         }
 
-        function updateChecklistItemText(itemId, text) {
-            const active = getActiveNote();
-            if (!active || active.type !== 'checklist') return;
-            const item = active.checklistItems.find(i => i.id === itemId);
-            if (item) {
-                item.text = text;
-                active.lastModified = new Date().toISOString();
-                saveNotesToLocalStorage();
-                renderNotesList();
-            }
-        }
+        // --- STRUTTURA AUTOSAVE E OFFLINE BUFFERING ---
+        let autoSaveTimeout = null;
+        function triggerAutoSave() {
+            const syncIndicator = document.getElementById("sync-status-indicator");
+            syncIndicator.innerHTML = `<i class="ph ph-arrows-counter-clockwise animate-spin text-amber-500"></i> Salvataggio...`;
 
-        function deleteChecklistItem(itemId) {
-            const active = getActiveNote();
-            if (!active || active.type !== 'checklist') return;
-            active.checklistItems = active.checklistItems.filter(i => i.id !== itemId);
-            active.lastModified = new Date().toISOString();
-            saveNotesToLocalStorage();
-            renderActiveEditor();
-            renderNotesList();
-        }
-
-        // Diary Controls
-        function updateDiaryMetadata(field, value) {
-            const active = getActiveNote();
-            if (!active || active.type !== 'diary') return;
-            active[field] = value;
-            active.lastModified = new Date().toISOString();
-            saveNotesToLocalStorage();
-            renderNotesList();
-            logBackend(`SYSTEM: Diary metadata [${field}] updated to [${value}]`);
-        }
-
-        function toggleDiaryLock() {
-            const active = getActiveNote();
-            if (!active || active.type !== 'diary') return;
-            active.isLocked = !active.isLocked;
-            active.lastModified = new Date().toISOString();
-            saveNotesToLocalStorage();
-            renderActiveEditor();
-            logBackend(`SECURITY: Diary document [ID: ${active.id}] set locked status: ${active.isLocked}`);
-        }
-
-        // Tag associations
-        function addTagToNote(tag) {
-            const active = getActiveNote();
-            if (!active || !tag) return;
-            if (!active.tags.includes(tag)) {
-                active.tags.push(tag);
-                active.lastModified = new Date().toISOString();
-                saveNotesToLocalStorage();
-                renderActiveEditor();
-                renderNotesList();
-                logBackend(`SYSTEM: Added tag #${tag} to note [ID: ${active.id}]`);
-            }
-        }
-
-        function removeTagFromNote(tag) {
-            const active = getActiveNote();
-            if (!active) return;
-            active.tags = active.tags.filter(t => t !== tag);
-            active.lastModified = new Date().toISOString();
-            saveNotesToLocalStorage();
-            renderActiveEditor();
-            renderNotesList();
-        }
-
-        // Markdown text injection helper
-        function injectMarkdownText(markup) {
-            const textarea = document.getElementById('editor-content-textarea');
-            if (!textarea) return;
+            if (autoSaveTimeout) clearTimeout(autoSaveTimeout);
             
-            const startPos = textarea.selectionStart;
-            const endPos = textarea.selectionEnd;
-            const text = textarea.value;
-            
-            const injected = text.substring(0, startPos) + markup + text.substring(endPos, text.length);
-            textarea.value = injected;
-            textarea.focus();
-            
-            updateActiveNoteContent(injected);
-            renderActiveEditor();
-        }
-
-        // Sync and database simulation savers
-        function saveNotesToLocalStorage() {
-            localStorage.setItem('ultrapad_notes', JSON.stringify(state.notes));
-        }
-
-        function simulateSync() {
-            logBackend('REST: PUT /api/v1/sync - Uploading current workspace JSON packet...');
-            const btn = document.getElementById('sync-btn');
-            btn.classList.add('animate-pulse', 'opacity-60');
-            setTimeout(() => {
-                btn.classList.remove('animate-pulse', 'opacity-60');
-                logBackend(`MONGODB: ${state.notes.length} documents written successfully to primary collection.`);
-                alert('Sincronizzazione completata con MongoDB Cloud!');
+            autoSaveTimeout = setTimeout(() => {
+                if (state.isOffline) {
+                    syncIndicator.innerHTML = `<i class="ph ph-warning-circle text-amber-500"></i> Offline - In coda IndexedDB`;
+                    logTerminal("WARNING", `REST Connection Timeout: PUT /api/v1/notes/${state.activeNoteId} fallito. Modifiche aggiunte al buffer IndexedDB locale.`);
+                } else {
+                    syncIndicator.innerHTML = `<i class="ph-fill ph-cloud-check text-green-500"></i> Cloud Sincronizzato`;
+                    logTerminal("SUCCESS", `REST Request: PUT /api/v1/notes/${state.activeNoteId} (Status: 200 OK). MongoDB document sync completed.`);
+                }
             }, 800);
         }
 
-        function resetAppDatabase() {
-            if (confirm("Sei sicuro di voler ripristinare il database? Eliminerai tutte le note personalizzate.")) {
-                localStorage.removeItem('ultrapad_notes');
-                state.notes = INITIAL_NOTES;
-                state.activeNoteId = INITIAL_NOTES[0].id;
-                saveNotesToLocalStorage();
-                toggleModal('settings-modal', false);
-                renderApp();
-                logBackend('MONGODB: Flushed collections. Reloaded default visual architectures templates.');
-            }
-        }
+        // --- SIMULATORE OFFLINE (PWA READY) ---
+        function toggleOfflineMode() {
+            state.isOffline = !state.isOffline;
+            
+            const btn = document.getElementById("offline-toggle-btn");
+            const icon = document.getElementById("network-icon");
+            const syncIndicator = document.getElementById("sync-status-indicator");
 
-        // Search & Filter changes
-        function handleSearch(query) {
-            state.searchQuery = query;
-            renderNotesList();
-        }
-
-        function clearSearch() {
-            state.searchQuery = '';
-            document.getElementById('search-input').value = '';
-            renderNotesList();
-        }
-
-        function setTypeFilter(type) {
-            state.selectedTypeFilter = type;
-            renderNotesList();
-        }
-
-        function setTagFilter(tag) {
-            state.selectedTagFilter = tag;
-            renderTagsFilter();
-            renderNotesList();
-        }
-
-        // Export active note to Markdown document
-        function exportActiveNote() {
-            const active = getActiveNote();
-            if (!active) return;
-
-            let fileContent = `# ${active.title}\n\n`;
-            if (active.type === 'checklist') {
-                fileContent += `Checklist: ${active.title}\n\n`;
-                active.checklistItems.forEach(item => {
-                    fileContent += `- [${item.completed ? 'x' : ' '}] ${item.text}\n`;
-                });
+            if (state.isOffline) {
+                btn.className = "p-2 text-amber-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all bg-amber-500/10";
+                icon.className = "ph ph-wifi-slash text-lg";
+                syncIndicator.innerHTML = `<i class="ph ph-warning-circle text-amber-500"></i> Modalità Offline attiva`;
+                
+                showToast("Sei offline. UltraPad sta bufferizzando le note localmente.");
+                logTerminal("WARNING", "PWA Mode: Network connection interrupted. App in offline-first mode (IndexedDB active).");
             } else {
-                fileContent += active.content;
+                btn.className = "p-2 text-green-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all";
+                icon.className = "ph ph-wifi-high text-lg";
+                syncIndicator.innerHTML = `<i class="ph-fill ph-cloud-check text-green-500"></i> Cloud Sincronizzato`;
+                
+                showToast("Tornato online! Sincronizzazione dati in corso.");
+                logTerminal("SUCCESS", "PWA Mode: Connection re-established. Syncing buffered modifications with Spring Boot...");
+                logTerminal("SUCCESS", "REST: Batch update to MongoDB executed successfully. Buffer cleared.");
             }
+        }
 
-            const blob = new Blob([fileContent], { type: 'text/markdown' });
+        // --- RICERCA E FILTRI ---
+        function handleSearch(val) {
+            state.searchTerm = val;
+            renderNotes();
+        }
+
+        function filterNotes(category) {
+            state.activeFilter = category;
+            
+            // Aggiorna l'estetica dei filtri selezionati
+            const categories = ["all", "appunto", "checklist", "diario"];
+            categories.forEach(cat => {
+                const btn = document.getElementById(`filter-${cat}`);
+                if (cat === category) {
+                    btn.className = "px-2.5 py-1 bg-primary-100 dark:bg-primary-900/40 text-primary-600 dark:text-primary-300 rounded-lg text-[11px] font-medium shrink-0";
+                } else {
+                    btn.className = "px-2.5 py-1 bg-gray-100 dark:bg-gray-800/80 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-lg text-[11px] font-medium shrink-0";
+                }
+            });
+
+            renderNotes();
+            logTerminal("INFO", `Filtro applicato: Mostrando solo note di tipo '${category.toUpperCase()}'`);
+        }
+
+        // --- SIMULATORE DIARIO MOOD ---
+        function updateDiaryMood(val) {
+            const note = state.notes.find(n => n.id === state.activeNoteId);
+            if (note) {
+                note.mood = val;
+                renderNotes();
+                logTerminal("INFO", `Note Metadati aggiornati: Mood del Diario impostato a '${val}'`);
+            }
+        }
+
+        // --- MOCK INTEGRATION CHAT AI NATIVA ---
+        let isAIPanelOpen = false;
+        function toggleAIPanel() {
+            const panel = document.getElementById("ai-panel");
+            isAIPanelOpen = !isAIPanelOpen;
+            
+            if (isAIPanelOpen) {
+                panel.classList.remove("translate-x-full");
+                logTerminal("INFO", "AI Native module initialized. Ready to compile semantic contexts.");
+            } else {
+                panel.classList.add("translate-x-full");
+            }
+        }
+
+        function handleAIEnter(e) {
+            if (e.key === "Enter") {
+                sendAIChatMessage();
+            }
+        }
+
+        function sendAIChatMessage() {
+            const input = document.getElementById("ai-input");
+            const text = input.value.trim();
+            if (text) {
+                triggerAICall(text);
+                input.value = "";
+            }
+        }
+
+        function triggerAICall(promptText) {
+            const chatMessages = document.getElementById("ai-chat-messages");
+            const suggestions = document.getElementById("ai-suggestions");
+            
+            if (suggestions) suggestions.style.display = "none";
+
+            // 1. Render User Message
+            const userHtml = `
+                <div class="flex gap-2.5 flex-row-reverse animate-fade-in">
+                    <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true" class="w-7 h-7 rounded-lg shrink-0 mt-0.5">
+                    <div class="bg-primary-500 text-white rounded-2xl rounded-tr-sm p-3 shadow-sm max-w-[85%]">
+                        ${promptText}
+                    </div>
+                </div>
+            `;
+            chatMessages.insertAdjacentHTML("beforeend", userHtml);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // 2. Render Typing Indicator
+            const typingId = "typing-" + Date.now();
+            const typingHtml = `
+                <div id="${typingId}" class="flex gap-2.5">
+                    <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white shrink-0 mt-0.5">
+                        <i class="ph-fill ph-sparkle text-xs animate-pulse"></i>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-gray-800 rounded-2xl rounded-tl-sm p-3 flex items-center gap-1 glass-input">
+                        <span class="w-2.5 h-2.5 rounded-full bg-indigo-400 animate-bounce"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-indigo-400 animate-bounce" style="animation-delay: 0.1s"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-indigo-400 animate-bounce" style="animation-delay: 0.2s"></span>
+                    </div>
+                </div>
+            `;
+            chatMessages.insertAdjacentHTML("beforeend", typingHtml);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            logTerminal("INFO", "AI Call initiated: Communicating with UltraPad Semantic AI core...");
+
+            // 3. Simula Risposta Intelligente basata sulla nota attiva
+            setTimeout(() => {
+                const typingElem = document.getElementById(typingId);
+                if (typingElem) typingElem.remove();
+
+                const activeNote = state.notes.find(n => n.id === state.activeNoteId);
+                let response = "Interessante! Posso aiutarti a strutturare meglio questo concetto direttamente sulla tua nota.";
+
+                if (promptText.toLowerCase().includes("riassumi")) {
+                    response = `<strong>Sintesi UltraPad AI per la nota "${activeNote.title}":</strong><br><br>${stripHtml(activeNote.content).substring(0, 180)}...`;
+                } else if (promptText.toLowerCase().includes("bug") || promptText.toLowerCase().includes("code")) {
+                    response = `<strong>Analisi del Codice & Best Practices:</strong><br><br>Il tuo Spring Boot controller rispetta le specifiche RESTful. Ottimo l'uso di JWT stateless. Ricordati di abilitare l'annotation <code class="bg-gray-800 text-pink-400 px-1 py-0.5 rounded font-mono">@CrossOrigin</code> solo per i domini autorizzati o di configurare il CORS in Spring Security in modalità sicura.`;
+                } else if (promptText.toLowerCase().includes("checklist")) {
+                    response = `<strong>Task Suggeriti Generati dall'AI:</strong><br><br>
+                    <div><input type="checkbox" style="margin-right: 8px;"> Ottimizzare l'indice delle note in MongoDB</div>
+                    <div><input type="checkbox" style="margin-right: 8px;"> Configurare gli expiration claims sui JWT</div>
+                    <div><input type="checkbox" style="margin-right: 8px;"> Aggiungere un endpoint per il download multi-formato</div>`;
+                }
+
+                const responseHtml = `
+                    <div class="flex gap-2.5 animate-slide-in">
+                        <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white shrink-0 mt-0.5">
+                            <i class="ph-fill ph-robot text-xs"></i>
+                        </div>
+                        <div class="bg-gray-100 dark:bg-gray-800 rounded-2xl rounded-tl-sm p-3 text-gray-800 dark:text-gray-200 glass-input max-w-[85%] leading-relaxed">
+                            ${response}
+                        </div>
+                    </div>
+                `;
+                chatMessages.insertAdjacentHTML("beforeend", responseHtml);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                logTerminal("SUCCESS", "AI Call Response received correctly.");
+            }, 1200);
+        }
+
+        // --- GESTIONE AUTH & JWT MODAL ---
+        function renderUserProfile() {
+            const widget = document.getElementById("user-profile-widget");
+            if (state.user) {
+                widget.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(state.user.username)}&background=6366f1&color=fff&rounded=true" class="w-8 h-8 rounded-full border border-gray-200 dark:border-gray-700">
+                        <div class="overflow-hidden">
+                            <div class="text-xs font-semibold truncate text-gray-800 dark:text-gray-100">${state.user.username}</div>
+                            <div class="text-[9px] text-gray-400 font-mono tracking-wider truncate">${state.user.email}</div>
+                        </div>
+                    </div>
+                    <button onclick="handleLogout()" class="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-500/10 dark:hover:bg-red-500/20 rounded-lg transition-all" title="Logout sessione">
+                        <i class="ph ph-sign-out text-base"></i>
+                    </button>
+                `;
+            } else {
+                widget.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-400">
+                            <i class="ph ph-user"></i>
+                        </div>
+                        <div class="text-xs">Ospite non connesso</div>
+                    </div>
+                    <button onclick="toggleModal('modal-auth')" class="px-2.5 py-1.5 bg-primary-500 hover:bg-primary-600 text-white text-[10px] font-bold rounded-lg transition-all shadow-sm">
+                        Accedi
+                    </button>
+                `;
+            }
+        }
+
+        function handleMockLogin() {
+            const email = document.getElementById("auth-email").value;
+            
+            state.user = {
+                username: email.split("@")[0],
+                email: email,
+                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI" + btoa(email) + "Iiwicm9sZXMiOlsiVVNFUiJdLCJpYXQiOjE3MTAxMjM0NTZ9.signature"
+            };
+
+            renderUserProfile();
+            toggleModal("modal-auth");
+            showToast("Login effettuato! Token JWT emesso.");
+
+            logTerminal("SUCCESS", `Spring Security: User successfully authenticated. JWT Generated: ${state.user.token.substring(0, 30)}...`);
+            logTerminal("INFO", "REST Request: GET /api/v1/notes - Loaded authenticated session notes");
+        }
+
+        function handleOAuthLogin(provider) {
+            state.user = {
+                username: `${provider}User`,
+                email: `${provider.toLowerCase()}@ultrapad.io`,
+                token: `OAuth2-${provider}-MockToken`
+            };
+
+            renderUserProfile();
+            toggleModal("modal-auth");
+            showToast(`Connesso tramite ${provider}!`);
+
+            logTerminal("SUCCESS", `Spring Security: OAuth2 login successful via ${provider}. User entity created.`);
+        }
+
+        function handleLogout() {
+            state.user = null;
+            renderUserProfile();
+            showToast("Disconnesso. Accesso limitato.");
+            logTerminal("WARNING", "Spring Security: User logged out. Session destroyed, JWT discarded.");
+        }
+
+        // --- COPIA LINK DI CONDIVISIONE ---
+        function copyShareLink() {
+            const text = document.getElementById("share-link-text").innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast("Link di condivisione copiato negli appunti!");
+                logTerminal("INFO", `Collaborazione: Link di condivisione generato ed estratto per la nota ID ${state.activeNoteId}`);
+            });
+        }
+
+        function addCollaborator() {
+            const input = document.getElementById("share-email");
+            const email = input.value.trim();
+            if (email) {
+                const note = state.notes.find(n => n.id === state.activeNoteId);
+                if (note) {
+                    if (!note.collaborators) note.collaborators = [];
+                    if (!note.collaborators.includes(email)) {
+                        note.collaborators.push(email);
+                        renderCollaborators();
+                        input.value = "";
+                        showToast("Collaboratore aggiunto!");
+                        logTerminal("SUCCESS", `MongoDB: Updated active collaborators for note ID ${state.activeNoteId}. Added user '${email}'`);
+                        renderNotes(); // Aggiorna l'icona "Condiviso"
+                    } else {
+                        showToast("L'utente ha già i permessi per questa nota");
+                    }
+                }
+            }
+        }
+
+        function renderCollaborators() {
+            const container = document.getElementById("collaborators-list");
+            container.innerHTML = "";
+            const note = state.notes.find(n => n.id === state.activeNoteId);
+            if (note && note.collaborators) {
+                note.collaborators.forEach(email => {
+                    const item = document.createElement("div");
+                    item.className = "flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-800 rounded-xl text-xs";
+                    item.innerHTML = `
+                        <div class="flex items-center gap-2">
+                            <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(email)}&background=random&rounded=true" class="w-6 h-6 rounded-full">
+                            <span class="truncate font-medium">${email}</span>
+                        </div>
+                        <span class="text-[9px] bg-indigo-50 text-indigo-500 dark:bg-indigo-900/30 dark:text-indigo-300 font-bold px-1.5 py-0.5 rounded uppercase">Editor</span>
+                    `;
+                    container.appendChild(item);
+                });
+            }
+        }
+
+        function openShareModal() {
+            renderCollaborators();
+            toggleModal("modal-share");
+        }
+
+        // --- CARICAMENTO DRAG & DROP E FILE IMPORT ---
+        function triggerFileInput() {
+            document.getElementById("file-uploader-input").click();
+        }
+
+        function handleFileImport(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            processImportedFile(file);
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'copy';
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                processImportedFile(file);
+            }
+        }
+
+        function processImportedFile(file) {
+            const reader = new FileReader();
+            
+            // Determinazione del tipo in base all'estensione
+            const extension = file.name.split('.').pop().toLowerCase();
+            
+            reader.onload = function(e) {
+                const content = e.target.result;
+                let title = file.name.replace(/\.[^/.]+$/, ""); // Rimuove l'estensione
+                let finalContent = "";
+                let type = "appunto";
+
+                if (extension === 'json') {
+                    try {
+                        const parsed = JSON.parse(content);
+                        title = parsed.title || title;
+                        finalContent = parsed.content || "";
+                        type = parsed.type || "appunto";
+                    } catch (err) {
+                        showToast("Errore parsing JSON invalido");
+                        return;
+                    }
+                } else {
+                    // TXT o MD
+                    // Convertiamo i paragrafi in tag HTML basici
+                    finalContent = content.split('\n\n').map(p => {
+                        if (p.startsWith('# ')) return `<h1>${p.replace('# ', '')}</h1>`;
+                        if (p.startsWith('## ')) return `<h3>${p.replace('## ', '')}</h3>`;
+                        return `<p>${p}</p>`;
+                    }).join('');
+                }
+
+                // Generiamo la nota importata
+                const id = (state.notes.length + 1).toString();
+                const newNote = {
+                    id: id,
+                    title: title,
+                    content: finalContent,
+                    type: type,
+                    updatedAt: "Adesso",
+                    collaborators: ["admin@ultrapad.io"],
+                    mood: "☕ Produttivo"
+                };
+
+                state.notes.unshift(newNote);
+                state.activeNoteId = id;
+                
+                renderNotes();
+                loadActiveNote();
+                showToast(`File "${file.name}" importato con successo!`);
+                logTerminal("SUCCESS", `File Reader: Imported document via local payload. Encoded as UTF-8. Synchronizing with MongoDB...`);
+            };
+
+            reader.readAsText(file);
+        }
+
+        // --- ESPORTAZIONE NOTA CORRENTE ---
+        function exportCurrentNote() {
+            const note = state.notes.find(n => n.id === state.activeNoteId);
+            if (!note) return;
+
+            // Formattazione semplice in markdown grezzo
+            const textContent = `${note.title}\n=====================\n\nType: ${note.type}\n\n${stripHtml(note.content)}`;
+            
+            const blob = new Blob([textContent], { type: "text/markdown;charset=utf-8;" });
             const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `${active.title.toLowerCase().replace(/\s+/g, '-')}.md`;
+            
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", `${note.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}.md`);
             document.body.appendChild(link);
+            
             link.click();
             document.body.removeChild(link);
-            URL.revokeObjectURL(url);
             
-            logBackend(`CLIENT: Exported note "${active.title}" to standard Markdown local file.`);
+            logTerminal("SUCCESS", `File Writer: Generated markdown stream. Download initiated for client environment.`);
         }
 
-        function triggerShareAction() {
-            const active = getActiveNote();
-            if (!active) return;
-            const email = prompt("Inserisci l'indirizzo email del collaboratore registrato su UltraPad:");
-            if (email) {
-                logBackend(`REST: POST /api/v1/share - Generated collaboration keys for: ${email}`);
-                alert(`Documento "${active.title}" condiviso con successo con ${email}!`);
-            }
+        // --- FUNZIONI WYSIWYG EDITOR FORMATTING ---
+        function formatDoc(command, value = null) {
+            document.execCommand(command, false, value);
+            handleContentChange();
         }
 
-        // AI Copilot Actions Integration (Real Gemini & Simulated Fallback Modes)
-        function callAICustom() {
-            const promptInput = document.getElementById('ai-prompt-input');
-            const val = promptInput.value;
-            if (!val) return;
-            callAI('custom', val);
-            promptInput.value = '';
+        function insertList(command) {
+            document.execCommand(command, false, null);
+            handleContentChange();
         }
 
-        async function callAI(mode, customPromptText = '') {
-            const activeNote = getActiveNote();
-            if (!activeNote) {
-                alert('Seleziona una nota prima di interrogare l\'assistente AI.');
-                return;
-            }
+        function insertCheckbox() {
+            const checkboxMarkup = `<div><input type="checkbox" style="margin-right: 8px;"> Nuovo Task</div>`;
+            document.execCommand('insertHTML', false, checkboxMarkup);
+            handleContentChange();
+        }
 
-            const outputPanel = document.getElementById('ai-output-panel');
-            const loadingIndicator = document.getElementById('ai-loading-indicator');
-            const errorMessage = document.getElementById('ai-error-message');
-            const resultBox = document.getElementById('ai-result-box');
-            const outputText = document.getElementById('ai-output-text');
+        // --- TOAST NOTIFICATION UTILS (Material Style) ---
+        function showToast(message) {
+            const container = document.getElementById("toast-container");
+            const toast = document.createElement("div");
+            toast.className = "flex items-center gap-2 px-4 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-2xl text-xs font-semibold shadow-xl transition-all translate-y-5 opacity-0";
+            toast.innerHTML = `<i class="ph-fill ph-bell-simple"></i> <span>${message}</span>`;
+            
+            container.appendChild(toast);
+            
+            // Trigger animation
+            setTimeout(() => {
+                toast.classList.remove("translate-y-5", "opacity-0");
+            }, 10);
 
-            outputPanel.classList.remove('hidden');
-            loadingIndicator.classList.remove('hidden');
-            errorMessage.classList.add('hidden');
-            resultBox.classList.add('hidden');
+            // Hide and remove after 3s
+            setTimeout(() => {
+                toast.classList.add("translate-y-5", "opacity-0");
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
 
-            logBackend(`AI SERVICE: Formatting context vectors for note "${activeNote.title}"...`);
-
-            // Build system directive
-            const systemDirective = "Sei UltraPad AI, un assistente di scrittura avanzato integrato in un moderno notepad intelligente. Rispondi in italiano con precisione chirurgica ed eccellente formattazione markdown. Mantieni uno stile minimalista ed evita introduzioni ripetitive.";
-            let userPrompt = "";
-
-            const noteBody = activeNote.type === 'checklist' 
-                ? `Checklist attuale:\n${activeNote.checklistItems.map(i => `- [${i.completed ? 'x' : ' '}] ${i.text}`).join('\n')}`
-                : activeNote.content;
-
-            switch (mode) {
-                case 'summarize':
-                    userPrompt = `Riassumi brevemente ed estrai i punti chiave dal seguente testo in un elenco puntato:\n\n${noteBody}`;
-                    break;
-                case 'fix-grammar':
-                    userPrompt = `Correggi la grammatica e la sintassi del seguente testo, rendendolo più professionale, senza stravolgere il significato:\n\n${noteBody}`;
-                    break;
-                case 'brainstorm':
-                    userPrompt = `Genera 5 idee innovative o concetti correlati partendo da questo argomento:\n\n${activeNote.title}\n${noteBody}`;
-                    break;
-                case 'checklist':
-                    userPrompt = `Converti le seguenti note in un elenco di compiti ordinati e pratici (checklist formato markdown):\n\n${noteBody}`;
-                    break;
-                case 'custom':
-                    userPrompt = `${customPromptText}\n\n[Contesto Documento]:\n${noteBody}`;
-                    break;
-                default:
-                    userPrompt = `Analizza questo documento:\n\n${noteBody}`;
-            }
-
-            // If user has supplied their own API Key, we make a live call
-            if (state.aiApiKey) {
-                try {
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${state.aiApiKey}`;
-                    const payload = {
-                        contents: [{ parts: [{ text: userPrompt }] }],
-                        systemInstruction: { parts: [{ text: systemDirective }] }
-                    };
-
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`API returned code status: ${response.status}`);
-                    }
-
-                    const json = await response.json();
-                    const textResult = json.candidates?.[0]?.content?.parts?.[0]?.text;
-                    if (textResult) {
-                        state.aiOutput = textResult;
-                        showAiResult(textResult);
-                    } else {
-                        throw new Error("Formato risposta non valido");
-                    }
-                } catch (e) {
-                    console.error(e);
-                    logBackend(`AI SERVICE: Error in real API connection. Triggering smart local fallback engine.`, 'ERROR');
-                    simulateAiResponse(mode, activeNote, customPromptText);
-                }
-            } else {
-                // Highly intelligent offline simulation
+        // --- GESTIONE DEI MODALI ---
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            const card = document.getElementById(`${modalId}-card`);
+            
+            if (modal.classList.contains("hidden")) {
+                modal.classList.remove("hidden");
                 setTimeout(() => {
-                    simulateAiResponse(mode, activeNote, customPromptText);
-                }, 1200);
-            }
-        }
-
-        // Mock generator for excellent offline/no-key evaluation experience
-        function simulateAiResponse(mode, note, custom) {
-            let mockResponse = '';
-            
-            if (mode === 'summarize') {
-                mockResponse = `### 📄 Riassunto Intelligente:\n- **Punti Chiave**: Analisi approfondita di "${note.title}".\n- **Contesto**: Il documento include informazioni fondamentali sui requisiti tecnologici di sviluppo.\n- **Azione Consigliata**: Ottimizzare gli algoritmi e proseguire con lo sviluppo dei moduli architetturali.`;
-            } else if (mode === 'fix-grammar') {
-                mockResponse = `### ✨ Ottimizzazione dello Stile:\nIl testo è stato riformulato per migliorare il flusso e la chiarezza professionale:\n\n*${
-                    note.content ? note.content.substring(0, 150) + "..." : "La nota non presentava un corpo testo elaborabile."
-                }*\n\n**Modifiche apportate**: Correzione delle ripetizioni sintattiche, applicazione della formattazione corretta nei tag.`;
-            } else if (mode === 'brainstorm') {
-                mockResponse = `### 🧠 5 Idee di Sviluppo Correlate:\n1. **Integrazione Cache Redis**: Inserimento davanti a MongoDB per conservare sessioni websocket.\n2. **Notifiche Push PWA**: Per informare gli utenti dei cambiamenti collaborativi delle note.\n3. **Criptazione client-side**: Utilizzo di WebCrypto API per la sicurezza delle note personali.\n4. **Esportazione in PDF**: Configurazione di un exporter lato frontend.\n5. **Versionamento storico**: Tracciamento dei log di modifica per ripristini rapidi.`;
-            } else if (mode === 'checklist') {
-                mockResponse = `- [ ] Analizzare l'architettura di base\n- [ ] Sincronizzare i dati su MongoDB\n- [ ] Controllare l'integrità dei token JWT\n- [ ] Verificare accessibilità PWA`;
+                    modal.classList.add("opacity-100");
+                    card.classList.remove("scale-95");
+                }, 10);
             } else {
-                mockResponse = `### 💬 Risposta all'Istruzione Personalizzata:\n\nEcco l'analisi in merito a "${custom}":\n\n- Sulla base di quanto inserito nel documento, si raccomanda una revisione dell'ordine architetturale.\n- Potresti voler espandere le checklist attive per coprire i test end-to-end con Cypress.`;
+                modal.classList.remove("opacity-100");
+                card.classList.add("scale-95");
+                setTimeout(() => modal.classList.add("hidden"), 300);
             }
-
-            state.aiOutput = mockResponse;
-            showAiResult(mockResponse);
         }
 
-        function showAiResult(text) {
-            const loadingIndicator = document.getElementById('ai-loading-indicator');
-            const resultBox = document.getElementById('ai-result-box');
-            const outputText = document.getElementById('ai-output-text');
-
-            loadingIndicator.classList.add('hidden');
-            resultBox.classList.remove('hidden');
-            outputText.innerText = text;
-
-            logBackend('AI SERVICE: Context extracted and parsed. Neurons execution done.');
+        // --- UTILS MINORI ---
+        function stripHtml(html) {
+            let tmp = document.createElement("DIV");
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || "";
         }
 
-        function copyAiOutputToClipboard() {
-            if (!state.aiOutput) return;
-            // Native fallback clipboard for iframe stability
-            const el = document.createElement('textarea');
-            el.value = state.aiOutput;
-            document.body.appendChild(el);
-            el.select();
-            document.execCommand('copy');
-            document.body.removeChild(el);
+        // --- LOGGER REAL-TIME PER TERMINALE (SPRING BOOT / MONGO) ---
+        function logTerminal(level, text) {
+            const terminal = document.getElementById("terminal-logs");
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString();
+
+            let color = "text-gray-400";
+            if (level === "SUCCESS") color = "text-green-400";
+            if (level === "WARNING") color = "text-amber-400";
+            if (level === "ERROR") color = "text-red-500";
+
+            const logLine = document.createElement("div");
+            logLine.className = "leading-5 flex items-start gap-2 select-all";
+            logLine.innerHTML = `
+                <span class="text-gray-600 shrink-0 font-bold">${timeStr}</span> 
+                <span class="font-semibold shrink-0 ${color}">[${level}]</span> 
+                <span class="text-gray-200 break-all">${text}</span>
+            `;
             
-            logBackend('SYSTEM: Copied AI response content directly to clipboard buffer.');
-            alert('Risposta copiata negli appunti!');
-        }
-
-        function injectAiResultToNote() {
-            const active = getActiveNote();
-            if (!active || !state.aiOutput) return;
-
-            if (active.type === 'checklist') {
-                // Try parsing checklist items from markdown output lines
-                const lines = state.aiOutput.split('\n');
-                let itemsAdded = 0;
-                lines.forEach(line => {
-                    const clean = line.replace(/^-\s*\[[ xX]*\]\s*/, '').replace(/^-\s*/, '').replace(/^\d+\.\s*/, '').trim();
-                    if (clean && clean.length > 2) {
-                        active.checklistItems.push({
-                            id: `cli-ai-${Date.now()}-${Math.random()}`,
-                            text: clean,
-                            completed: false
-                        });
-                        itemsAdded++;
-                    }
-                });
-
-                if (itemsAdded > 0) {
-                    logBackend(`SYSTEM: Extracted and appended ${itemsAdded} checklist items from AI response.`);
-                } else {
-                    active.content += `\n\n${state.aiOutput}`;
-                }
-            } else {
-                active.content += `\n\n${state.aiOutput}`;
-            }
-
-            active.lastModified = new Date().toISOString();
-            saveNotesToLocalStorage();
-            renderActiveEditor();
-            renderNotesList();
-
-            // Reset AI output view
-            state.aiOutput = '';
-            document.getElementById('ai-output-panel').classList.add('hidden');
-        }
-
-        // Mock Social and Credentials logins
-        function handleSocialLogin(provider) {
-            logBackend(`SECURITY: Initializing secure ${provider} OAuth2 handshaking...`);
-            setTimeout(() => {
-                state.currentUser = {
-                    name: 'Sviluppatore UltraPad',
-                    email: `dev-${provider.toLowerCase()}@ultrapad.io`,
-                    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80',
-                    token: 'jwt_mock_handshake_successful_key'
-                };
-                toggleModal('auth-modal', false);
-                renderAuthHeader();
-                logBackend(`SECURITY: Authorized. JWT payload decoded successfully. Access granted to private data.`);
-            }, 800);
-        }
-
-        function handleCredentialsLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('auth-email-input').value;
-            logBackend('SECURITY: Sending credentials packet with secure hash algorithms...');
-            setTimeout(() => {
-                state.currentUser = {
-                    name: 'Amministratore Web',
-                    email: email,
-                    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80',
-                    token: 'jwt_full_custom_credentials_signature'
-                };
-                toggleModal('auth-modal', false);
-                renderAuthHeader();
-                logBackend(`SECURITY: Status Stateless JWT active. Private MongoDB clusters verified.`);
-            }, 600);
-        }
-
-        function logout() {
-            state.currentUser = null;
-            renderAuthHeader();
-            logBackend('SECURITY: Destroyed active user token. Sychronization paused.');
+            terminal.appendChild(logLine);
+            terminal.scrollTop = terminal.scrollHeight;
         }
 
         function clearLogs() {
-            state.backendLogs = [];
-            renderConsoleLogs();
+            document.getElementById("terminal-logs").innerHTML = `<div class="text-gray-500 text-[10px]">Log puliti. Avvia nuove interazioni per popolare la simulazione...</div>`;
         }
     </script>
 </body>
