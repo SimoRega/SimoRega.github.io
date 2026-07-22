@@ -57,7 +57,7 @@
     <section class="max-w-6xl mx-auto w-full px-4 mt-8">
         <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
             <p class="text-xs uppercase font-bold tracking-wider text-slate-400 mb-3 text-center md:text-left">Selezionare la macro-destinazione di interesse per aggiornare l'intera scheda:</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
                 <button onclick="switchMacroDestination('dolomiti')" id="macro-btn-dolomiti" class="flex items-center justify-between p-4 rounded-lg border-2 transition duration-200 text-left bg-slate-50 border-slate-200 hover:border-slate-300">
                     <div class="flex items-center gap-3">
                         <div class="p-2.5 rounded-lg bg-emerald-50 text-emerald-600">
@@ -95,6 +95,19 @@
                         </div>
                     </div>
                     <span class="text-xs font-semibold px-2 py-1 bg-indigo-100 text-indigo-800 rounded-md">Da €1.500 pp</span>
+                </button>
+
+                <button onclick="switchMacroDestination('westcoast')" id="macro-btn-westcoast" class="flex items-center justify-between p-4 rounded-lg border-2 transition duration-200 text-left bg-slate-50 border-slate-200 hover:border-slate-300">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2.5 rounded-lg bg-orange-50 text-orange-600">
+                            <i data-lucide="map" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <span class="block font-bold text-slate-950 text-sm">USA West Coast</span>
+                            <span class="text-xs text-slate-500">Road Trip 15 Giorni</span>
+                        </div>
+                    </div>
+                    <span class="text-xs font-semibold px-2 py-1 bg-orange-100 text-orange-800 rounded-md">Da €2.500 pp</span>
                 </button>
             </div>
         </div>
@@ -344,6 +357,63 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Panel Content for WEST COAST -->
+            <div id="logistica-westcoast" class="space-y-6 hidden">
+                <div class="bg-orange-50 border border-orange-100 p-4 rounded-xl text-xs text-orange-950 mb-6 flex flex-col md:flex-row gap-4 items-start">
+                    <div class="p-2 bg-orange-200 rounded-lg shrink-0">
+                        <i data-lucide="plane-takeoff" class="w-5 h-5 text-orange-700"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold">Logistica di Partenza Obbligata (FCO ore 09:30):</span> Poiché il volo ITA Airways per Los Angeles decolla molto presto, dovrete essere in aeroporto a Fiumicino alle 06:30. <strong>È impossibile partire da Rimini la mattina stessa.</strong> Si consiglia fortemente di viaggiare il pomeriggio/sera precedente in treno (Rimini &rarr; Roma Termini &rarr; Fiumicino Aeroporto) e pernottare in un hotel limitrofo con navetta, per riposare adeguatamente prima delle 12h 45m di volo.
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="border border-slate-200 p-5 rounded-xl bg-slate-50 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="bg-orange-100 text-orange-800 text-[11px] px-2 py-0.5 rounded font-semibold uppercase">Volo Diretto</span>
+                                <span class="text-slate-400 text-xs font-semibold">FCO &rarr; LAX</span>
+                            </div>
+                            <h3 class="text-base font-bold text-slate-900 mt-2">Dettagli Voli ITA Airways</h3>
+                            <p class="text-slate-500 text-xs mt-1">Soluzione ottimizzata per massimizzare il tempo sul suolo californiano.</p>
+                            
+                            <div class="mt-4 space-y-2 border-t border-slate-100 pt-3 text-xs">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-500">Andata (Giorno 1):</span>
+                                    <span class="font-medium text-slate-700">09:30 &rarr; 13:15 (Ora locale)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-500">Ritorno (Giorno 15):</span>
+                                    <span class="font-medium text-slate-700">15:15 &rarr; 11:55 (+1 giorno a FCO)</span>
+                                </div>
+                                <div class="flex justify-between mt-2 pt-2 border-t border-slate-100/50">
+                                    <span class="text-slate-500">Tariffa Prevista (image_6c0a4b):</span>
+                                    <span class="font-bold text-slate-900">€ 795 pp</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-slate-200 p-5 rounded-xl bg-slate-50 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="bg-sky-100 text-sky-800 text-[11px] px-2 py-0.5 rounded font-semibold uppercase">Mobilità</span>
+                                <span class="text-slate-400 text-xs font-semibold">Alamo Rent a Car</span>
+                            </div>
+                            <h3 class="text-base font-bold text-slate-900 mt-2">Noleggio Mid-SUV (LAX)</h3>
+                            <p class="text-slate-500 text-xs mt-1">L'auto sarà la vostra casa per 15 giorni. Un Mid-SUV è vitale per comfort e sicurezza nei Parchi (es. Death Valley).</p>
+                            
+                            <ul class="mt-4 space-y-2 border-t border-slate-100 pt-3 text-xs text-slate-600">
+                                <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0"></i> Utilizzare il Rental Car Shuttle dai terminal.</li>
+                                <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0"></i> <strong>Trucco "Skip the Counter":</strong> Fate il check-in online dall'Italia. Eviterete ore di coda andando direttamente al parcheggio a scegliere l'auto (chiavi nel cruscotto).</li>
+                                <li class="flex gap-2"><i data-lucide="alert-triangle" class="w-4 h-4 text-amber-500 shrink-0"></i> <strong>Riconsegna Giorno 15:</strong> Rientrate entro le 11:30 per essere al terminal in tempo per il volo.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- SEZIONE 2: ITINERARIO DETTAGLIATO -->
@@ -574,6 +644,74 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ITINERARIO WEST COAST -->
+            <div id="itinerario-westcoast-content" class="space-y-6 hidden">
+                <div class="p-4 bg-orange-50 border border-orange-100 rounded-xl flex flex-col md:flex-row justify-between gap-4 text-xs">
+                    <div>
+                        <span class="font-bold text-orange-950 block">Road Trip di 15 Giorni - California, Arizona, Utah e Nevada</span>
+                        <p class="text-orange-800 mt-1">Viaggio per giovani coppie dinamiche: ritmi alti, molte escursioni, e un mix perfetto tra metropoli e natura selvaggia americana.</p>
+                    </div>
+                </div>
+
+                <div class="relative border-l-2 border-slate-200 ml-4 pl-6 space-y-6 text-sm">
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-orange-500 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 1: Arrivo a L.A. e respiro dell'Oceano</h4>
+                        <p class="text-slate-600 mt-1">Arrivo a LAX alle 13:15, ritiro SUV presso Alamo. Trasferimento a <strong>Santa Monica o Venice Beach</strong> per check-in e prima passeggiata sul molo. Cena con hamburger e a letto presto per abbattere il jet lag. <em>(Notte a Los Angeles)</em></p>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-orange-500 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 2: Le Icone di Los Angeles</h4>
+                        <p class="text-slate-600 mt-1">Esplorazione mattutina di <strong>Hollywood Boulevard</strong> (Walk of Fame) e <strong>Beverly Hills</strong> (Rodeo Drive). Nel tardo pomeriggio salita al mitico <strong>Griffith Observatory</strong> per il tramonto e le foto alla scritta Hollywood. <em>(Notte a Los Angeles)</em></p>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-orange-500 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 3: Gli Studios o la Costa</h4>
+                        <p class="text-slate-600 mt-1">Scelta tra una giornata adrenalinica agli <strong>Universal Studios Hollywood</strong> oppure un giro panoramico in auto lungo la Pacific Coast Highway fino a Malibù. <em>(Notte a LA o spostamento a Est verso San Bernardino per guadagnare strada)</em></p>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-slate-300 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 4: Sulla Strada Madre verso l'Arizona</h4>
+                        <p class="text-slate-600 mt-1">Lunga giornata di guida. Ingresso sulla leggendaria <strong>Route 66</strong>. Tappe fotografiche a Calico Ghost Town, Oatman (asinelli selvatici) e Kingman. <em>(Notte a Williams o Valle, in avvicinamento al canyon)</em></p>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-red-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 5: La Maestosità del Grand Canyon</h4>
+                        <p class="text-slate-600 mt-1">Ingresso al <strong>Grand Canyon (South Rim)</strong>. Visita ai view-point (Mather Point, Hopi Point). Discesa consigliata su una parte del <em>South Kaibab Trail</em> per i più allenati. <em>(Notte a Tusayan o Grand Canyon Village)</em></p>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-red-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 6: Rocce Rosse e Acque Azzurre (Page)</h4>
+                        <p class="text-slate-600 mt-1">Spostamento a Page. Tour <em>obbligatoriamente prenotato in anticipo</em> nell'iconico <strong>Antelope Canyon</strong>. Al tramonto affaccio all'<strong>Horseshoe Bend</strong> sul fiume Colorado. <em>(Notte a Page)</em></p>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-red-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 7 & 8: Bryce Canyon & Zion National Park</h4>
+                        <p class="text-slate-600 mt-1"><strong>Giorno 7:</strong> Arrivo a Bryce Canyon tra i "camini delle fate" e passeggiata nel <em>Navajo Loop Trail</em> (notte a Tropic/Bryce City).<br><strong>Giorno 8:</strong> Zion National Park con trekking epici (Angels Landing con permesso o camminata nel fiume The Narrows). <em>(Notte a Springdale)</em></p>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-violet-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 9: Ritorno alla "Civiltà" (Las Vegas)</h4>
+                        <p class="text-slate-600 mt-1">Arrivo in Nevada a <strong>Las Vegas</strong>. Pomeriggio in piscina per spezzare le fatiche del road trip. Serata sulla Strip tra luci, casinò, e le fontane del Bellagio. <em>(Notte sulla Strip)</em></p>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-yellow-500 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 10: Il Calore Estremo della Death Valley</h4>
+                        <p class="text-slate-600 mt-1">Partenza <em>molto</em> presto. Attraversamento della <strong>Valle della Morte</strong>. Tappe a Zabriskie Point, Badwater Basin (punto più basso d'America) e le dune di sabbia. <em>(Notte a Lone Pine o Bishop, ai piedi delle montagne)</em></p>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-emerald-600 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 11, 12 e 13: La Natura Alpina e Yosemite</h4>
+                        <p class="text-slate-600 mt-1"><strong>Giorno 11:</strong> Risalita panoramica verso i freschi <em>Mammoth Lakes</em>.<br><strong>Giorno 12:</strong> Attraversamento del pazzesco Tioga Pass con discesa verso la <strong>Yosemite Valley</strong>.<br><strong>Giorno 13:</strong> Trekking sul <em>Mist Trail</em> (cascate Vernal e Nevada) al cospetto del monolite El Capitan e dell'Half Dome. <em>(Notti dentro o vicino al parco)</em></p>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-0.5 bg-slate-400 text-white rounded-full w-4 h-4 border-2 border-white flex items-center justify-center"></span>
+                        <h4 class="font-bold text-slate-900">Giorno 14 & 15: Sequoia National Park e Rientro</h4>
+                        <p class="text-slate-600 mt-1">Deviazione verso le sequoie giganti per salutare il Generale Sherman, e successiva discesa logistica verso Sud. Il Giorno 15 mattina tranquilla e rientro a LAX per riconsegna auto. Volo ore 15:15 per l'Italia.</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- SEZIONE 3: GUIDA BUROCRATICA E INFORMAZIONI DOGANALI -->
@@ -708,6 +846,51 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Dynamic Advice for WEST COAST -->
+            <div id="burocrazia-westcoast" class="grid grid-cols-1 md:grid-cols-2 gap-8 hidden">
+                <div class="space-y-4">
+                    <h3 class="font-semibold text-slate-900 text-lg flex items-center gap-2">
+                        <i data-lucide="file-key" class="text-orange-600 w-5 h-5"></i>
+                        Preparativi Burocratici Indispensabili
+                    </h3>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-3 text-sm">
+                        <div>
+                            <span class="font-bold text-slate-800 block">1. Passaporto ed ESTA ($21):</span>
+                            <p class="text-slate-600 text-xs">Richiedere il Visto ESTA <strong>esclusivamente</strong> sul sito governativo ufficiale USA circa un mese prima della partenza, a tutela per l'ingresso sul suolo americano.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-800 block">2. Carta di Credito (Noleggio):</span>
+                            <p class="text-slate-600 text-xs">FONDAMENTALE per il noleggio Alamo. Deve essere una carta di credito tradizionale (numeri in rilievo, circuito Visa o MasterCard, NON di debito/prepagata) ed essere <strong>intestata al guidatore principale</strong>.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-800 block">3. Patente Internazionale:</span>
+                            <p class="text-slate-600 text-xs">Sebbene in California e Nevada le polizie stradali spesso "chiudano un occhio", la legge federale richiede il permesso internazionale modello Ginevra 1949 (ottenibile in Motorizzazione) affiancato alla patente italiana.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="font-semibold text-slate-900 text-lg flex items-center gap-2">
+                        <i data-lucide="wifi" class="text-orange-600 w-5 h-5"></i>
+                        Sanità & Connettività "On the Road"
+                    </h3>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-3 text-sm">
+                        <div>
+                            <span class="font-bold text-slate-800 block">Assicurazione Sanitaria Illimitata:</span>
+                            <p class="text-slate-600 text-xs text-red-600 font-semibold mb-1">Obbligatoria moralmente e finanziariamente.</p>
+                            <p class="text-slate-600 text-xs">Il recupero in elicottero in un Canyon o un ricovero al pronto soccorso può costare decine di migliaia di dollari. Appoggiatevi a enti sicuri come Heymondo o Columbus.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-800 block">Dati Mobile (e-SIM):</span>
+                            <p class="text-slate-600 text-xs">Per i 15 giorni di navigatore Google Maps e booking, installate una e-SIM virtuale pre-partenza tramite App quali <strong>Airalo</strong> o <strong>Holafly</strong>, che si connetterà automaticamente alla rete 5G americana al momento dell'atterraggio a LAX.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-800 block">National Parks Pass (America the Beautiful):</span>
+                            <p class="text-slate-600 text-xs">Tessera d'ingresso annuale acquistabile al primo parco visitato (circa $80 a vettura). Copre l'ingresso per Grand Canyon, Bryce, Zion, Death Valley e Yosemite, garantendo un netto risparmio rispetto ai biglietti singoli.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- SEZIONE 4: PREVENTIVATORE E CALCOLATORE DI BUDGET DINAMICO -->
@@ -734,6 +917,7 @@
                                 <option value="na_boston">Nord America - Boston (Volo ITA Airways Diretto, 7 Notti)</option>
                                 <option value="na_newyork">Nord America - New York (Volo ITA Airways Diretto, 7 Notti)</option>
                                 <option value="na_toronto">Nord America - Toronto (Volo Air Canada Diretto, 7 Notti)</option>
+                                <option value="usa_westcoast">USA West Coast - Road Trip (Volo Diretto + SUV, 14 Notti)</option>
                             </select>
                         </div>
 
@@ -851,7 +1035,7 @@
             activeMacroDest = dest;
 
             // Reset classi e attivazioni sui bottoni principali
-            const macroIds = ['dolomiti', 'madeira', 'nordamerica'];
+            const macroIds = ['dolomiti', 'madeira', 'nordamerica', 'westcoast'];
             macroIds.forEach(id => {
                 const btn = document.getElementById(`macro-btn-${id}`);
                 if (id === dest) {
@@ -867,18 +1051,21 @@
             document.getElementById('logistica-dolomiti').classList.add('hidden');
             document.getElementById('logistica-madeira').classList.add('hidden');
             document.getElementById('logistica-nordamerica').classList.add('hidden');
+            document.getElementById('logistica-westcoast').classList.add('hidden');
             document.getElementById(`logistica-${dest}`).classList.remove('hidden');
 
             // Mostra o nasconde gli itinerari
             document.getElementById('itinerario-dolomiti-content').classList.add('hidden');
             document.getElementById('itinerario-madeira-content').classList.add('hidden');
             document.getElementById('itinerario-nordamerica-content').classList.add('hidden');
+            document.getElementById('itinerario-westcoast-content').classList.add('hidden');
             document.getElementById(`itinerario-${dest}-content`).classList.remove('hidden');
 
             // Mostra o nasconde le schede informative burocratiche
             document.getElementById('burocrazia-dolomiti').classList.add('hidden');
             document.getElementById('burocrazia-madeira').classList.add('hidden');
             document.getElementById('burocrazia-nordamerica').classList.add('hidden');
+            document.getElementById('burocrazia-westcoast').classList.add('hidden');
             document.getElementById(`burocrazia-${dest}`).classList.remove('hidden');
 
             // Allinea automaticamente il calcolatore di budget
@@ -889,6 +1076,8 @@
                 calcDestSelector.value = 'madeira_blq'; // default
             } else if (dest === 'nordamerica') {
                 calcDestSelector.value = 'na_' + activeNASubCity;
+            } else if (dest === 'westcoast') {
+                calcDestSelector.value = 'usa_westcoast';
             }
 
             onCalculatorDestinationChange();
@@ -1005,6 +1194,21 @@
                 sliderVitto.max = "180";
                 if (parseInt(sliderVitto.value) < 40) sliderVitto.value = "70";
             }
+            else if (selectedVal === 'usa_westcoast') {
+                riminiTransportWrapper.classList.remove('hidden');
+                riminiTransportSelect.innerHTML = `
+                    <option value="150" selected>Treno per Roma Termini A/R + Leonardo Express (~€150)</option>
+                    <option value="180">Auto a Roma FCO (Carburante + Pedaggi + Parcheggio 15gg) (~€180)</option>
+                `;
+                sliderAlloggio.min = "80";
+                sliderAlloggio.max = "350";
+                if (parseInt(sliderAlloggio.value) < 80) sliderAlloggio.value = "150";
+                document.getElementById('label-alloggio-desc').innerText = "Media notte: Motel stradali economici + lodge nei parchi + hotel a LA/Vegas.";
+
+                sliderVitto.min = "50";
+                sliderVitto.max = "200";
+                if (parseInt(sliderVitto.value) < 50) sliderVitto.value = "80";
+            }
 
             recalculateBudgetValues();
         }
@@ -1062,6 +1266,13 @@
                 totalNights = 7;
                 totalDays = 8;
                 extraCostsPair = 10 + 100 + 80; // eTA Canadese + Assicurazione + Bus per Cascate del Niagara A/R per 2
+            }
+            else if (selectedVal === 'usa_westcoast') {
+                flightCostPair = 795 * 2; // Volo ITA diretto da FCO a LAX 
+                totalNights = 14; // 1 Roma + 13 USA
+                totalDays = 15;
+                // Auto (1000€) + Benzina/Parcheggi (350€) + ESTA (42€) + Assicurazione (120€) + Parchi/Attrazioni (200€) = 1712
+                extraCostsPair = 1000 + 350 + 42 + 120 + 200; 
             }
 
             // Calcoli complessivi
