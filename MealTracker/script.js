@@ -1,5 +1,5 @@
 // INCOLLA QUI L'URL DELLA TUA WEB APP GOOGLE APPS SCRIPT
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyWrM0sCqbsvLkfB-QQdqqnen8gk8OKZG4qppdoMXdgRiBuRvJkHQmm6NO2i6wBVolghA/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzX5E0WYcxxWMD4XgX9NSkVri8UlGrxmDozGT1ejZqfKt8QdWnbTScKB9KGCtau-p2O4g/exec';
 let macroChart = null; // Variabile per il grafico
 
 // Evento al click del pulsante
