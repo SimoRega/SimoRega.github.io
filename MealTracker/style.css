@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #219a52;
+}
+
+#statusMessage {
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.loading { color: #f39c12; }
+.success { color: #27ae60; }
+.error { color: #e74c3c; }
+
+.stats-card {
+    text-align: center;
+}
+
+.calories-display {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #e67e22;
+    margin: 10px 0 20px 0;
+}
+
+.chart-container {
+    position: relative;
+    height: 250px;
+    width: 100%;
+}

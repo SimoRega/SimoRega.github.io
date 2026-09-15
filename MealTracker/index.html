@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Tracker AI</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Importiamo Chart.js per i grafici -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>🍽️ Meal Tracker AI</h1>
+        
+        <div class="card">
+            <p>Descrivi cosa hai mangiato e l'IA calcolerà i valori nutrizionali.</p>
+            <div class="input-group">
+                <input type="text" id="mealInput" placeholder="Es. 100g di pasta al pesto e una mela..." />
+                <button id="submitBtn">Aggiungi</button>
+            </div>
+            <div id="statusMessage"></div>
+        </div>
+
+        <div class="card stats-card">
+            <h2>Riepilogo di Oggi</h2>
+            <div class="calories-display">
+                <span id="totalCalories">0</span> kcal
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="macroChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
