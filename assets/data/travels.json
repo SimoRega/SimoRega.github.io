@@ -1,0 +1,120 @@
+{
+  "destinations": [
+    {
+      "id": "italia",
+      "name": "Italia",
+      "country": "Italia",
+      "latitude": 41.9,
+      "longitude": 12.5,
+      "mapRegions": [
+        "Italy"
+      ]
+    },
+    {
+      "id": "inghilterra",
+      "name": "Inghilterra",
+      "country": "Regno Unito",
+      "latitude": 52.5,
+      "longitude": -1.5,
+      "mapRegions": []
+    },
+    {
+      "id": "romania",
+      "name": "Romania",
+      "country": "Romania",
+      "latitude": 45.94,
+      "longitude": 24.97,
+      "mapRegions": [
+        "Romania"
+      ]
+    },
+    {
+      "id": "repubblica-ceca",
+      "name": "Repubblica Ceca",
+      "country": "Repubblica Ceca",
+      "latitude": 49.82,
+      "longitude": 15.47,
+      "mapRegions": [
+        "Czech Republic"
+      ]
+    },
+    {
+      "id": "ungheria",
+      "name": "Ungheria",
+      "country": "Ungheria",
+      "latitude": 47.16,
+      "longitude": 19.5,
+      "mapRegions": [
+        "Hungary"
+      ]
+    },
+    {
+      "id": "spagna",
+      "name": "Spagna",
+      "country": "Spagna",
+      "latitude": 40.46,
+      "longitude": -3.75,
+      "mapRegions": [
+        "Spain"
+      ]
+    },
+    {
+      "id": "francia",
+      "name": "Francia",
+      "country": "Francia",
+      "latitude": 46.6,
+      "longitude": 2.21,
+      "mapRegions": [
+        "France"
+      ]
+    },
+    {
+      "id": "austria",
+      "name": "Austria",
+      "country": "Austria",
+      "latitude": 47.52,
+      "longitude": 14.55,
+      "mapRegions": [
+        "Austria"
+      ]
+    },
+    {
+      "id": "germania",
+      "name": "Germania",
+      "country": "Germania",
+      "latitude": 51.16,
+      "longitude": 10.45,
+      "mapRegions": [
+        "Germany"
+      ]
+    },
+    {
+      "id": "florida",
+      "name": "Florida",
+      "country": "Stati Uniti",
+      "latitude": 27.66,
+      "longitude": -81.52,
+      "mapRegions": []
+    },
+    {
+      "id": "svezia",
+      "name": "Svezia",
+      "country": "Svezia",
+      "latitude": 60.12,
+      "longitude": 18.64,
+      "mapRegions": [
+        "Sweden"
+      ]
+    },
+    {
+      "id": "giappone",
+      "name": "Giappone",
+      "country": "Giappone",
+      "latitude": 36.2,
+      "longitude": 138.25,
+      "mapRegions": [
+        "Japan"
+      ]
+    }
+  ]
+}
