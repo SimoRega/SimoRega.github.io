@@ -44,3 +44,5 @@ python -m http.server 8000
 ```
 
 Apri `http://localhost:8000`. Usa un server HTTP perché la mappa carica i file JSON tramite fetch.
+
+Sito personale: https://simorega.github.io/
